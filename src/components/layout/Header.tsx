@@ -18,7 +18,14 @@ import {
   ChevronDown,
   ShieldCheck,
   Grid,
-  Percent
+  Percent,
+  Menu,
+  X,
+  Home,
+  ShoppingBag,
+  Zap,
+  Tv,
+  Laptop,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -43,7 +50,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
     setFilters
   } = useStore();
 
-  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [megaMenuOpen, setMegaMenuOpen]     = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearch, setMobileSearch]     = useState(false);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -63,325 +72,342 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
     }
   };
 
+  const navLinks = [
+    { label: language === 'EN' ? 'Home'         : 'হোম',          icon: <Home className="w-4 h-4" />,        view: 'home',      onClick: () => { setFilters(p => ({ ...p, category: null })); setCurrentView('home'); } },
+    { label: language === 'EN' ? 'All Products' : 'সকল প্রোডাক্ট', icon: <ShoppingBag className="w-4 h-4" />, view: 'shop',      onClick: () => setCurrentView('shop') },
+    { label: language === 'EN' ? 'PC Builder'   : 'পিসি বিল্ডার',  icon: <Sparkles className="w-4 h-4" />,    view: 'pc-builder',onClick: () => setCurrentView('pc-builder'), highlight: 'orange' },
+    { label: language === 'EN' ? 'Gaming Zone'  : 'গেমিং জোন',    icon: <Zap className="w-4 h-4" />,          view: 'gaming',    onClick: () => { setFilters(p => ({ ...p, category: 'gaming-pc', gamingOnly: true })); setCurrentView('shop'); } },
+    { label: language === 'EN' ? 'Laptops'      : 'ল্যাপটপ',      icon: <Laptop className="w-4 h-4" />,      view: 'laptops',   onClick: () => { setFilters(p => ({ ...p, category: 'laptop' })); setCurrentView('shop'); } },
+    { label: language === 'EN' ? 'TV & AC'      : 'টিভি ও এসি',   icon: <Tv className="w-4 h-4" />,           view: 'tv',        onClick: () => { setFilters(p => ({ ...p, category: 'tv-appliance' })); setCurrentView('shop'); } },
+    { label: language === 'EN' ? 'Hot Offers'   : 'অফারসমূহ',     icon: <Percent className="w-4 h-4" />,      view: 'offers',    onClick: () => setCurrentView('offers'), highlight: 'red' },
+  ];
+
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-300">
-      {/* 1. Animated Ticker Top Bar */}
-      <div className="relative overflow-hidden text-white text-xs py-2 border-b border-slate-800"
+
+      {/* ── Ticker Bar (hidden on very small screens) ──────── */}
+      <div
+        className="hidden sm:block relative overflow-hidden text-white text-xs py-1.5 border-b border-slate-800"
         style={{ background: 'linear-gradient(90deg, #0f172a, #1e1b4b, #0f172a)' }}
       >
-        {/* Shimmer overlay */}
+        {/* shimmer */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)',
-            backgroundSize: '200% 100%',
-            animation: 'shimmer 3s linear infinite',
-          }}
+          style={{ background: 'linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.04) 50%,transparent 100%)', backgroundSize: '200% 100%', animation: 'shimmer 3s linear infinite' }}
         />
         <div className="ticker-wrapper">
-          <div className="ticker-inner gap-0">
+          <div className="ticker-inner">
             {[...Array(2)].map((_, rep) => (
               <span key={rep} className="flex items-center gap-0">
-                <span className="flex items-center gap-1.5 px-6 text-orange-400 font-bold">
-                  <PhoneCall className="w-3.5 h-3.5 flex-shrink-0" />
-                  {language === 'EN' ? 'Hotline: 16789 (10AM–8PM)' : 'হটলাইন: ১৬৭৮৯'}
-                </span>
-                <span className="text-slate-600 px-2">•</span>
-                <span className="flex items-center gap-1.5 px-6 text-emerald-400 font-semibold">
-                  <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0" />
-                  100% Genuine Products · Official Warranty
-                </span>
-                <span className="text-slate-600 px-2">•</span>
-                <span className="flex items-center gap-1.5 px-6 text-blue-400 font-semibold">
-                  <Truck className="w-3.5 h-3.5 flex-shrink-0" />
-                  Free Delivery Inside Dhaka on orders ৳5,000+
-                </span>
-                <span className="text-slate-600 px-2">•</span>
-                <span className="flex items-center gap-1.5 px-6 text-purple-400 font-semibold">
-                  <Percent className="w-3.5 h-3.5 flex-shrink-0" />
-                  0% EMI up to 24 months · All major banks
-                </span>
-                <span className="text-slate-600 px-2">•</span>
-                <span className="flex items-center gap-1.5 px-6 text-amber-400 font-semibold">
-                  <Sparkles className="w-3.5 h-3.5 flex-shrink-0" />
-                  Mega Sale! Up to 30% OFF on Gaming Laptops
-                </span>
-                <span className="text-slate-600 px-2">•</span>
+                {[
+                  { icon: <PhoneCall className="w-3 h-3 flex-shrink-0" />, text: 'Hotline: 16789 (10AM–8PM)', color: 'text-orange-400' },
+                  { icon: <ShieldCheck className="w-3 h-3 flex-shrink-0" />, text: '100% Genuine · Official Warranty', color: 'text-emerald-400' },
+                  { icon: <Truck className="w-3 h-3 flex-shrink-0" />, text: 'Free Delivery Inside Dhaka ৳5,000+', color: 'text-blue-400' },
+                  { icon: <Percent className="w-3 h-3 flex-shrink-0" />, text: '0% EMI up to 24 months', color: 'text-purple-400' },
+                  { icon: <Sparkles className="w-3 h-3 flex-shrink-0" />, text: 'Mega Sale! Up to 30% OFF Gaming Laptops', color: 'text-amber-400' },
+                ].map((item, i) => (
+                  <span key={i} className="flex items-center gap-0">
+                    <span className={`flex items-center gap-1.5 px-5 font-semibold ${item.color}`}>
+                      {item.icon}{item.text}
+                    </span>
+                    <span className="text-slate-700 px-1">•</span>
+                  </span>
+                ))}
               </span>
             ))}
           </div>
         </div>
-
-        {/* Right side controls - floating over ticker */}
-        <div className="absolute right-4 top-0 bottom-0 flex items-center gap-3 bg-gradient-to-l from-slate-900 via-slate-900/90 to-transparent pl-8 z-10">
-          <button
-            onClick={toggleLanguage}
-            className="font-bold text-orange-400 hover:text-orange-300 px-2 py-0.5 rounded bg-slate-800 border border-slate-700 transition-all text-[11px] hover-lift"
-          >
+        {/* right controls */}
+        <div className="absolute right-3 top-0 bottom-0 flex items-center gap-2 bg-gradient-to-l from-slate-900 via-slate-900/90 to-transparent pl-6 z-10">
+          <button onClick={toggleLanguage} className="font-bold text-orange-400 hover:text-orange-300 px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px]">
             {language === 'EN' ? 'বাংলা' : 'EN'}
           </button>
-          <button
-            onClick={toggleTheme}
-            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-700 transition-all"
-            title="Toggle Theme"
-          >
-            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+          <button onClick={toggleTheme} className="p-0.5 rounded-full text-slate-400 hover:text-white transition-all">
+            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5" />}
           </button>
         </div>
       </div>
 
+      {/* ── Main Header Row ─────────────────────────────────── */}
+      <div className="glass-nav border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-2.5 flex items-center gap-2 sm:gap-3">
 
-      {/* 2. Main Sticky Header with Glassmorphism */}
-      <div className="glass-nav border-b border-slate-200/80 dark:border-slate-800/80 px-4 py-3 shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          
-          {/* Brand Logo */}
-          <div
-            onClick={() => {
-              setFilters(prev => ({ ...prev, category: null, searchQuery: '' }));
-              setCurrentView('home');
-            }}
-            className="cursor-pointer hover:opacity-90 transition-opacity py-1 shrink-0"
-            title="My Computer BD - Home"
+          {/* Mobile: Hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(prev => !prev)}
+            className="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all flex-shrink-0"
           >
-            <Logo size="md" showTagline={true} />
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+
+          {/* Logo */}
+          <div
+            onClick={() => { setFilters(p => ({ ...p, category: null, searchQuery: '' })); setCurrentView('home'); setMobileMenuOpen(false); }}
+            className="cursor-pointer hover:opacity-90 transition-opacity flex-shrink-0"
+          >
+            {/* Mobile: small logo, Desktop: full logo */}
+            <div className="hidden sm:block">
+              <Logo size="md" showTagline={true} />
+            </div>
+            <div className="sm:hidden">
+              <Logo size="sm" showTagline={false} />
+            </div>
           </div>
 
-          {/* AI Smart Search Bar */}
+          {/* Desktop Search */}
           <form
             onSubmit={handleSearchSubmit}
             className="hidden lg:flex flex-1 max-w-2xl items-center relative rounded-full bg-slate-100 dark:bg-slate-800/90 border border-slate-300/80 dark:border-slate-700/80 focus-within:border-blue-500 dark:focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all shadow-inner"
           >
-            {/* Category Filter Select Dropdown inside search */}
             <select
               onChange={handleCategorySelect}
-              className="bg-transparent text-xs font-semibold text-slate-700 dark:text-slate-300 pl-4 pr-2 py-2.5 border-r border-slate-300 dark:border-slate-700 focus:outline-none cursor-pointer rounded-l-full max-w-[140px] truncate"
+              className="bg-transparent text-xs font-semibold text-slate-700 dark:text-slate-300 pl-4 pr-2 py-2.5 border-r border-slate-300 dark:border-slate-700 focus:outline-none cursor-pointer rounded-l-full max-w-[130px] truncate"
             >
-              <option value="">{language === 'EN' ? 'All Categories' : 'সকল ক্যাটাগরি'}</option>
+              <option value="">{language === 'EN' ? 'All Categories' : 'সকল'}</option>
               {CATEGORIES.map(c => (
                 <option key={c.id} value={c.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
                   {language === 'EN' ? c.name : c.nameBn}
                 </option>
               ))}
             </select>
-
             <input
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder={language === 'EN' ? 'Search laptops, graphics cards, TVs, ACs...' : 'ল্যাপটপ, জিপিইউ, টিভি, এসি খুঁজুন...'}
+              placeholder={language === 'EN' ? 'Search laptops, GPUs, TVs, ACs...' : 'ল্যাপটপ, জিপিইউ, টিভি খুঁজুন...'}
               className="w-full bg-transparent px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none"
             />
-
-            {/* AI Prompt Assistant Trigger Button */}
-            <button
-              type="button"
-              onClick={() => setAiSearchOpen(true)}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[11px] font-semibold transition-all mr-1 shadow-sm"
-              title="AI Smart Search"
+            <button type="button" onClick={() => setAiSearchOpen(true)}
+              className="flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[11px] font-semibold mr-1 shadow-sm"
             >
-              <Sparkles className="w-3.5 h-3.5 text-orange-300" />
-              <span>AI Search</span>
+              <Sparkles className="w-3 h-3 text-orange-300" /><span>AI</span>
             </button>
-
-            {/* Voice Search Trigger */}
-            <button
-              type="button"
-              onClick={() => setAiSearchOpen(true)}
-              className="p-2 text-slate-400 hover:text-orange-500 transition-colors"
-              title="Voice Search"
-            >
+            <button type="button" onClick={() => setAiSearchOpen(true)} className="p-2 text-slate-400 hover:text-orange-500 transition-colors">
               <Mic className="w-4 h-4" />
             </button>
-
-            {/* Submit Search Button */}
-            <button
-              type="submit"
-              className="p-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-r-full transition-colors font-medium px-4 flex items-center justify-center"
-            >
+            <button type="submit" className="p-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-r-full transition-colors px-4 flex items-center justify-center">
               <Search className="w-4 h-4" />
             </button>
           </form>
 
-          {/* Header Action Buttons (Compare, Wishlist, Cart, User) */}
-          <div className="flex items-center space-x-2 md:space-x-3">
-            {/* Compare */}
+          {/* Spacer on mobile */}
+          <div className="flex-1 lg:hidden" />
+
+          {/* Mobile: Search icon */}
+          <button
+            onClick={() => setMobileSearch(prev => !prev)}
+            className="lg:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Compare - hidden on mobile */}
             <button
               onClick={() => setCurrentView('compare')}
-              className="relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all"
-              title="Product Comparison"
+              className="hidden sm:flex relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all"
+              title="Compare"
             >
               <GitCompare className="w-5 h-5" />
               {compareList.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 text-white font-bold text-[10px] rounded-full flex items-center justify-center shadow-sm">
-                  {compareList.length}
-                </span>
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 text-white font-bold text-[9px] rounded-full flex items-center justify-center">{compareList.length}</span>
               )}
             </button>
 
-            {/* Wishlist */}
+            {/* Wishlist - hidden on mobile */}
             <button
               onClick={() => setCurrentView('user-dashboard')}
-              className="relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-red-500 dark:hover:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all"
+              className="hidden sm:flex relative p-2.5 text-slate-700 dark:text-slate-200 hover:text-red-500 dark:hover:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all"
               title="Wishlist"
             >
               <Heart className="w-5 h-5" />
               {wishlist.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white font-bold text-[10px] rounded-full flex items-center justify-center shadow-sm">
-                  {wishlist.length}
-                </span>
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white font-bold text-[9px] rounded-full flex items-center justify-center">{wishlist.length}</span>
               )}
             </button>
 
-            {/* Cart Button */}
+            {/* Cart */}
             <button
               onClick={onOpenCart}
-              className="flex items-center gap-2.5 bg-slate-900 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl transition-all shadow-md group"
+              className="flex items-center gap-2 bg-slate-900 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white px-2.5 sm:px-3.5 py-2 rounded-xl transition-all shadow-md group"
             >
               <div className="relative">
                 <ShoppingCart className="w-5 h-5 text-orange-400 group-hover:text-white transition-colors" />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2.5 w-4 h-4 bg-orange-500 text-white font-bold text-[9px] rounded-full flex items-center justify-center animate-bounce">
-                    {cartItemCount}
-                  </span>
+                  <span className="absolute -top-2 -right-2.5 w-4 h-4 bg-orange-500 text-white font-bold text-[9px] rounded-full flex items-center justify-center animate-bounce">{cartItemCount}</span>
                 )}
               </div>
-              <div className="hidden sm:block text-left pr-1">
-                <p className="text-[10px] text-slate-300 leading-none">
-                  {language === 'EN' ? 'Your Cart' : 'আপনার কার্ট'}
-                </p>
-                <p className="text-xs font-extrabold leading-tight text-orange-400">
-                  ৳{cartTotal.toLocaleString()}
-                </p>
+              <div className="hidden md:block text-left">
+                <p className="text-[10px] text-slate-300 leading-none">{language === 'EN' ? 'Cart' : 'কার্ট'}</p>
+                <p className="text-xs font-extrabold leading-tight text-orange-400">৳{cartTotal.toLocaleString()}</p>
               </div>
             </button>
 
-            {/* User Profile / Dashboard Toggle */}
+            {/* User - hidden on mobile (shown in MobileNav) */}
             <button
               onClick={() => setCurrentView('user-dashboard')}
-              className="p-2.5 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all border border-slate-200 dark:border-slate-800"
-              title="User Account"
+              className="hidden sm:flex p-2.5 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all border border-slate-200 dark:border-slate-800"
+              title="Account"
             >
               <User className="w-5 h-5" />
             </button>
+
+            {/* Mobile: theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="sm:hidden p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Search Bar (expandable) */}
+        {mobileSearch && (
+          <div className="lg:hidden px-3 pb-3 animate-fade-down">
+            <form onSubmit={handleSearchSubmit} className="flex items-center rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus-within:border-blue-500 transition-all">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder={language === 'EN' ? 'Search products...' : 'প্রোডাক্ট খুঁজুন...'}
+                autoFocus
+                className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none"
+              />
+              <button type="button" onClick={() => setAiSearchOpen(true)}
+                className="p-2 text-blue-500 hover:text-blue-600 transition-colors"
+              >
+                <Sparkles className="w-4 h-4" />
+              </button>
+              <button type="submit" className="p-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-r-xl transition-colors">
+                <Search className="w-4 h-4" />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
 
-      {/* 3. Navigation Bar & Mega Menu Strip */}
-      <div className="bg-white dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 shadow-sm relative">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-          
-          {/* Mega Menu Toggle Button */}
+      {/* ── Nav Strip (Desktop only) ─────────────────────────── */}
+      <div className="hidden md:block bg-white dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 shadow-sm relative">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between">
+
+          {/* Mega Menu Toggle */}
           <div className="relative">
             <button
               onMouseEnter={() => setMegaMenuOpen(true)}
-              onClick={() => setMegaMenuOpen(prev => !prev)}
-              className="flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-3.5 transition-colors shadow-sm"
+              onClick={() => setMegaMenuOpen(p => !p)}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-3 transition-colors"
             >
               <Grid className="w-4 h-4 text-orange-300" />
-              <span>{language === 'EN' ? 'Browse Categories' : 'সকল ক্যাটাগরি'}</span>
-              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
+              <span className="hidden lg:inline">{language === 'EN' ? 'Browse Categories' : 'সকল ক্যাটাগরি'}</span>
+              <span className="lg:hidden">{language === 'EN' ? 'Categories' : 'ক্যাটাগরি'}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${megaMenuOpen ? 'rotate-180' : ''}`} />
             </button>
-
-            {/* Mega Menu Dropdown Overlay */}
             <MegaMenu isOpen={megaMenuOpen} onClose={() => setMegaMenuOpen(false)} />
           </div>
 
-          {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-1 font-semibold text-xs text-slate-700 dark:text-slate-200">
-            <button
-              onClick={() => {
-                setFilters(prev => ({ ...prev, category: null }));
-                setCurrentView('home');
-              }}
-              className={`px-3 py-3.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors ${
-                currentView === 'home' ? 'text-blue-600 dark:text-blue-400 font-extrabold border-b-2 border-blue-600' : ''
-              }`}
-            >
-              {language === 'EN' ? 'Home' : 'হোম'}
-            </button>
-
-            <button
-              onClick={() => setCurrentView('shop')}
-              className={`px-3 py-3.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors ${
-                currentView === 'shop' ? 'text-blue-600 dark:text-blue-400 font-extrabold border-b-2 border-blue-600' : ''
-              }`}
-            >
-              {language === 'EN' ? 'All Products' : 'সকল প্রোডাক্ট'}
-            </button>
-
-            <button
-              onClick={() => setCurrentView('pc-builder')}
-              className={`px-3.5 py-3.5 flex items-center gap-1.5 text-orange-600 dark:text-orange-400 hover:text-orange-500 font-extrabold transition-colors ${
-                currentView === 'pc-builder' ? 'bg-orange-50 dark:bg-orange-950/40 border-b-2 border-orange-500' : ''
-              }`}
-            >
-              <Sparkles className="w-3.5 h-3.5 animate-spin" />
-              <span>{language === 'EN' ? 'PC Builder' : 'পিসি বিল্ডার'}</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setFilters(prev => ({ ...prev, category: 'gaming-pc', gamingOnly: true }));
-                setCurrentView('shop');
-              }}
-              className="px-3 py-3.5 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              🎮 {language === 'EN' ? 'Gaming Zone' : 'গেমিং জোন'}
-            </button>
-
-            <button
-              onClick={() => {
-                setFilters(prev => ({ ...prev, category: 'laptop' }));
-                setCurrentView('shop');
-              }}
-              className="px-3 py-3.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              💻 {language === 'EN' ? 'Laptops' : 'ল্যাপটপ'}
-            </button>
-
-            <button
-              onClick={() => {
-                setFilters(prev => ({ ...prev, category: 'tv-appliance' }));
-                setCurrentView('shop');
-              }}
-              className="px-3 py-3.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              📺 {language === 'EN' ? 'TV & AC' : 'টিভি ও এসি'}
-            </button>
-
-            <button
-              onClick={() => setCurrentView('offers')}
-              className="px-3 py-3.5 text-red-600 dark:text-red-400 font-bold flex items-center gap-1 hover:text-red-700 transition-colors"
-            >
-              <Percent className="w-3.5 h-3.5" />
-              <span>{language === 'EN' ? 'Hot Offers' : 'অফারসমূহ'}</span>
-            </button>
-
-            <button
-              onClick={() => setCurrentView('blog')}
-              className="px-3 py-3.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              📰 {language === 'EN' ? 'Tech Blog' : 'টেক ব্লগ'}
-            </button>
-
-            <button
-              onClick={() => setCurrentView('admin')}
-              className="px-3 py-3.5 text-indigo-600 dark:text-indigo-400 font-bold hover:underline"
-            >
-              ⚡ {language === 'EN' ? 'Admin Panel' : 'এডমিন প্যানেল'}
+          {/* Nav Links */}
+          <nav className="flex items-center gap-0 font-semibold text-xs text-slate-700 dark:text-slate-200 overflow-x-auto no-scrollbar">
+            {navLinks.map(link => (
+              <button
+                key={link.view}
+                onClick={() => link.onClick()}
+                className={`px-3 py-3 whitespace-nowrap hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5 ${
+                  link.highlight === 'orange'
+                    ? 'text-orange-600 dark:text-orange-400 font-extrabold'
+                    : link.highlight === 'red'
+                    ? 'text-red-600 dark:text-red-400 font-bold'
+                    : ''
+                } ${currentView === link.view ? 'text-blue-600 dark:text-blue-400 font-extrabold border-b-2 border-blue-600' : ''}`}
+              >
+                {link.label}
+              </button>
+            ))}
+            <button onClick={() => setCurrentView('blog')} className="px-3 py-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap">
+              📰 Blog
             </button>
           </nav>
 
           {/* EMI Badge */}
-          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 font-medium">
-            <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">
-              0% EMI
-            </span>
-            <span>Available on 30+ BD Banks</span>
+          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 font-medium flex-shrink-0">
+            <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">0% EMI</span>
+            <span>30+ Banks</span>
           </div>
         </div>
       </div>
+
+      {/* ── Mobile Slide-Down Menu ───────────────────────────── */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 z-50 glass-nav border-b border-slate-200 dark:border-slate-800 shadow-2xl animate-fade-down">
+          {/* Category Quick Links */}
+          <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800">
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Categories</p>
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { label: '💻 Laptops', cat: 'laptop' },
+                { label: '🎮 Gaming', cat: 'gaming-pc' },
+                { label: '📺 TV & AC', cat: 'tv-appliance' },
+                { label: '🖥️ Monitors', cat: 'monitor' },
+                { label: '🖨️ Printers', cat: 'printer' },
+                { label: '📷 Cameras', cat: 'camera' },
+              ].map(item => (
+                <button
+                  key={item.cat}
+                  onClick={() => { setFilters(p => ({ ...p, category: item.cat })); setCurrentView('shop'); setMobileMenuOpen(false); }}
+                  className="text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-600 rounded-lg px-2 py-2 text-center transition-colors"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Nav Links */}
+          <div className="px-4 py-3">
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Navigation</p>
+            <div className="flex flex-col gap-1">
+              {navLinks.map(link => (
+                <button
+                  key={link.view}
+                  onClick={() => { link.onClick(); setMobileMenuOpen(false); }}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-left transition-all ${
+                    link.highlight === 'orange'
+                      ? 'text-orange-600 bg-orange-50 dark:bg-orange-950/30'
+                      : link.highlight === 'red'
+                      ? 'text-red-600 bg-red-50 dark:bg-red-950/30'
+                      : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  {link.icon}
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={() => { setCurrentView('admin'); setMobileMenuOpen(false); }}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all"
+              >
+                <Zap className="w-4 h-4" /> Admin Panel
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom: Language + Theme */}
+          <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              <PhoneCall className="w-3.5 h-3.5 text-orange-500" />
+              <span className="font-medium">Hotline: 16789</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <button onClick={toggleLanguage} className="font-bold text-orange-400 px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
+                {language === 'EN' ? 'বাংলা' : 'EN'}
+              </button>
+              <button onClick={toggleTheme} className="p-1.5 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 transition-all">
+                {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

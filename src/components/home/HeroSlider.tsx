@@ -176,36 +176,30 @@ export const HeroSlider: React.FC = () => {
       />
 
       {/* ── Main Content ─────────────────────────────────────── */}
-      <div className="relative min-h-[480px] md:min-h-[520px] flex items-center p-6 md:p-12">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="relative min-h-[340px] sm:min-h-[420px] md:min-h-[480px] lg:min-h-[520px] flex items-center p-4 sm:p-6 md:p-8 lg:p-12">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
           {/* Left: Text + CTA */}
           <div
-            className="lg:col-span-7 space-y-5 z-10"
+            className="lg:col-span-7 space-y-3 sm:space-y-4 lg:space-y-5 z-10"
             key={`text-${current}`}
             style={{ animation: 'fadeInLeft 0.55s ease both' }}
           >
             {/* Badge Row */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <span
-                className="px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest backdrop-blur-md border"
-                style={{
-                  background: `${slide.accentColor}25`,
-                  borderColor: `${slide.accentColor}55`,
-                  color: slide.accentColor,
-                  boxShadow: `0 0 16px ${slide.glowColor}`,
-                }}
+                className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-extrabold uppercase tracking-widest backdrop-blur-md border"
+                style={{ background: `${slide.accentColor}25`, borderColor: `${slide.accentColor}55`, color: slide.accentColor, boxShadow: `0 0 16px ${slide.glowColor}` }}
               >
                 {slide.badge}
               </span>
-
-              <span className="px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold backdrop-blur-md">
+              <span className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] sm:text-xs font-bold backdrop-blur-md">
                 {slide.discount}
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight leading-[1.1]">
               <span className="text-white drop-shadow-lg">{slide.title}</span>
               <br />
               <span style={{ color: slide.accentColor, textShadow: `0 0 40px ${slide.glowColor}` }}>
@@ -214,80 +208,69 @@ export const HeroSlider: React.FC = () => {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm md:text-base text-slate-300 max-w-lg leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-lg leading-relaxed font-medium line-clamp-2 sm:line-clamp-none">
               {slide.subtitle}
             </p>
 
-            {/* Feature Chips */}
-            <div className="flex flex-wrap gap-4 pt-1 text-xs text-slate-300">
-              <div className="flex items-center gap-1.5 frosted-badge px-3 py-1.5 rounded-full">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+            {/* Feature Chips — hidden on xs, shown sm+ */}
+            <div className="hidden sm:flex flex-wrap gap-2 sm:gap-4 pt-1 text-xs text-slate-300">
+              <div className="flex items-center gap-1.5 frosted-badge px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full">
+                <ShieldCheck className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-blue-400" />
                 <span>Official Warranty</span>
               </div>
-              <div className="flex items-center gap-1.5 frosted-badge px-3 py-1.5 rounded-full">
-                <Sparkles className="w-3.5 h-3.5" style={{ color: slide.accentColor }} />
-                <span>Fast Dhaka Delivery</span>
+              <div className="flex items-center gap-1.5 frosted-badge px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full">
+                <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5" style={{ color: slide.accentColor }} />
+                <span>Fast Delivery</span>
               </div>
-              <div className="flex items-center gap-1.5 frosted-badge px-3 py-1.5 rounded-full">
-                <ShoppingBag className="w-3.5 h-3.5 text-emerald-400" />
-                <span>0% EMI Available</span>
+              <div className="flex items-center gap-1.5 frosted-badge px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full">
+                <ShoppingBag className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-emerald-400" />
+                <span>0% EMI</span>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-3 pt-2 sm:pt-4">
               <button
                 onClick={() => handleCta(slide)}
-                className="btn-glow-orange relative font-extrabold text-sm px-8 py-4 rounded-2xl text-white overflow-hidden flex items-center gap-2"
-                style={{
-                  background: `linear-gradient(135deg, ${slide.accentColor}, ${slide.accentColor}cc)`,
-                }}
+                className="btn-glow-orange relative font-extrabold text-sm px-5 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-white overflow-hidden flex items-center gap-2"
+                style={{ background: `linear-gradient(135deg, ${slide.accentColor}, ${slide.accentColor}cc)` }}
               >
                 <Zap className="w-4 h-4" />
                 <span>{slide.ctaText}</span>
               </button>
-
               <button
                 onClick={() => setCurrentView('shop')}
-                className="font-bold text-sm px-6 py-4 rounded-2xl border border-white/20 text-white hover:bg-white/10 transition-all backdrop-blur-md hover-lift"
+                className="font-bold text-sm px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-white/20 text-white hover:bg-white/10 transition-all backdrop-blur-md"
               >
-                {language === 'EN' ? 'Browse Catalog' : 'ক্যাটালগ দেখুন'}
+                {language === 'EN' ? 'Browse Catalog' : 'ক্যাটালগ'}
               </button>
             </div>
 
             {/* Rating proof */}
-            <div className="flex items-center gap-3 pt-1">
+            <div className="flex items-center gap-2 sm:gap-3 pt-1">
               <div className="flex text-amber-400">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-3 sm:w-4 h-3 sm:h-4 fill-current" />)}
               </div>
-              <span className="text-xs text-slate-400">
-                <span className="text-white font-bold">4.9/5</span> · Trusted by 50,000+ customers
+              <span className="text-[11px] sm:text-xs text-slate-400">
+                <span className="text-white font-bold">4.9/5</span> · 50,000+ customers
               </span>
             </div>
           </div>
 
-          {/* Right: Hero Image */}
+          {/* Right: Hero Image — hidden on mobile to save space */}
           <div
-            className="lg:col-span-5 relative flex items-center justify-center z-10"
+            className="hidden lg:flex lg:col-span-5 relative items-center justify-center z-10"
             key={`img-${current}`}
             style={{ animation: 'fadeInRight 0.55s ease both' }}
           >
-            {/* Glow ring behind image */}
-            <div
-              className="absolute w-72 h-72 rounded-full blur-3xl"
-              style={{ background: slide.orb1, opacity: 0.8 }}
-            />
+            {/* Glow ring */}
+            <div className="absolute w-72 h-72 rounded-full blur-3xl" style={{ background: slide.orb1, opacity: 0.8 }} />
 
             <div className="relative w-full max-w-md group">
-              {/* Floating badge top-right */}
+              {/* Floating badge */}
               <div
                 className="absolute -top-4 -right-4 z-20 px-3 py-2 rounded-2xl text-xs font-extrabold animate-float-subtle"
-                style={{
-                  background: `${slide.accentColor}22`,
-                  border: `1px solid ${slide.accentColor}55`,
-                  color: slide.accentColor,
-                  backdropFilter: 'blur(8px)',
-                }}
+                style={{ background: `${slide.accentColor}22`, border: `1px solid ${slide.accentColor}55`, color: slide.accentColor, backdropFilter: 'blur(8px)' }}
               >
                 <div className="flex items-center gap-1.5">
                   <Flame className="w-3.5 h-3.5" />
@@ -295,18 +278,11 @@ export const HeroSlider: React.FC = () => {
                 </div>
               </div>
 
-              {/* Image frame */}
-              <div
-                className="rounded-3xl overflow-hidden shadow-2xl border border-slate-700/40"
-                style={{
-                  boxShadow: `0 30px 80px ${slide.glowColor}, 0 0 0 1px rgba(255,255,255,0.06)`,
-                }}
+              {/* Image */}
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-700/40"
+                style={{ boxShadow: `0 30px 80px ${slide.glowColor}, 0 0 0 1px rgba(255,255,255,0.06)` }}
               >
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="w-full aspect-[4/3] object-cover transform group-hover:scale-105 transition-transform duration-700"
-                />
+                <img src={slide.image} alt={slide.title} className="w-full aspect-[4/3] object-cover transform group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               </div>
 
@@ -316,10 +292,7 @@ export const HeroSlider: React.FC = () => {
                   <p className="font-bold text-white">Genuine Brand Stock</p>
                   <p className="text-[10px] text-slate-400">Verified · My Computer BD</p>
                 </div>
-                <span
-                  className="px-2.5 py-1 rounded-lg text-white font-extrabold text-[10px] tracking-wider"
-                  style={{ background: slide.accentColor }}
-                >
+                <span className="px-2.5 py-1 rounded-lg text-white font-extrabold text-[10px] tracking-wider" style={{ background: slide.accentColor }}>
                   IN STOCK
                 </span>
               </div>
