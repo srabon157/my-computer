@@ -1,5 +1,22 @@
 export type CategoryId = 
+  | 'desktop'
   | 'laptop'
+  | 'component'
+  | 'monitor'
+  | 'power'
+  | 'phone'
+  | 'tablet'
+  | 'office-equipment'
+  | 'camera'
+  | 'security'
+  | 'networking'
+  | 'software'
+  | 'server-storage'
+  | 'accessories'
+  | 'gadget'
+  | 'gaming'
+  | 'tv'
+  | 'appliance'
   | 'desktop-pc'
   | 'gaming-pc'
   | 'processor'
@@ -7,14 +24,11 @@ export type CategoryId =
   | 'motherboard'
   | 'ram'
   | 'storage'
-  | 'monitor'
   | 'keyboard-mouse'
   | 'headphone-audio'
-  | 'networking'
   | 'cctv-security'
   | 'tv-appliance'
   | 'air-conditioner'
-  | 'accessories'
   | 'mobile-tablet';
 
 export type BrandName = 
@@ -105,6 +119,15 @@ export interface Product {
   createdDate: string;
 }
 
+export interface SubCategory {
+  id: string;
+  name: string;
+  nameBn: string;
+  popular?: boolean;
+  hasChildren?: boolean;
+  isShowAll?: boolean;
+}
+
 export interface Category {
   id: CategoryId;
   name: string;
@@ -113,6 +136,7 @@ export interface Category {
   image: string;
   itemCount: number;
   popular?: boolean;
+  subCategories?: SubCategory[];
 }
 
 export interface Brand {

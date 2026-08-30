@@ -331,7 +331,22 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const filteredProducts = PRODUCTS.filter(product => {
     // Category filter
-    if (filters.category && product.category !== filters.category) return false;
+    if (filters.category) {
+      const cat = filters.category;
+      const isMatch =
+        product.category === cat ||
+        product.subcategory === cat ||
+        (cat === 'desktop' && (product.category === 'desktop-pc' || product.category === 'desktop')) ||
+        (cat === 'component' && ['processor', 'graphics-card', 'motherboard', 'ram', 'storage', 'component'].includes(product.category)) ||
+        (cat === 'gaming' && (product.isGaming || product.category === 'gaming-pc' || product.category === 'gaming')) ||
+        (cat === 'security' && (product.category === 'security' || product.category === 'cctv-security')) ||
+        (cat === 'accessories' && ['accessories', 'keyboard-mouse', 'headphone-audio'].includes(product.category)) ||
+        (cat === 'tv' && (product.category === 'tv' || product.category === 'tv-appliance')) ||
+        (cat === 'appliance' && (product.category === 'appliance' || product.category === 'air-conditioner')) ||
+        (cat === 'phone' && (product.category === 'phone' || product.category === 'mobile-tablet')) ||
+        (cat === 'tablet' && (product.category === 'tablet' || product.category === 'mobile-tablet'));
+      if (!isMatch) return false;
+    }
     
     // Brand filter
     if (filters.brand.length > 0 && !filters.brand.includes(product.brand)) return false;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS, MOCK_ORDERS } from '../../data/mockData';
 import type { Product } from '../../types';
+import { Logo } from '../common/Logo';
 import {
   Package,
   ShoppingCart,
@@ -68,14 +69,15 @@ export const AdminDashboard: React.FC = () => {
   return (
     <div className="py-8 space-y-8 animate-fadeIn">
       {/* Header */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 text-white border border-indigo-900/60 shadow-xl flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-2">
+      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 text-white border border-indigo-900/60 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <Logo size="sm" variant="dark" />
             <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-wider border border-indigo-500/40">
               System Admin Console
             </span>
           </div>
-          <h1 className="text-2xl font-extrabold tracking-tight mt-2">
+          <h1 className="text-2xl font-extrabold tracking-tight">
             My Computer Management Panel
           </h1>
           <p className="text-xs text-slate-300">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, X, Send, Bot } from 'lucide-react';
+import { MessageSquare, X, Send } from 'lucide-react';
 
 interface ChatMessage {
   sender: 'bot' | 'user';
@@ -70,8 +70,8 @@ export const LiveChatWidget: React.FC = () => {
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-slate-900 to-blue-950 text-white flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-full bg-orange-500 flex items-center justify-center text-white">
-                <Bot className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700/80 p-1 flex items-center justify-center flex-shrink-0">
+                <img src="/logo-icon.png" alt="My Computer" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h4 className="font-bold text-xs">My Computer Support AI</h4>

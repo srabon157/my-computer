@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StoreProvider, useStore } from './context/StoreContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
@@ -38,6 +38,19 @@ import { LiveChatWidget } from './components/extra/LiveChatWidget';
 const MainContent: React.FC = () => {
   const { currentView } = useStore();
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // Page transition key — increments on every view change to re-trigger animation
+  const [pageKey, setPageKey] = useState(0);
+  const prevView = useRef(currentView);
+
+  useEffect(() => {
+    if (currentView !== prevView.current) {
+      prevView.current = currentView;
+      setPageKey(k => k + 1);
+      // Scroll to top smoothly on view change
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentView]);
 
   const renderView = () => {
     switch (currentView) {
@@ -97,7 +110,10 @@ const MainContent: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans">
       <Header onOpenCart={() => setIsCartOpen(true)} />
       
-      <main className="grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 md:pb-6">
+      <main
+        key={pageKey}
+        className="grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 md:pb-6 page-enter"
+      >
         {renderView()}
       </main>
 

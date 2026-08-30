@@ -1,22 +1,327 @@
 import type { Product, Category, Brand, BlogPost, StoreLocation, Coupon, Order } from '../types';
 
 export const CATEGORIES: Category[] = [
-  { id: 'laptop', name: 'Laptops & Notebooks', nameBn: 'ল্যাপটপ ও নোটবুক', icon: 'Laptop', image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=600&auto=format&fit=crop', itemCount: 142, popular: true },
-  { id: 'desktop-pc', name: 'Desktop PCs', nameBn: 'ডেস্কটপ পিসি', icon: 'Monitor', image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=600&auto=format&fit=crop', itemCount: 89, popular: true },
-  { id: 'gaming-pc', name: 'Gaming PC & Rig', nameBn: 'গেমিং পিসি ও রিগ', icon: 'Gamepad2', image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=600&auto=format&fit=crop', itemCount: 64, popular: true },
-  { id: 'processor', name: 'Processors (CPU)', nameBn: 'প্রসেসর (সিপিইউ)', icon: 'Cpu', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop', itemCount: 45, popular: true },
-  { id: 'graphics-card', name: 'Graphics Cards (GPU)', nameBn: 'গ্রাফিক্স কার্ড (জিপিইউ)', icon: 'CircuitBoard', image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=600&auto=format&fit=crop', itemCount: 38, popular: true },
-  { id: 'motherboard', name: 'Motherboards', nameBn: 'মাদারবোর্ড', icon: 'HardDrive', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop', itemCount: 52 },
-  { id: 'ram', name: 'RAM (Desktop & Laptop)', nameBn: 'র‌্যাম', icon: 'MemoryStick', image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?q=80&w=600&auto=format&fit=crop', itemCount: 67 },
-  { id: 'storage', name: 'SSD & HDD Storage', nameBn: 'এসএসডি ও হার্ডডিস্ক', icon: 'Database', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=600&auto=format&fit=crop', itemCount: 74 },
-  { id: 'monitor', name: 'Monitors & Displays', nameBn: 'মনিটর ও ডিসপ্লে', icon: 'Tv', image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=600&auto=format&fit=crop', itemCount: 96, popular: true },
-  { id: 'keyboard-mouse', name: 'Keyboards & Mice', nameBn: 'কীবোর্ড ও মাউস', icon: 'Keyboard', image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=600&auto=format&fit=crop', itemCount: 110, popular: true },
-  { id: 'headphone-audio', name: 'Headphones & Speakers', nameBn: 'হেডফোন ও অডিও', icon: 'Headphones', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop', itemCount: 85 },
-  { id: 'networking', name: 'Routers & Networking', nameBn: 'রাউটার ও নেটওয়ার্কিং', icon: 'Wifi', image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=600&auto=format&fit=crop', itemCount: 48 },
-  { id: 'cctv-security', name: 'CCTV & Security', nameBn: 'সিসিটিভি ও সিকিউরিটি', icon: 'Camera', image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=600&auto=format&fit=crop', itemCount: 53, popular: true },
-  { id: 'tv-appliance', name: 'Smart TVs & Appliances', nameBn: 'স্মার্ট টিভি ও হোম অ্যাপ্লায়েন্স', icon: 'Tv2', image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=600&auto=format&fit=crop', itemCount: 61, popular: true },
-  { id: 'air-conditioner', name: 'Air Conditioners (AC)', nameBn: 'এয়ার কন্ডিশনার (এসি)', icon: 'Wind', image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=crop', itemCount: 29 },
-  { id: 'accessories', name: 'Gadgets & Accessories', nameBn: 'গ্যাজেট ও এক্সেসরিজ', icon: 'Plug', image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=600&auto=format&fit=crop', itemCount: 120 }
+  {
+    id: 'desktop',
+    name: 'Desktop',
+    nameBn: 'ডেস্কটপ',
+    icon: 'Monitor',
+    image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?q=80&w=600&auto=format&fit=crop',
+    itemCount: 94,
+    popular: true,
+    subCategories: [
+      { id: 'brand-pc', name: 'Brand PC (Dell, HP, Asus, Acer, Lenovo)', nameBn: 'ব্র্যান্ড পিসি' },
+      { id: 'custom-pc', name: 'Custom Built Desktop Rig', nameBn: 'কাস্টম পিসি' },
+      { id: 'all-in-one', name: 'All-in-One PC', nameBn: 'অল-ইন-ওয়ান পিসি' },
+      { id: 'apple-mac', name: 'Apple Mac Mini / Studio / iMac', nameBn: 'অ্যাপল ম্যাক' },
+      { id: 'mini-pc', name: 'Portable Mini PC', nameBn: 'মিনি পিসি' },
+      { id: 'gaming-desktop', name: 'High Performance Gaming PC', nameBn: 'গেমিং ডেস্কটপ' }
+    ]
+  },
+  {
+    id: 'laptop',
+    name: 'Laptop',
+    nameBn: 'ল্যাপটপ',
+    icon: 'Laptop',
+    image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=600&auto=format&fit=crop',
+    itemCount: 156,
+    popular: true,
+    subCategories: [
+      { id: 'all-laptops', name: 'All Laptops & Notebooks', nameBn: 'সকল ল্যাপটপ' },
+      { id: 'gaming-laptop', name: 'Gaming Laptop (ROG, Legion, Predator)', nameBn: 'গেমিং ল্যাপটপ' },
+      { id: 'premium-ultrabook', name: 'Premium Ultrabook & OLED Laptops', nameBn: 'আল্ট্রাবুক' },
+      { id: 'macbook', name: 'Apple MacBook (M3 / M2 Air & Pro)', nameBn: 'অ্যাপল ম্যাকবুক' },
+      { id: 'business-laptop', name: 'Business & Office Laptops', nameBn: 'বিজনেস ল্যাপটপ' },
+      { id: 'budget-laptop', name: 'Budget Student Laptops', nameBn: 'বাজেট ল্যাপটপ' }
+    ]
+  },
+  {
+    id: 'component',
+    name: 'Component',
+    nameBn: 'কম্পোনেন্ট',
+    icon: 'Cpu',
+    image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop',
+    itemCount: 280,
+    popular: true,
+    subCategories: [
+      { id: 'processor', name: 'Processor', nameBn: 'প্রসেসর', hasChildren: true },
+      { id: 'cpu-cooler', name: 'CPU Cooler', nameBn: 'সিপিইউ কুলার', hasChildren: true },
+      { id: 'motherboard', name: 'Motherboard', nameBn: 'মাদারবোর্ড', hasChildren: true },
+      { id: 'graphics-card', name: 'Graphics Card', nameBn: 'গ্রাফিক্স কার্ড', hasChildren: true },
+      { id: 'ram-desktop', name: 'RAM (Desktop)', nameBn: 'র‌্যাম (ডেস্কটপ)', hasChildren: true },
+      { id: 'ram-laptop', name: 'RAM (Laptop)', nameBn: 'র‌্যাম (ল্যাপটপ)', hasChildren: true },
+      { id: 'power-supply', name: 'Power Supply', nameBn: 'পাওয়ার সাপ্লাই', hasChildren: true },
+      { id: 'hard-disk-drive', name: 'Hard Disk Drive', nameBn: 'হার্ড ডিস্ক ড্রাইভ', hasChildren: true },
+      { id: 'portable-hdd', name: 'Portable Hard Disk Drive', nameBn: 'পোর্টেবল হার্ড ডিস্ক', hasChildren: true },
+      { id: 'ssd', name: 'SSD', nameBn: 'এসএসডি', hasChildren: true },
+      { id: 'portable-ssd', name: 'Portable SSD', nameBn: 'পোর্টেবল এসএসডি', hasChildren: true },
+      { id: 'casing', name: 'Casing', nameBn: 'কেসিং', hasChildren: true },
+      { id: 'casing-cooler', name: 'Casing Cooler', nameBn: 'কেসিং কুলার', hasChildren: true },
+      { id: 'optical-disk-drive', name: 'Optical Disk Drive', nameBn: 'অপটিক্যাল ডিস্ক ড্রাইভ' },
+      { id: 'vertical-gpu-holder', name: 'Vertical GPU Holder', nameBn: 'ভার্টিক্যাল জিপিইউ হোল্ডার' },
+      { id: 'liquid-cooling', name: 'Water / Liquid Cooling', nameBn: 'লিকুইড কুলিং' },
+      { id: 'component', name: 'Show All Component', nameBn: 'সকল কম্পোনেন্ট দেখুন', isShowAll: true }
+    ]
+  },
+  {
+    id: 'monitor',
+    name: 'Monitor',
+    nameBn: 'মনিটর',
+    icon: 'Tv',
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=600&auto=format&fit=crop',
+    itemCount: 110,
+    popular: true,
+    subCategories: [
+      { id: 'gaming-monitor', name: 'Gaming Monitor (144Hz–360Hz Fast IPS)', nameBn: 'গেমিং মনিটর' },
+      { id: '4k-monitor', name: '4K UHD & 2K QHD Display', nameBn: '৪কে মনিটর' },
+      { id: 'curved-monitor', name: 'Curved Ultra-Wide Displays', nameBn: 'কার্ভড মনিটর' },
+      { id: 'oled-monitor', name: 'OLED & Mini-LED Displays', nameBn: 'ওএলইডি মনিটর' },
+      { id: 'touch-monitor', name: 'Touch & Portable Monitors', nameBn: 'টাচ ও পোর্টেবল' }
+    ]
+  },
+  {
+    id: 'power',
+    name: 'Power',
+    nameBn: 'পাওয়ার',
+    icon: 'Zap',
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&auto=format&fit=crop',
+    itemCount: 45,
+    subCategories: [
+      { id: 'online-ups', name: 'Online UPS (APC, Santak, MaxGreen)', nameBn: 'অনলাইন ইউপিএস' },
+      { id: 'offline-ups', name: 'Offline UPS (650VA - 2000VA)', nameBn: 'অফলাইন ইউপিএস' },
+      { id: 'ips-inverter', name: 'IPS & Solar Inverter Systems', nameBn: 'আইপিএস ও ইনভার্টার' },
+      { id: 'voltage-stabilizer', name: 'Voltage Stabilizer & Surge Protector', nameBn: 'ভোল্টেজ স্ট্যাবিলাইজার' },
+      { id: 'power-bank', name: 'High-Capacity Power Banks (65W/100W)', nameBn: 'পাওয়ার ব্যাংক' }
+    ]
+  },
+  {
+    id: 'phone',
+    name: 'Phone',
+    nameBn: 'ফোন',
+    icon: 'Smartphone',
+    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=600&auto=format&fit=crop',
+    itemCount: 78,
+    popular: true,
+    subCategories: [
+      { id: 'apple-iphone', name: 'Apple iPhone (iPhone 16 / 15 Pro Max)', nameBn: 'আইফোন' },
+      { id: 'samsung-phone', name: 'Samsung Galaxy (S24 Ultra & Z Fold)', nameBn: 'স্যামসাং ফোন' },
+      { id: 'xiaomi-phone', name: 'Xiaomi / Redmi / POCO', nameBn: 'শাওমি ফোন' },
+      { id: 'google-pixel', name: 'Google Pixel 9 / 8 Pro', nameBn: 'গুগল পিক্সেল' },
+      { id: 'phone-accessories', name: 'Fast Chargers, Cables & Cases', nameBn: 'ফোন এক্সেসরিজ' }
+    ]
+  },
+  {
+    id: 'tablet',
+    name: 'Tablet',
+    nameBn: 'ট্যাবলেট',
+    icon: 'Tablet',
+    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=600&auto=format&fit=crop',
+    itemCount: 42,
+    subCategories: [
+      { id: 'apple-ipad', name: 'Apple iPad (Pro M4, Air M2, Mini)', nameBn: 'অ্যাপল আইপ্যাড' },
+      { id: 'samsung-tab', name: 'Samsung Galaxy Tab (S9 Ultra & A9)', nameBn: 'স্যামসাং ট্যাব' },
+      { id: 'surface', name: 'Microsoft Surface Pro', nameBn: 'মাইক্রোসফট সারফেস' },
+      { id: 'graphics-tablet', name: 'Graphics Drawing Tablets (Wacom / Huion)', nameBn: 'ড্রয়িং ট্যাবলেট' }
+    ]
+  },
+  {
+    id: 'office-equipment',
+    name: 'Office Equipment',
+    nameBn: 'অফিস ইকুইপমেন্ট',
+    icon: 'Printer',
+    image: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?q=80&w=600&auto=format&fit=crop',
+    itemCount: 68,
+    subCategories: [
+      { id: 'printers', name: 'Laser & All-in-One InkTank Printers (Canon, HP, Epson)', nameBn: 'প্রিন্টার' },
+      { id: 'projectors', name: 'Multimedia & 4K Projectors', nameBn: 'প্রজেক্টর' },
+      { id: 'scanners', name: 'Document & Flatbed Scanners', nameBn: 'স্ক্যানার' },
+      { id: 'photocopiers', name: 'Digital Photocopier Machines', nameBn: 'ফটোকপিয়ার' },
+      { id: 'barcode-pos', name: 'Barcode Scanners & POS Cash Drawers', nameBn: 'পিওএস ও বারকোড' },
+      { id: 'shredders', name: 'Paper Shredders & Lamination', nameBn: 'কাগজ কাটার মেশিন' }
+    ]
+  },
+  {
+    id: 'camera',
+    name: 'Camera',
+    nameBn: 'ক্যামেরা',
+    icon: 'Camera',
+    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=600&auto=format&fit=crop',
+    itemCount: 54,
+    popular: true,
+    subCategories: [
+      { id: 'action-camera', name: 'Action Camera', nameBn: 'অ্যাকশন ক্যামেরা', hasChildren: true },
+      { id: 'dslr', name: 'DSLR', nameBn: 'ডিএসএলআর', hasChildren: true },
+      { id: 'mirrorless-camera', name: 'Mirrorless Camera', nameBn: 'মিররলেস ক্যামেরা', hasChildren: true },
+      { id: 'digital-camera', name: 'Digital Camera', nameBn: 'ডিজিটাল ক্যামেরা', hasChildren: true },
+      { id: 'video-camera', name: 'Video Camera', nameBn: 'ভিডিও ক্যামেরা', hasChildren: true },
+      { id: 'handycam', name: 'Handycam', nameBn: 'হ্যান্ডিক্যাম' },
+      { id: 'dash-cam', name: 'Dash Cam', nameBn: 'ড্যাশ ক্যাম', hasChildren: true },
+      { id: 'instant-camera', name: 'Instant Camera', nameBn: 'ইনস্ট্যান্ট ক্যামেরা' },
+      { id: 'body-camera', name: 'Body Camera', nameBn: 'বডি ক্যামেরা' },
+      { id: 'camera-lenses', name: 'Camera Lenses', nameBn: 'ক্যামেরা লেন্স', hasChildren: true },
+      { id: 'camera-tripod', name: 'Camera Tripod', nameBn: 'ক্যামেরা ট্রাইপড', hasChildren: true },
+      { id: 'camera-accessories', name: 'Camera Accessories', nameBn: 'ক্যামেরা এক্সেসরিজ', hasChildren: true },
+      { id: 'gimbal', name: 'Gimbal', nameBn: 'গিম্বল' },
+      { id: 'camera', name: 'Show All Camera', nameBn: 'সকল ক্যামেরা দেখুন', isShowAll: true }
+    ]
+  },
+  {
+    id: 'security',
+    name: 'Security',
+    nameBn: 'সিকিউরিটি',
+    icon: 'ShieldCheck',
+    image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=600&auto=format&fit=crop',
+    itemCount: 62,
+    popular: true,
+    subCategories: [
+      { id: 'portable-wifi-camera', name: 'Portable WiFi Camera', nameBn: 'পোর্টেবল ওয়াইফাই ক্যামেরা', hasChildren: true },
+      { id: 'ip-camera', name: 'IP Camera', nameBn: 'আইপি ক্যামেরা', hasChildren: true },
+      { id: 'cc-camera', name: 'CC Camera', nameBn: 'সিসি ক্যামেরা', hasChildren: true },
+      { id: 'ptz-camera', name: 'PTZ Camera', nameBn: 'পিটিজেড ক্যামেরা', hasChildren: true },
+      { id: 'cc-camera-package', name: 'CC Camera Package', nameBn: 'সিসি ক্যামেরা প্যাকেজ', hasChildren: true },
+      { id: 'ip-camera-package', name: 'IP Camera Package', nameBn: 'আইপি ক্যামেরা প্যাকেজ', hasChildren: true },
+      { id: 'dvr', name: 'DVR', nameBn: 'ডিভিআর', hasChildren: true },
+      { id: 'nvr', name: 'NVR', nameBn: 'এনভিআর', hasChildren: true },
+      { id: 'xvr', name: 'XVR', nameBn: 'এক্সভিআর', hasChildren: true },
+      { id: 'cc-camera-accessories', name: 'CC Camera Accessories', nameBn: 'সিসি ক্যামেরা এক্সেসরিজ' },
+      { id: 'door-lock', name: 'Door Lock', nameBn: 'ডোর লক', hasChildren: true },
+      { id: 'smart-door-bell', name: 'Smart Door Bell', nameBn: 'স্মার্ট ডোর বেল' },
+      { id: 'access-control', name: 'Access Control', nameBn: 'অ্যাক্সেস কন্ট্রোল', hasChildren: true },
+      { id: 'entrance-control', name: 'Entrance Control', nameBn: 'এন্ট্রান্স কন্ট্রোল' },
+      { id: 'digital-locker-vault', name: 'Digital Locker & Vault', nameBn: 'ডিজিটাল লকার ও ভল্ট' },
+      { id: 'kvm-switch', name: 'KVM Switch', nameBn: 'কেভিএম সুইচ' },
+      { id: 'security', name: 'Show All Security', nameBn: 'সকল সিকিউরিটি দেখুন', isShowAll: true }
+    ]
+  },
+  {
+    id: 'networking',
+    name: 'Networking',
+    nameBn: 'নেটওয়ার্কিং',
+    icon: 'Wifi',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=600&auto=format&fit=crop',
+    itemCount: 76,
+    subCategories: [
+      { id: 'wifi-routers', name: 'Wi-Fi 6 / Wi-Fi 7 Gigabit Routers', nameBn: 'ওয়াইফাই রাউটার' },
+      { id: 'mesh-wifi', name: 'Mesh Whole-Home Wi-Fi Systems', nameBn: 'মেশ ওয়াইফাই' },
+      { id: 'network-switch', name: 'Managed & PoE Network Switches', nameBn: 'নেটওয়ার্ক সুইচ' },
+      { id: 'access-points', name: 'Ceiling Access Points & Outdoor Antennas', nameBn: 'অ্যাক্সেস পয়েন্ট' },
+      { id: 'cables-patch', name: 'Cat6 / Cat7 UTP Cables & Patch Panels', nameBn: 'নেটওয়ার্ক কেবল' },
+      { id: 'server-rack', name: 'Wall Mount Server Racks & Fiber ONU', nameBn: 'সার্ভার র‍্যাক' }
+    ]
+  },
+  {
+    id: 'software',
+    name: 'Software',
+    nameBn: 'সফটওয়্যার',
+    icon: 'Terminal',
+    image: 'https://images.unsplash.com/photo-1618401471353-b98aedd04e11?q=80&w=600&auto=format&fit=crop',
+    itemCount: 35,
+    subCategories: [
+      { id: 'windows-os', name: 'Microsoft Windows 11 Pro Genuine License', nameBn: 'উইন্ডোজ ১১ প্রো' },
+      { id: 'office-apps', name: 'Microsoft Office 365 Home & Business', nameBn: 'অফিস ৩৬৫' },
+      { id: 'antivirus', name: 'Antivirus & Internet Security (Kaspersky, ESET, Bitdefender)', nameBn: 'অ্যান্টিভাইরাস' },
+      { id: 'creative-software', name: 'Adobe Creative Cloud Genuine Subscription', nameBn: 'অ্যাডোবি সফটওয়্যার' },
+      { id: 'server-os', name: 'Windows Server & SQL Database Licenses', nameBn: 'সার্ভার ওএস' }
+    ]
+  },
+  {
+    id: 'server-storage',
+    name: 'Server & Storage',
+    nameBn: 'সার্ভার ও স্টোরেজ',
+    icon: 'Server',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop',
+    itemCount: 48,
+    subCategories: [
+      { id: 'rack-servers', name: 'Rack & Tower Enterprise Servers (Dell PowerEdge, HPE)', nameBn: 'সার্ভার' },
+      { id: 'nas-storage', name: 'Network Attached Storage (Synology & QNAP NAS)', nameBn: 'ন্যাস স্টোরেজ' },
+      { id: 'server-hdd', name: 'Enterprise SAS & IronWolf Pro Hard Drives', nameBn: 'এন্টারপ্রাইজ হার্ডডিস্ক' },
+      { id: 'server-ram', name: 'ECC Registered Server RAM Modules', nameBn: 'সার্ভার র‍্যাম' },
+      { id: 'server-accessories', name: 'KVM Switches, Rails & Server Power Supplies', nameBn: 'সার্ভার এক্সেসরিজ' }
+    ]
+  },
+  {
+    id: 'accessories',
+    name: 'Accessories',
+    nameBn: 'এক্সেসরিজ',
+    icon: 'Keyboard',
+    image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=600&auto=format&fit=crop',
+    itemCount: 165,
+    popular: true,
+    subCategories: [
+      { id: 'keyboards', name: 'Mechanical & Wireless Keyboards', nameBn: 'কীবোর্ড' },
+      { id: 'mouse', name: 'Wireless Ergonomic & Precision Mice', nameBn: 'মাউস' },
+      { id: 'audio-headphone', name: 'Studio Headphones & Bluetooth Speakers', nameBn: 'হেডফোন ও অডিও' },
+      { id: 'hubs-adapters', name: 'USB-C Hubs, Docks & DisplayPort Cables', nameBn: 'ইউএসবি হাব ও ক্যাবল' },
+      { id: 'laptop-stand', name: 'Aluminum Laptop Stands & Cooling Pads', nameBn: 'ল্যাপটপ স্ট্যান্ড' },
+      { id: 'backpacks', name: 'Waterproof Laptop Backpacks & Sleeves', nameBn: 'ল্যাপটপ ব্যাগ' }
+    ]
+  },
+  {
+    id: 'gadget',
+    name: 'Gadget',
+    nameBn: 'গ্যাজেট',
+    icon: 'Watch',
+    image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=600&auto=format&fit=crop',
+    itemCount: 95,
+    popular: true,
+    subCategories: [
+      { id: 'smart-watch', name: 'Smart Watches (Apple Watch, Galaxy Watch, Amazfit)', nameBn: 'স্মার্ট ওয়াচ' },
+      { id: 'tws-earbuds', name: 'TWS Noise Cancelling Earbuds (AirPods, Galaxy Buds)', nameBn: 'টিডব্লিউএস ইয়ারবাডস' },
+      { id: 'drones', name: 'DJI Camera Drones & Accessories', nameBn: 'ক্যামেরা ড্রোন' },
+      { id: 'smart-lights', name: 'RGB Smart LED Strips & Desk Lights', nameBn: 'স্মার্ট লাইটিং' },
+      { id: 'stylus-pen', name: 'Stylus & Apple Pencil', nameBn: 'স্টাইলাস পেন' }
+    ]
+  },
+  {
+    id: 'gaming',
+    name: 'Gaming',
+    nameBn: 'গেমিং',
+    icon: 'Gamepad2',
+    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=600&auto=format&fit=crop',
+    itemCount: 120,
+    popular: true,
+    subCategories: [
+      { id: 'gaming-consoles', name: 'Gaming Consoles (Sony PS5 Slim, Xbox Series X, Switch OLED)', nameBn: 'গেমিং কনসোল' },
+      { id: 'game-controllers', name: 'Wireless Gamepads & Racing Wheels', nameBn: 'গেমপ্যাড ও কন্ট্রোলার' },
+      { id: 'gaming-chairs', name: 'Ergonomic Gaming Chairs & RGB Desks', nameBn: 'গেমিং চেয়ার ও ডেস্ক' },
+      { id: 'gaming-peripherals', name: 'RGB Mechanical Gaming Keyboards & High DPI Mice', nameBn: 'গেমিং কীবোর্ড ও মাউস' },
+      { id: 'gaming-audio', name: '7.1 Surround Gaming Headsets & Microphones', nameBn: 'গেমিং হেডসেট' },
+      { id: 'gaming-streaming', name: 'Elgato Capture Cards & Stream Decks', nameBn: 'স্ট্রিমিং গিয়ার' }
+    ]
+  },
+  {
+    id: 'tv',
+    name: 'TV',
+    nameBn: 'টিভি',
+    icon: 'Tv2',
+    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=600&auto=format&fit=crop',
+    itemCount: 58,
+    popular: true,
+    subCategories: [
+      { id: '4k-smart-tv', name: '4K Ultra HD Smart Google TVs', nameBn: '৪কে স্মার্ট টিভি' },
+      { id: 'oled-qled', name: 'LG OLED, Samsung Neo QLED & Sony Bravia XR', nameBn: 'ওএলইডি ও কিউএলইডি' },
+      { id: 'interactive-display', name: 'Interactive Flat Touch Panels for Conference & Education', nameBn: 'ইন্টারেক্টিভ প্যানেল' },
+      { id: 'tv-box', name: 'Android TV Box (Xiaomi Mi Box 4K, Apple TV 4K)', nameBn: 'অ্যান্ড্রয়েড টিভি বক্স' },
+      { id: 'soundbars', name: 'Dolby Atmos Home Theater Soundbars', nameBn: 'সাউন্ডবার' },
+      { id: 'tv-mounts', name: 'Hydraulic Wall Mounts & Mobile TV Stands', nameBn: 'টিভি মাউন্ট' }
+    ]
+  },
+  {
+    id: 'appliance',
+    name: 'Appliance',
+    nameBn: 'অ্যাপ্লায়েন্স',
+    icon: 'Wind',
+    image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=crop',
+    itemCount: 42,
+    subCategories: [
+      { id: 'inverter-ac', name: 'Inverter Air Conditioners (Gree, General, Haier 1.5 - 2 Ton)', nameBn: 'ইনভার্টার এসি' },
+      { id: 'refrigerators', name: 'Smart Inverter Refrigerators & Deep Freezers', nameBn: 'ফ্রিজ' },
+      { id: 'microwave-ovens', name: 'Convection & Grill Microwave Ovens', nameBn: 'মাইক্রোওয়েভ ওভেন' },
+      { id: 'washing-machines', name: 'Front & Top Load Automatic Washing Machines', nameBn: 'ওয়াশিং মেশিন' },
+      { id: 'air-purifiers', name: 'HEPA Filter Smart Air Purifiers & Dehumidifiers', nameBn: 'এয়ার পিউরিফায়ার' },
+      { id: 'vacuum-cleaners', name: 'Cordless Handheld & Robot Vacuum Cleaners', nameBn: 'ভ্যাকুয়াম ক্লিনার' }
+    ]
+  }
 ];
 
 export const BRANDS: Brand[] = [
@@ -799,6 +1104,170 @@ export const PRODUCTS: Product[] = [
     reviews: [],
     questions: [],
     createdDate: '2024-01-12'
+  },
+
+  // 19. IMOU Ranger 2 Portable WiFi Security Camera
+  {
+    id: 'prod-019',
+    name: 'IMOU Ranger 2 4MP 360° Smart Portable Wi-Fi IP Security Camera with Human Detection',
+    slug: 'imou-ranger-2-4mp-portable-wifi-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'portable-wifi-camera',
+    badge: 'Hot',
+    regularPrice: 3800,
+    discountPrice: 3250,
+    discountPercentage: 14,
+    rating: 4.8,
+    reviewCount: 64,
+    stockStatus: 'In Stock',
+    stockCount: 50,
+    isSmartHome: true,
+    images: [
+      'https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=1000&auto=format&fit=crop'
+    ],
+    shortSpecs: [
+      '4MP QHD Video & 360° Panoramic View (Pan & Tilt)',
+      'AI Smart Human Detection & Smart Tracking',
+      'Two-Way Audio with Built-in Siren Alarm',
+      'Supports Micro SD Card up to 256GB & Cloud Storage'
+    ],
+    specifications: {
+      'Camera': [
+        { label: 'Resolution', value: '4MP (2560 x 1440)' },
+        { label: 'Night Vision', value: '10m (33ft) Distance' },
+        { label: 'Connectivity', value: 'Wi-Fi IEEE802.11b/g/n (2.4GHz)' }
+      ]
+    },
+    warranty: '1 Year Brand Warranty',
+    emiAvailable: false,
+    reviews: [],
+    questions: [],
+    createdDate: '2024-03-15'
+  },
+
+  // 20. Dahua 4MP WizSense PTZ IP Camera
+  {
+    id: 'prod-020',
+    name: 'Dahua 4MP 25x Starlight IR WizSense PTZ Network Security Camera (SD49425XB-HNR)',
+    slug: 'dahua-4mp-wizsense-ptz-camera',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ptz-camera',
+    badge: 'Best Seller',
+    regularPrice: 42000,
+    discountPrice: 38500,
+    discountPercentage: 8,
+    rating: 4.9,
+    reviewCount: 28,
+    stockStatus: 'In Stock',
+    stockCount: 15,
+    isSmartHome: true,
+    images: [
+      'https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?q=80&w=1000&auto=format&fit=crop'
+    ],
+    shortSpecs: [
+      '1/2.8" STARVIS™ CMOS with 4MP Crystal Clear Resolution',
+      'Powerful 25x Optical Zoom for long-distance surveillance',
+      'Starlight Technology with 100m IR distance',
+      'Perimeter Protection, Face Detection & Auto Tracking'
+    ],
+    specifications: {
+      'Specs': [
+        { label: 'Optical Zoom', value: '25x' },
+        { label: 'IR Distance', value: '100 meters' },
+        { label: 'Protection', value: 'IP66 Weatherproof & IK10 Vandal-Proof' }
+      ]
+    },
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 3208,
+    reviews: [],
+    questions: [],
+    createdDate: '2024-02-20'
+  },
+
+  // 21. Smart Fingerprint Digital Door Lock
+  {
+    id: 'prod-021',
+    name: 'Tuya Smart Fingerprint & Face Recognition Digital Door Lock with App & Keypad',
+    slug: 'tuya-smart-fingerprint-digital-door-lock',
+    brand: 'Xiaomi',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'door-lock',
+    badge: 'New',
+    regularPrice: 22000,
+    discountPrice: 18500,
+    discountPercentage: 16,
+    rating: 4.9,
+    reviewCount: 41,
+    stockStatus: 'In Stock',
+    stockCount: 18,
+    isSmartHome: true,
+    images: [
+      'https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1000&auto=format&fit=crop'
+    ],
+    shortSpecs: [
+      '5 Unlock Methods: 3D Face ID, Fingerprint, Passcode, RFID Card & Mobile App',
+      'Built-in HD Wide Angle Camera & Smart Doorbell',
+      'Auto-Locking Mechanism with Tamper Alarm',
+      'Rechargeable Lithium-ion Battery with USB Emergency Port'
+    ],
+    specifications: {
+      'Specs': [
+        { label: 'Material', value: 'Zinc Alloy + Tempered Glass' },
+        { label: 'Door Thickness', value: '38mm - 120mm' },
+        { label: 'Battery Life', value: 'Up to 6 Months per Charge' }
+      ]
+    },
+    warranty: '2 Years Replacement Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1541,
+    reviews: [],
+    questions: [],
+    createdDate: '2024-03-01'
+  },
+
+  // 22. ZKTeco Face & Fingerprint Access Control
+  {
+    id: 'prod-022',
+    name: 'ZKTeco MB20 Face & Fingerprint Time Attendance Access Control Terminal',
+    slug: 'zkteco-mb20-face-fingerprint-access-control',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'access-control',
+    regularPrice: 11500,
+    discountPrice: 9800,
+    discountPercentage: 15,
+    rating: 4.7,
+    reviewCount: 52,
+    stockStatus: 'In Stock',
+    stockCount: 30,
+    images: [
+      'https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=1000&auto=format&fit=crop'
+    ],
+    shortSpecs: [
+      'Multi-biometric verification: Face, Fingerprint, RFID & Password',
+      'Capacity: 1,000 Faces, 1,000 Fingerprints, 100,000 Logs',
+      '2.8-inch TFT Color Screen with intuitive UI',
+      'TCP/IP & USB Host for easy data management & reports'
+    ],
+    specifications: {
+      'Specs': [
+        { label: 'Face Capacity', value: '1,000' },
+        { label: 'Fingerprint Capacity', value: '1,000' },
+        { label: 'Communication', value: 'TCP/IP, USB-Host' }
+      ]
+    },
+    warranty: '1 Year Warranty',
+    emiAvailable: false,
+    reviews: [],
+    questions: [],
+    createdDate: '2024-01-28'
   }
 ];
 

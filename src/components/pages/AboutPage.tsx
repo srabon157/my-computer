@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
-import { Monitor, ShieldCheck, Truck, Wrench } from 'lucide-react';
+import { Logo } from '../common/Logo';
+import { ShieldCheck, Truck, Wrench } from 'lucide-react';
 
 export const AboutPage: React.FC = () => {
   const { language } = useStore();
@@ -8,11 +9,11 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="py-8 space-y-12 animate-fadeIn max-w-5xl mx-auto">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 rounded-3xl p-8 md:p-12 text-white border border-blue-800/50 shadow-2xl text-center space-y-4">
-        <div className="w-16 h-16 rounded-2xl bg-orange-500 text-white flex items-center justify-center mx-auto shadow-lg">
-          <Monitor className="w-8 h-8" />
+      <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 rounded-3xl p-8 md:p-12 text-white border border-blue-800/50 shadow-2xl text-center space-y-5">
+        <div className="flex justify-center">
+          <Logo size="xl" variant="dark" />
         </div>
-        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
           {language === 'EN' ? 'About My Computer BD' : 'মাই কম্পিউটার সম্পর্কে'}
         </h1>
         <p className="text-sm text-blue-200 max-w-2xl mx-auto leading-relaxed">

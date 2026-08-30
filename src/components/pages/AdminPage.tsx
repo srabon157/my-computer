@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS } from '../../data/mockData';
+import { Logo } from '../common/Logo';
 import { ShieldCheck, Plus, Package, DollarSign, Users, ShoppingBag, Eye, Edit } from 'lucide-react';
 
 export const AdminPage: React.FC = () => {
@@ -11,15 +12,18 @@ export const AdminPage: React.FC = () => {
     <div className="py-8 space-y-8 animate-fadeIn">
       {/* Header */}
       <div className="bg-gradient-to-r from-slate-900 via-slate-950 to-blue-950 rounded-3xl p-6 md:p-8 text-white border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-blue-400 font-bold text-xs uppercase tracking-wider mb-1">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Store Admin Console & Inventory</span>
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <Logo size="sm" variant="dark" />
+            <div className="flex items-center gap-1.5 text-blue-400 font-bold text-xs uppercase tracking-wider">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span>Admin Portal</span>
+            </div>
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-            {language === 'EN' ? 'My Computer - Admin Portal' : 'অ্যাডমিন প্যানেল'}
+            {language === 'EN' ? 'Store Admin Console & Inventory' : 'অ্যাডমিন প্যানেল'}
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-400">
             Manage product catalog, check live BDT revenue metrics & monitor pending customer orders
           </p>
         </div>

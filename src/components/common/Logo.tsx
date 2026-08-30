@@ -4,63 +4,77 @@ interface LogoProps {
   className?: string;
   showTagline?: boolean;
   variant?: 'light' | 'dark' | 'auto';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  iconOnly?: boolean;
 }
 
 export const Logo: React.FC<LogoProps> = ({
   className = '',
-  showTagline = true,
   variant = 'auto',
-  size = 'md'
+  size = 'md',
+  iconOnly = false
 }) => {
   const sizeMap = {
-    sm: { icon: 'w-8 h-8 text-xl', title: 'text-lg', tagline: 'text-[9px]', gap: 'gap-2' },
-    md: { icon: 'w-10 h-10 text-xl', title: 'text-xl', tagline: 'text-[9px]', gap: 'gap-2.5' },
-    lg: { icon: 'w-12 h-12 text-2xl', title: 'text-2xl', tagline: 'text-[10px]', gap: 'gap-3' }
+    sm: 'h-8 sm:h-9',
+    md: 'h-10 sm:h-11 md:h-12',
+    lg: 'h-12 sm:h-14 md:h-16',
+    xl: 'h-16 sm:h-20'
   };
 
-  const s = sizeMap[size];
+  const iconSizeMap = {
+    sm: 'h-8 w-8',
+    md: 'h-10 w-10',
+    lg: 'h-12 w-12',
+    xl: 'h-16 w-16'
+  };
 
-  const titleColor =
-    variant === 'dark'
-      ? 'text-white'
-      : variant === 'light'
-      ? 'text-slate-900'
-      : 'text-slate-900 dark:text-white';
+  const heightClass = iconOnly ? iconSizeMap[size] : sizeMap[size];
 
-  const taglineColor =
-    variant === 'dark'
-      ? 'text-slate-300'
-      : variant === 'light'
-      ? 'text-slate-500'
-      : 'text-slate-500 dark:text-slate-400';
+  if (iconOnly) {
+    return (
+      <div className={`inline-flex items-center justify-center select-none flex-shrink-0 ${className}`}>
+        <img
+          src="/logo-icon.png"
+          alt="My Computer"
+          className={`${heightClass} w-auto object-contain drop-shadow-sm transition-transform duration-200 hover:scale-105`}
+        />
+      </div>
+    );
+  }
 
+  // Variant handling:
+  // - 'dark': renders dark version (white text for dark backgrounds)
+  // - 'light': renders light version (dark text for light backgrounds)
+  // - 'auto': automatically switches between light/dark based on current theme class
   return (
-    <div className={`inline-flex items-center ${s.gap} select-none ${className}`}>
-      {/* Icon Box */}
-      <div
-        className={`${s.icon} rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-extrabold shadow-md flex-shrink-0`}
-      >
-        {/* MC monogram */}
-        <span className="leading-none tracking-tight">MC</span>
-      </div>
-
-      {/* Text Section */}
-      <div className="flex flex-col leading-none">
-        {/* Brand Name */}
-        <span className={`font-extrabold ${s.title} tracking-tight leading-tight ${titleColor}`}>
-          MY<span className="text-orange-500">COMPUTER</span>
-        </span>
-
-        {/* Tagline */}
-        {showTagline && (
-          <span
-            className={`font-semibold uppercase tracking-[0.18em] ${s.tagline} ${taglineColor} mt-0.5`}
-          >
-            Your Tech, Our Passion
-          </span>
-        )}
-      </div>
+    <div className={`inline-flex items-center select-none flex-shrink-0 ${className}`}>
+      {variant === 'dark' ? (
+        <img
+          src="/logo-dark.png"
+          alt="My Computer - Laptop, Desktop, Accessories"
+          className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02]`}
+        />
+      ) : variant === 'light' ? (
+        <img
+          src="/logo.png"
+          alt="My Computer - Laptop, Desktop, Accessories"
+          className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02]`}
+        />
+      ) : (
+        <>
+          <img
+            src="/logo.png"
+            alt="My Computer - Laptop, Desktop, Accessories"
+            className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02] dark:hidden block`}
+          />
+          <img
+            src="/logo-dark.png"
+            alt="My Computer - Laptop, Desktop, Accessories"
+            className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02] hidden dark:block`}
+          />
+        </>
+      )}
     </div>
   );
 };
+

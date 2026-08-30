@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { CATEGORIES } from '../../data/mockData';
-import { MegaMenu } from './MegaMenu';
 import { Logo } from '../common/Logo';
+import { PCBuildDropdown } from './PCBuildDropdown';
 import {
   Search,
   Mic,
@@ -15,9 +15,7 @@ import {
   PhoneCall,
   Truck,
   Sparkles,
-  ChevronDown,
   ShieldCheck,
-  Grid,
   Percent,
   Menu,
   X,
@@ -26,6 +24,7 @@ import {
   Zap,
   Tv,
   Laptop,
+  ChevronRight,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -47,12 +46,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
     cartTotal,
     wishlist,
     compareList,
+    filters,
     setFilters
   } = useStore();
 
-  const [megaMenuOpen, setMegaMenuOpen]     = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearch, setMobileSearch]     = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -226,6 +226,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
               )}
             </button>
 
+            {/* PC Build Dropdown — always visible */}
+            <PCBuildDropdown />
+
             {/* Cart */}
             <button
               onClick={onOpenCart}
@@ -287,76 +290,120 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
         )}
       </div>
 
-      {/* ── Nav Strip (Desktop only) ─────────────────────────── */}
-      <div className="hidden md:block bg-white dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 shadow-sm relative">
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between">
+      {/* ── Category Navigation Bar (All 18 Categories from User) ── */}
+      <div className="hidden md:block bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm relative z-30">
+        <div className="max-w-[1440px] mx-auto px-2 sm:px-4 flex items-center justify-between">
+          {/* Horizontal list of all 18 categories */}
+          <nav className="flex items-center gap-0 overflow-x-auto no-scrollbar py-0 flex-1 justify-between">
+            {CATEGORIES.map((category, idx) => {
+              const isSelected = filters.category === category.id;
+              const isHovered = hoveredCategory === category.id;
+              const isRightAligned = idx >= 11;
 
-          {/* Mega Menu Toggle */}
-          <div className="relative">
-            <button
-              onMouseEnter={() => setMegaMenuOpen(true)}
-              onClick={() => setMegaMenuOpen(p => !p)}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-3 transition-colors"
-            >
-              <Grid className="w-4 h-4 text-orange-300" />
-              <span className="hidden lg:inline">{language === 'EN' ? 'Browse Categories' : 'সকল ক্যাটাগরি'}</span>
-              <span className="lg:hidden">{language === 'EN' ? 'Categories' : 'ক্যাটাগরি'}</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${megaMenuOpen ? 'rotate-180' : ''}`} />
-            </button>
-            <MegaMenu isOpen={megaMenuOpen} onClose={() => setMegaMenuOpen(false)} />
-          </div>
+              return (
+                <div
+                  key={category.id}
+                  className="relative group"
+                  onMouseEnter={() => setHoveredCategory(category.id)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                >
+                  <button
+                    onClick={() => {
+                      setFilters(prev => ({ ...prev, category: category.id }));
+                      setCurrentView('shop');
+                      setHoveredCategory(null);
+                    }}
+                    className={`px-2 lg:px-2.5 xl:px-3 py-3 text-[12px] lg:text-[12.5px] xl:text-[13px] font-semibold whitespace-nowrap transition-all flex items-center gap-0.5 relative ${
+                      isHovered || isSelected
+                        ? 'text-orange-600 dark:text-orange-400 font-bold'
+                        : 'text-slate-800 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400'
+                    }`}
+                  >
+                    {/* Top orange accent bar on hover/active just like screenshot */}
+                    {(isHovered || isSelected) && (
+                      <span className="absolute top-0 left-0 right-0 h-[2.5px] bg-orange-600 dark:bg-orange-500 animate-fadeIn" />
+                    )}
+                    <span>{category.name}</span>
+                  </button>
 
-          {/* Nav Links */}
-          <nav className="flex items-center gap-0 font-semibold text-xs text-slate-700 dark:text-slate-200 overflow-x-auto no-scrollbar">
-            {navLinks.map(link => (
-              <button
-                key={link.view}
-                onClick={() => link.onClick()}
-                className={`px-3 py-3 whitespace-nowrap hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1.5 ${
-                  link.highlight === 'orange'
-                    ? 'text-orange-600 dark:text-orange-400 font-extrabold'
-                    : link.highlight === 'red'
-                    ? 'text-red-600 dark:text-red-400 font-bold'
-                    : ''
-                } ${currentView === link.view ? 'text-blue-600 dark:text-blue-400 font-extrabold border-b-2 border-blue-600' : ''}`}
-              >
-                {link.label}
-              </button>
-            ))}
-            <button onClick={() => setCurrentView('blog')} className="px-3 py-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap">
-              📰 Blog
-            </button>
+                  {/* Hover Dropdown matching user screenshot */}
+                  {category.subCategories && category.subCategories.length > 0 && isHovered && (
+                    <div
+                      className={`absolute top-full ${isRightAligned ? 'right-0' : 'left-0'} min-w-[220px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-[0_12px_36px_rgba(0,0,0,0.16)] border-t-2 border-t-orange-600 dark:border-t-orange-500 py-1.5 z-50 animate-fadeIn`}
+                    >
+                      <div className="max-h-[480px] overflow-y-auto no-scrollbar py-0.5">
+                        {category.subCategories.map(sub => {
+                          const isShowAll = sub.isShowAll;
+                          return (
+                            <button
+                              key={sub.id}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (isShowAll) {
+                                  setFilters(prev => ({ ...prev, category: category.id }));
+                                } else {
+                                  setFilters(prev => ({ ...prev, category: category.id }));
+                                }
+                                setCurrentView('shop');
+                                setHoveredCategory(null);
+                              }}
+                              className={`w-full text-left px-4 py-1.5 text-[13px] transition-colors flex items-center justify-between group/item ${
+                                isShowAll
+                                  ? 'font-bold text-slate-900 dark:text-white border-t border-slate-100 dark:border-slate-800 mt-1 pt-2 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-50/50 dark:hover:bg-slate-800'
+                                  : 'font-normal text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-slate-50 dark:hover:bg-slate-800/80'
+                              }`}
+                            >
+                              <span>{sub.name}</span>
+                              {sub.hasChildren && (
+                                <span className="text-[#f87171] text-sm font-bold opacity-75 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all">
+                                  ›
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </nav>
-
-          {/* EMI Badge */}
-          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 font-medium flex-shrink-0">
-            <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">0% EMI</span>
-            <span>30+ Banks</span>
-          </div>
         </div>
       </div>
 
       {/* ── Mobile Slide-Down Menu ───────────────────────────── */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 z-50 glass-nav border-b border-slate-200 dark:border-slate-800 shadow-2xl animate-fade-down">
-          {/* Category Quick Links */}
+        <div className="md:hidden absolute top-full left-0 right-0 z-50 glass-nav border-b border-slate-200 dark:border-slate-800 shadow-2xl animate-fade-down max-h-[85vh] overflow-y-auto">
+          {/* Mobile Drawer Brand Header */}
+          <div className="px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/80 dark:bg-slate-900/80">
+            <Logo size="sm" />
+            <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Official Tech Store</span>
+          </div>
+
+          {/* All 18 Categories */}
           <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Categories</p>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { label: '💻 Laptops', cat: 'laptop' },
-                { label: '🎮 Gaming', cat: 'gaming-pc' },
-                { label: '📺 TV & AC', cat: 'tv-appliance' },
-                { label: '🖥️ Monitors', cat: 'monitor' },
-                { label: '🖨️ Printers', cat: 'printer' },
-                { label: '📷 Cameras', cat: 'camera' },
-              ].map(item => (
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">All Categories (18)</p>
+              <span className="text-[10px] text-blue-500 font-bold">100% Genuine</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {CATEGORIES.map(category => (
                 <button
-                  key={item.cat}
-                  onClick={() => { setFilters(p => ({ ...p, category: item.cat })); setCurrentView('shop'); setMobileMenuOpen(false); }}
-                  className="text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-600 rounded-lg px-2 py-2 text-center transition-colors"
+                  key={category.id}
+                  onClick={() => {
+                    setFilters(p => ({ ...p, category: category.id }));
+                    setCurrentView('shop');
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`text-xs font-bold text-left px-3 py-2 rounded-xl transition-all border flex items-center justify-between ${
+                    filters.category === category.id
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                      : 'text-slate-800 dark:text-slate-200 bg-slate-100/80 dark:bg-slate-800/80 border-slate-200/80 dark:border-slate-700/60 hover:border-blue-500'
+                  }`}
                 >
-                  {item.label}
+                  <span className="truncate">{category.name}</span>
+                  <ChevronRight className="w-3 h-3 opacity-50 flex-shrink-0 ml-1" />
                 </button>
               ))}
             </div>
@@ -364,14 +411,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
 
           {/* Nav Links */}
           <div className="px-4 py-3">
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Navigation</p>
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Quick Navigation</p>
             <div className="flex flex-col gap-1">
               {navLinks.map(link => (
                 <button
                   key={link.view}
                   onClick={() => { link.onClick(); setMobileMenuOpen(false); }}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-left transition-all ${
-                    link.highlight === 'orange'
+                    currentView === link.view
+                      ? 'bg-blue-600 text-white font-bold'
+                      : link.highlight === 'orange'
                       ? 'text-orange-600 bg-orange-50 dark:bg-orange-950/30'
                       : link.highlight === 'red'
                       ? 'text-red-600 bg-red-50 dark:bg-red-950/30'

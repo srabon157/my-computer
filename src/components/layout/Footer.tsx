@@ -2,6 +2,7 @@ import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { STORE_LOCATIONS } from '../../data/mockData';
 import { Logo } from '../common/Logo';
+import { useStaggerReveal, useScrollReveal } from '../../hooks/useScrollReveal';
 import {
   PhoneCall,
   Mail,
@@ -15,15 +16,17 @@ import {
 
 export const Footer: React.FC = () => {
   const { setCurrentView, setFilters } = useStore();
+  const { containerRef: valueRef, inView: valueInView } = useStaggerReveal<HTMLDivElement>(4);
+  const { ref: colRef, inView: colInView } = useScrollReveal<HTMLDivElement>();
 
   return (
     <footer className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         
-        {/* 1. Value Proposition Banner */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-6 rounded-2xl bg-slate-900/80 border border-slate-800/80">
-          <div className="flex items-center space-x-4">
-            <div className="p-3 rounded-xl bg-blue-600/20 text-blue-400">
+        {/* 1. Value Proposition Banner — staggered */}
+        <div ref={valueRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-6 rounded-2xl bg-slate-900/80 border border-slate-800/80">
+          <div className={`stagger-item ${valueInView ? 'in-view' : ''} flex items-center space-x-4`}>
+            <div className="p-3 rounded-xl bg-blue-600/20 text-blue-400 hover:scale-110 transition-transform">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -32,8 +35,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="p-3 rounded-xl bg-orange-600/20 text-orange-400">
+          <div className={`stagger-item ${valueInView ? 'in-view' : ''} flex items-center space-x-4`}>
+            <div className="p-3 rounded-xl bg-orange-600/20 text-orange-400 hover:scale-110 transition-transform">
               <Truck className="w-6 h-6" />
             </div>
             <div>
@@ -42,8 +45,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="p-3 rounded-xl bg-emerald-600/20 text-emerald-400">
+          <div className={`stagger-item ${valueInView ? 'in-view' : ''} flex items-center space-x-4`}>
+            <div className="p-3 rounded-xl bg-emerald-600/20 text-emerald-400 hover:scale-110 transition-transform">
               <CreditCard className="w-6 h-6" />
             </div>
             <div>
@@ -52,8 +55,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <div className="p-3 rounded-xl bg-purple-600/20 text-purple-400">
+          <div className={`stagger-item ${valueInView ? 'in-view' : ''} flex items-center space-x-4`}>
+            <div className="p-3 rounded-xl bg-purple-600/20 text-purple-400 hover:scale-110 transition-transform">
               <RotateCcw className="w-6 h-6" />
             </div>
             <div>
@@ -64,7 +67,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* 2. Main Footer Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div ref={colRef} className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 transition-all duration-700 ${colInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           
           {/* Column 1: Brand & Contact Info */}
           <div className="lg:col-span-2 space-y-4">
