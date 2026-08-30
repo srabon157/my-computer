@@ -19,7 +19,7 @@ export const LaptopShowcase: React.FC = () => {
   });
 
   const { ref: headerRef, inView: headerInView } = useScrollReveal<HTMLDivElement>();
-  const { containerRef, inView: gridInView } = useStaggerReveal<HTMLDivElement>(3);
+  const { containerRef, inView } = useStaggerReveal<HTMLDivElement>(3);
 
   return (
     <section className="py-8 bg-slate-50 dark:bg-slate-900/40 rounded-3xl p-6 md:p-8 border border-slate-200/80 dark:border-slate-800 my-6 relative overflow-hidden">
@@ -78,7 +78,7 @@ export const LaptopShowcase: React.FC = () => {
         {displayedLaptops.slice(0, 3).map((laptop, idx) => (
           <div
             key={laptop.id}
-            className="stagger-item in-view"
+            className={`stagger-item ${inView ? 'in-view' : ''}`}
             style={{ transitionDelay: `${idx * 0.1}s` }}
           >
             <ProductCard product={laptop} />
