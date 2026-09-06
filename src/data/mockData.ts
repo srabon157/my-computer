@@ -149,19 +149,133 @@ export const CATEGORIES: Category[] = [
     itemCount: 54,
     popular: true,
     subCategories: [
-      { id: 'action-camera', name: 'Action Camera', nameBn: 'অ্যাকশন ক্যামেরা', hasChildren: true },
-      { id: 'dslr', name: 'DSLR', nameBn: 'ডিএসএলআর', hasChildren: true },
-      { id: 'mirrorless-camera', name: 'Mirrorless Camera', nameBn: 'মিররলেস ক্যামেরা', hasChildren: true },
-      { id: 'digital-camera', name: 'Digital Camera', nameBn: 'ডিজিটাল ক্যামেরা', hasChildren: true },
-      { id: 'video-camera', name: 'Video Camera', nameBn: 'ভিডিও ক্যামেরা', hasChildren: true },
+      {
+        id: 'action-camera',
+        name: 'Action Camera',
+        nameBn: 'অ্যাকশন ক্যামেরা',
+        hasChildren: true,
+        children: [
+          { id: 'action-camera', name: 'GoPro Action Camera', nameBn: 'গোপ্রো অ্যাকশন ক্যামেরা', brand: 'GoPro' },
+          { id: 'action-camera', name: 'DJI Action Series', nameBn: 'ডিজেআই অ্যাকশন ক্যামেরা', brand: 'DJI' },
+          { id: 'action-camera', name: 'Insta360 360° Cam', nameBn: 'ইনস্টা৩৬০ ক্যামেরা', brand: 'Insta360' },
+          { id: 'action-camera', name: 'SJCAM Action Camera', nameBn: 'এসজেক্যাম ক্যামেরা', brand: 'SJCAM' },
+          { id: 'action-camera', name: 'All Action Cameras', nameBn: 'সকল অ্যাকশন ক্যামেরা' }
+        ]
+      },
+      {
+        id: 'dslr',
+        name: 'DSLR',
+        nameBn: 'ডিএসএলআর',
+        hasChildren: true,
+        children: [
+          { id: 'dslr', name: 'Canon DSLR Cameras', nameBn: 'ক্যানন ডিএসএলআর', brand: 'Canon' },
+          { id: 'dslr', name: 'Nikon DSLR Cameras', nameBn: 'নিকন ডিএসএলআর', brand: 'Nikon' },
+          { id: 'dslr', name: 'All DSLR Cameras', nameBn: 'সকল ডিএসএলআর' }
+        ]
+      },
+      {
+        id: 'mirrorless-camera',
+        name: 'Mirrorless Camera',
+        nameBn: 'মিররলেস ক্যামেরা',
+        hasChildren: true,
+        children: [
+          { id: 'mirrorless-camera', name: 'Sony Alpha Mirrorless', nameBn: 'সনি আলফা মিররলেস', brand: 'Sony' },
+          { id: 'mirrorless-camera', name: 'Canon EOS R Series', nameBn: 'ক্যানন ইওএস আর', brand: 'Canon' },
+          { id: 'mirrorless-camera', name: 'Fujifilm X-Series', nameBn: 'ফুজিফিল্ম মিররলেস', brand: 'Fujifilm' },
+          { id: 'mirrorless-camera', name: 'Nikon Z-Series', nameBn: 'নিকন জেড মিররলেস', brand: 'Nikon' },
+          { id: 'mirrorless-camera', name: 'All Mirrorless Cameras', nameBn: 'সকল মিররলেস' }
+        ]
+      },
+      {
+        id: 'digital-camera',
+        name: 'Digital Camera',
+        nameBn: 'ডিজিটাল ক্যামেরা',
+        hasChildren: true,
+        children: [
+          { id: 'digital-camera', name: 'Canon PowerShot Series', nameBn: 'ক্যানন ডিজিটাল', brand: 'Canon' },
+          { id: 'digital-camera', name: 'Sony Cyber-shot Series', nameBn: 'সনি ডিজিটাল', brand: 'Sony' },
+          { id: 'digital-camera', name: 'All Digital Cameras', nameBn: 'সকল ডিজিটাল ক্যামেরা' }
+        ]
+      },
+      {
+        id: 'video-camera',
+        name: 'Video Camera',
+        nameBn: 'ভিডিও ক্যামেরা',
+        hasChildren: true,
+        children: [
+          { id: 'video-camera', name: 'Sony Professional Camcorder', nameBn: 'সনি ক্যামকর্ডার', brand: 'Sony' },
+          { id: 'video-camera', name: 'Canon Cinema EOS', nameBn: 'ক্যানন সিনেমা ক্যামেরা', brand: 'Canon' },
+          { id: 'video-camera', name: 'Panasonic 4K Video Cam', nameBn: 'প্যানাসনিক ভিডিও' },
+          { id: 'video-camera', name: 'All Video Cameras', nameBn: 'সকল ভিডিও ক্যামেরা' }
+        ]
+      },
       { id: 'handycam', name: 'Handycam', nameBn: 'হ্যান্ডিক্যাম' },
-      { id: 'dash-cam', name: 'Dash Cam', nameBn: 'ড্যাশ ক্যাম', hasChildren: true },
+      {
+        id: 'dash-cam',
+        name: 'Dash Cam',
+        nameBn: 'ড্যাশ ক্যাম',
+        hasChildren: true,
+        children: [
+          { id: 'dash-cam', name: '70mai Smart Dash Cam', nameBn: '৭০মাই ড্যাশ ক্যাম' },
+          { id: 'dash-cam', name: 'Hikvision Dash Cam', nameBn: 'হিকভিশন ড্যাশ ক্যাম', brand: 'Hikvision' },
+          { id: 'dash-cam', name: 'DDPAI Car Dash Cam', nameBn: 'ডিডিপিএআই ড্যাশ ক্যাম' },
+          { id: 'dash-cam', name: 'All Dash Cams', nameBn: 'সকল ড্যাশ ক্যাম' }
+        ]
+      },
       { id: 'instant-camera', name: 'Instant Camera', nameBn: 'ইনস্ট্যান্ট ক্যামেরা' },
       { id: 'body-camera', name: 'Body Camera', nameBn: 'বডি ক্যামেরা' },
-      { id: 'camera-lenses', name: 'Camera Lenses', nameBn: 'ক্যামেরা লেন্স', hasChildren: true },
-      { id: 'camera-tripod', name: 'Camera Tripod', nameBn: 'ক্যামেরা ট্রাইপড', hasChildren: true },
-      { id: 'camera-accessories', name: 'Camera Accessories', nameBn: 'ক্যামেরা এক্সেসরিজ', hasChildren: true },
-      { id: 'gimbal', name: 'Gimbal', nameBn: 'গিম্বল' },
+      {
+        id: 'camera-lenses',
+        name: 'Camera Lenses',
+        nameBn: 'ক্যামেরা লেন্স',
+        hasChildren: true,
+        children: [
+          { id: 'camera-lenses', name: 'Canon RF & EF Lenses', nameBn: 'ক্যানন লেন্স', brand: 'Canon' },
+          { id: 'camera-lenses', name: 'Sony E-Mount Lenses', nameBn: 'সনি ই-মাউন্ট লেন্স', brand: 'Sony' },
+          { id: 'camera-lenses', name: 'Nikon Z & F Lenses', nameBn: 'নিকন লেন্স', brand: 'Nikon' },
+          { id: 'camera-lenses', name: 'Sigma Art & Contemporary', nameBn: 'সিগমা লেন্স', brand: 'Sigma' },
+          { id: 'camera-lenses', name: 'Tamron Zoom Lenses', nameBn: 'ট্যামরন লেন্স', brand: 'Tamron' },
+          { id: 'camera-lenses', name: 'All Camera Lenses', nameBn: 'সকল ক্যামেরা লেন্স' }
+        ]
+      },
+      {
+        id: 'camera-tripod',
+        name: 'Camera Tripod',
+        nameBn: 'ক্যামেরা ট্রাইপড',
+        hasChildren: true,
+        children: [
+          { id: 'camera-tripod', name: 'Benro Professional Tripods', nameBn: 'বেনরো ট্রাইপড', brand: 'Benro' },
+          { id: 'camera-tripod', name: 'Manfrotto Premium Tripods', nameBn: 'ম্যানফ্রোটো ট্রাইপড', brand: 'Manfrotto' },
+          { id: 'camera-tripod', name: 'Digipod Light Tripods', nameBn: 'ডিজিপড ট্রাইপড' },
+          { id: 'camera-tripod', name: 'Yunteng Mobile & DSLR Tripods', nameBn: 'ইউনটেং ট্রাইপড' },
+          { id: 'camera-tripod', name: 'All Camera Tripods', nameBn: 'সকল ট্রাইপড' }
+        ]
+      },
+      {
+        id: 'camera-accessories',
+        name: 'Camera Accessories',
+        nameBn: 'ক্যামেরা এক্সেসরিজ',
+        hasChildren: true,
+        children: [
+          { id: 'camera-accessories', name: 'Camera Backpack & Bags', nameBn: 'ক্যামেরা ব্যাগ' },
+          { id: 'camera-accessories', name: 'Battery, Charger & Grip', nameBn: 'ব্যাটারি ও চার্জার' },
+          { id: 'camera-accessories', name: 'SD & CFexpress Memory Cards', nameBn: 'মেমোরি কার্ড' },
+          { id: 'camera-accessories', name: 'Speedlite Flash & Video Lights', nameBn: 'ফ্ল্যাশ ও লাইট' },
+          { id: 'camera-accessories', name: 'UV Filters & Lens Hoods', nameBn: 'ফিল্টার ও হুড' },
+          { id: 'camera-accessories', name: 'All Camera Accessories', nameBn: 'সকল এক্সেসরিজ' }
+        ]
+      },
+      {
+        id: 'gimbal',
+        name: 'Gimbal',
+        nameBn: 'গিম্বল',
+        hasChildren: true,
+        children: [
+          { id: 'gimbal', name: 'DJI RS & Osmo Mobile Gimbal', nameBn: 'ডিজেআই গিম্বল', brand: 'DJI' },
+          { id: 'gimbal', name: 'Zhiyun Crane & Smooth Gimbal', nameBn: 'ঝিয়ুন গিম্বল', brand: 'Zhiyun' },
+          { id: 'gimbal', name: 'All Gimbals & Stabilizers', nameBn: 'সকল গিম্বল' }
+        ]
+      },
       { id: 'camera', name: 'Show All Camera', nameBn: 'সকল ক্যামেরা দেখুন', isShowAll: true }
     ]
   },
@@ -199,14 +313,97 @@ export const CATEGORIES: Category[] = [
     nameBn: 'নেটওয়ার্কিং',
     icon: 'Wifi',
     image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=600&auto=format&fit=crop',
-    itemCount: 76,
+    itemCount: 145,
+    popular: true,
     subCategories: [
-      { id: 'wifi-routers', name: 'Wi-Fi 6 / Wi-Fi 7 Gigabit Routers', nameBn: 'ওয়াইফাই রাউটার' },
-      { id: 'mesh-wifi', name: 'Mesh Whole-Home Wi-Fi Systems', nameBn: 'মেশ ওয়াইফাই' },
-      { id: 'network-switch', name: 'Managed & PoE Network Switches', nameBn: 'নেটওয়ার্ক সুইচ' },
-      { id: 'access-points', name: 'Ceiling Access Points & Outdoor Antennas', nameBn: 'অ্যাক্সেস পয়েন্ট' },
-      { id: 'cables-patch', name: 'Cat6 / Cat7 UTP Cables & Patch Panels', nameBn: 'নেটওয়ার্ক কেবল' },
-      { id: 'server-rack', name: 'Wall Mount Server Racks & Fiber ONU', nameBn: 'সার্ভার র‍্যাক' }
+      {
+        id: 'wifi-routers',
+        name: 'Router',
+        nameBn: 'রাউটার',
+        hasChildren: true,
+        children: [
+          { id: 'wifi-routers', name: 'TP-Link Router', nameBn: 'টিপি-লিংক রাউটার', brand: 'TP-Link' },
+          { id: 'wifi-routers', name: 'Tenda Router', nameBn: 'টেন্ডা রাউটার', brand: 'Tenda' },
+          { id: 'wifi-routers', name: 'ASUS Router', nameBn: 'আসুস রাউটার', brand: 'Asus' },
+          { id: 'wifi-routers', name: 'D-Link Router', nameBn: 'ডি-লিংক রাউটার', brand: 'D-Link' },
+          { id: 'wifi-routers', name: 'MikroTik Router', nameBn: 'মিকরোটিক রাউটার', brand: 'MikroTik' },
+          { id: 'wifi-routers', name: 'Xiaomi Router', nameBn: 'শাওমি রাউটার', brand: 'Xiaomi' },
+          { id: 'wifi-routers', name: 'Mercusys Router', nameBn: 'মারকিউসিস রাউটার', brand: 'Mercusys' },
+          { id: 'wifi-routers', name: 'Netgear Router', nameBn: 'নেটগিয়ার রাউটার', brand: 'Netgear' },
+          { id: 'wifi-routers', name: 'Huawei Router', nameBn: 'হুয়াওয়ে রাউটার', brand: 'Huawei' },
+          { id: 'wifi-routers', name: 'All Routers', nameBn: 'সকল রাউটার' }
+        ]
+      },
+      { id: '4g-lte-router', name: '4G LTE Router', nameBn: '৪জি এলটিই রাউটার' },
+      { id: 'mesh-wifi', name: 'Mesh Whole-Home Wi-Fi', nameBn: 'মেশ ওয়াইফাই' },
+      { id: 'mikrotik', name: 'MikroTik RouterBOARD', nameBn: 'মিকরোটিক রাউটার' },
+      {
+        id: 'network-switch',
+        name: 'Network Switch',
+        nameBn: 'নেটওয়ার্ক সুইচ',
+        hasChildren: true,
+        children: [
+          { id: 'network-switch', name: 'PoE Switch', nameBn: 'পিওই সুইচ' },
+          { id: 'network-switch', name: 'Gigabit Switch', nameBn: 'গিগাবিট সুইচ' },
+          { id: 'network-switch', name: 'Managed Switch', nameBn: 'ম্যানেজড সুইচ' },
+          { id: 'network-switch', name: 'All Switches', nameBn: 'সকল সুইচ' }
+        ]
+      },
+      { id: 'access-points', name: 'Access Point', nameBn: 'অ্যাক্সেস পয়েন্ট' },
+      {
+        id: 'onu-device',
+        name: 'Optical Fiber Device (ONU)',
+        nameBn: 'ওএনইউ / ফাইবার ডিভাইস',
+        hasChildren: true,
+        children: [
+          { id: 'gpon-onu', name: 'ZTE GPON ONU', nameBn: 'জেডটিই ওএনইউ', brand: 'ZTE' },
+          { id: 'gpon-onu', name: 'Huawei GPON ONU', nameBn: 'হুয়াওয়ে ওএনইউ', brand: 'Huawei' },
+          { id: 'gpon-onu', name: 'FiberHome GPON ONU', nameBn: 'ফাইবারহোম ওএনইউ', brand: 'FiberHome' },
+          { id: 'gpon-onu', name: 'TP-Link GPON ONU', nameBn: 'টিপি-লিংক ওএনইউ', brand: 'TP-Link' },
+          { id: 'epon-onu', name: 'VSOL EPON/GPON ONU', nameBn: 'ভিসল ওএনইউ', brand: 'VSOL' },
+          { id: 'onu-device', name: 'All ONU Devices', nameBn: 'সকল ওএনইউ' }
+        ]
+      },
+      { id: 'cables-patch', name: 'UTP Cables & Patch Cord', nameBn: 'নেটওয়ার্ক কেবল' },
+      { id: 'server-rack', name: 'Server Rack', nameBn: 'সার্ভার র‍্যাক' },
+      { id: 'networking', name: 'Show All Networking Products', nameBn: 'সকল নেটওয়ার্কিং পণ্য', isShowAll: true }
+    ]
+  },
+  {
+    id: 'onu-device',
+    name: 'ONU / ONT Device',
+    nameBn: 'ওএনইউ / ফাইবার ডিভাইস',
+    icon: 'Wifi',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop',
+    itemCount: 28,
+    subCategories: [
+      {
+        id: 'gpon-onu',
+        name: 'GPON ONU / ONT',
+        nameBn: 'জিপন ওএনইউ',
+        hasChildren: true,
+        children: [
+          { id: 'gpon-onu', name: 'ZTE GPON ONU', nameBn: 'জেডটিই জিপন', brand: 'ZTE' },
+          { id: 'gpon-onu', name: 'Huawei GPON ONU', nameBn: 'হুয়াওয়ে জিপন', brand: 'Huawei' },
+          { id: 'gpon-onu', name: 'FiberHome GPON', nameBn: 'ফাইবারহোম জিপন', brand: 'FiberHome' },
+          { id: 'gpon-onu', name: 'TP-Link GPON', nameBn: 'টিপি-লিংক জিপন', brand: 'TP-Link' },
+          { id: 'gpon-onu', name: 'All GPON ONU', nameBn: 'সকল জিপন ওএনইউ' }
+        ]
+      },
+      {
+        id: 'epon-onu',
+        name: 'EPON ONU Devices',
+        nameBn: 'ইপন ওএনইউ',
+        hasChildren: true,
+        children: [
+          { id: 'epon-onu', name: 'VSOL EPON ONU', nameBn: 'ভিসল ইপন', brand: 'VSOL' },
+          { id: 'epon-onu', name: 'FiberHome EPON', nameBn: 'ফাইবারহোম ইপন', brand: 'FiberHome' },
+          { id: 'epon-onu', name: 'All EPON ONU', nameBn: 'সকল ইপন ওএনইউ' }
+        ]
+      },
+      { id: 'xgs-pon-onu', name: 'XGS-PON ONU (10G Fiber)', nameBn: '১০জি এক্সজিএস-পন ওএনইউ' },
+      { id: 'wifi-onu', name: 'ONU with Built-in Wi-Fi', nameBn: 'ওয়াইফাই সহ ওএনইউ' },
+      { id: 'onu-device', name: 'Show All ONU / ONT Devices', nameBn: 'সকল ওএনইউ দেখুন', isShowAll: true }
     ]
   },
   {
@@ -325,6 +522,10 @@ export const CATEGORIES: Category[] = [
 ];
 
 export const BRANDS: Brand[] = [
+  { name: 'EZVIZ', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/EZVIZ_Logo.svg/200px-EZVIZ_Logo.svg.png', category: 'Smart Wi-Fi Security Cameras', popular: true },
+  { name: 'Imou', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Imou_Logo.png/200px-Imou_Logo.png', category: 'Smart Home Security Cameras', popular: true },
+  { name: 'Uniview', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Uniview_Logo.svg/200px-Uniview_Logo.svg.png', category: 'IP Surveillance & PTZ', popular: false },
+  { name: 'ZKTeco', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/ZKTeco_Logo.svg/200px-ZKTeco_Logo.svg.png', category: 'Biometrics & Smart Door Locks', popular: true },
   { name: 'Asus', logo: 'https://cdn.worldvectorlogo.com/logos/asus-2.svg', category: 'Laptops, GPUs, Motherboards', popular: true },
   { name: 'Apple', logo: 'https://cdn.worldvectorlogo.com/logos/apple-13.svg', category: 'MacBooks, iPads, Watches', popular: true },
   { name: 'Dell', logo: 'https://cdn.worldvectorlogo.com/logos/dell-2.svg', category: 'Laptops, Monitors, Servers', popular: true },
@@ -341,7 +542,18 @@ export const BRANDS: Brand[] = [
   { name: 'Sony', logo: 'https://cdn.worldvectorlogo.com/logos/sony-2.svg', category: 'Audio, TVs, Cameras', popular: true },
   { name: 'Hikvision', logo: 'https://cdn.worldvectorlogo.com/logos/hikvision.svg', category: 'CCTV Cameras, DVRs', popular: true },
   { name: 'Logitech', logo: 'https://cdn.worldvectorlogo.com/logos/logitech-2.svg', category: 'Keyboards, Mice, Webcams', popular: true },
-  { name: 'TP-Link', logo: 'https://cdn.worldvectorlogo.com/logos/tp-link-2.svg', category: 'Routers, Switches', popular: true }
+  { name: 'TP-Link', logo: 'https://cdn.worldvectorlogo.com/logos/tp-link-2.svg', category: 'Routers, Switches, ONU', popular: true },
+  { name: 'Tenda', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tenda_logo.svg/200px-Tenda_logo.svg.png', category: 'Routers, Wi-Fi Devices', popular: true },
+  { name: 'D-Link', logo: 'https://cdn.worldvectorlogo.com/logos/d-link.svg', category: 'Routers, Switches, Network Gear', popular: true },
+  { name: 'MikroTik', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/MikroTik_logo.svg/200px-MikroTik_logo.svg.png', category: 'RouterBOARD, Switches, ISP Equipment', popular: true },
+  { name: 'Netgear', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Netgear_Logo.svg/200px-Netgear_Logo.svg.png', category: 'Nighthawk Routers, Switches', popular: false },
+  { name: 'Mercusys', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Mercusys_Logo.svg/200px-Mercusys_Logo.svg.png', category: 'Budget Routers, Wi-Fi 6', popular: false },
+  { name: 'Huawei', logo: 'https://cdn.worldvectorlogo.com/logos/huawei-2.svg', category: 'Routers, ONU/ONT, Enterprise', popular: true },
+  { name: 'ZTE', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/ZTE_Logo.svg/200px-ZTE_Logo.svg.png', category: 'ONU, GPON Devices, Routers', popular: true },
+  { name: 'FiberHome', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/FiberHome_logo.svg/200px-FiberHome_logo.svg.png', category: 'GPON/EPON ONU Devices', popular: false },
+  { name: 'Nokia', logo: 'https://cdn.worldvectorlogo.com/logos/nokia.svg', category: 'GPON ONT, ISP Equipment', popular: false },
+  { name: 'VSOL', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/VSOL_logo.png/200px-VSOL_logo.png', category: 'ONU/ONT, EPON/GPON', popular: false },
+  { name: 'CIG', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/CIG_logo.png/200px-CIG_logo.png', category: 'XGS-PON, 10G ONU Devices', popular: false }
 ];
 
 export const PRODUCTS: Product[] = [
@@ -1268,6 +1480,4018 @@ export const PRODUCTS: Product[] = [
     reviews: [],
     questions: [],
     createdDate: '2024-01-28'
+  },
+
+  // ─────────────────────────────────────────────
+  // ROUTERS — Bangladesh Market (approx. prices)
+  // ─────────────────────────────────────────────
+
+  // TP-Link Routers
+  {
+    id: 'prod-r001',
+    name: 'TP-Link TL-WR841N 300Mbps Wireless N Router (2 Antennas)',
+    slug: 'tp-link-tl-wr841n-300mbps-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Best Seller',
+    regularPrice: 1250,
+    discountPrice: 1150,
+    discountPercentage: 8,
+    rating: 4.5,
+    reviewCount: 312,
+    stockStatus: 'In Stock',
+    stockCount: 200,
+    images: ['/images/products/tp-link-tl-wr841n.webp'],
+    shortSpecs: [
+      'Standard: IEEE 802.11b/g/n, Speed: 300 Mbps (2.4GHz)',
+      '2× Fixed Omni-directional Antennas (5dBi)',
+      '4× 10/100 Mbps LAN + 1× 10/100 Mbps WAN Ports',
+      'Wireless security: WPA / WPA2 encryption',
+      'Ideal for home use, small apartments'
+    ],
+    specifications: {
+      'Basic': [
+        { label: 'Wi-Fi Standard', value: 'IEEE 802.11b/g/n (Wi-Fi 4)' },
+        { label: 'Max Speed', value: '300 Mbps (2.4 GHz)' },
+        { label: 'Antennas', value: '2× 5dBi Fixed' },
+        { label: 'LAN Ports', value: '4× 10/100 Mbps' },
+        { label: 'WAN Port', value: '1× 10/100 Mbps' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-r002',
+    name: 'TP-Link TL-WR845N 300Mbps Wireless N Router (3 Antennas)',
+    slug: 'tp-link-tl-wr845n-300mbps-3-antenna-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 1500,
+    discountPrice: 1350,
+    discountPercentage: 10,
+    rating: 4.5,
+    reviewCount: 198,
+    stockStatus: 'In Stock',
+    stockCount: 150,
+    images: ['/images/products/tp-link-tl-wr845n.webp'],
+    shortSpecs: [
+      'Speed: 300 Mbps (2.4GHz) | 3× Fixed 5dBi Antennas',
+      'Better coverage than 2-antenna models',
+      '4× 10/100 Mbps LAN + 1× WAN Port',
+      'WPA/WPA2 encryption, Easy setup via Tether App'
+    ],
+    specifications: {
+      'Basic': [
+        { label: 'Wi-Fi Standard', value: 'IEEE 802.11b/g/n (Wi-Fi 4)' },
+        { label: 'Max Speed', value: '300 Mbps' },
+        { label: 'Antennas', value: '3× 5dBi Fixed' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-r003',
+    name: 'TP-Link Archer C6 AC1200 Dual-Band MU-MIMO Gigabit Wi-Fi Router',
+    slug: 'tp-link-archer-c6-ac1200-gigabit-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 3500,
+    discountPrice: 3100,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 245,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    images: ['/images/products/tp-link-archer-c6.webp'],
+    shortSpecs: [
+      'AC1200: 867Mbps (5GHz) + 300Mbps (2.4GHz)',
+      '5× Gigabit Ports (1 WAN + 4 LAN) | MU-MIMO',
+      '4× External Antennas | Beamforming Technology',
+      'TP-Link Tether App | Parental Controls'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: '5GHz Speed', value: '867 Mbps' },
+        { label: '2.4GHz Speed', value: '300 Mbps' },
+        { label: 'LAN Ports', value: '4× Gigabit' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+  {
+    id: 'prod-r004',
+    name: 'TP-Link Archer C60 AC1350 Dual-Band Wi-Fi Router (5 Antennas)',
+    slug: 'tp-link-archer-c60-ac1350-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 4200,
+    discountPrice: 3800,
+    discountPercentage: 10,
+    rating: 4.6,
+    reviewCount: 89,
+    stockStatus: 'In Stock',
+    stockCount: 45,
+    images: ['/images/products/tp-link-archer-c60.webp'],
+    shortSpecs: [
+      'AC1350: 867Mbps (5GHz) + 450Mbps (2.4GHz)',
+      '5× External Antennas for extended coverage',
+      'MU-MIMO | 4× Gigabit LAN + 1× Gigabit WAN',
+      'VPN Server & Client support'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Total Speed', value: 'AC1350' },
+        { label: 'Antennas', value: '5× External' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+  {
+    id: 'prod-r005',
+    name: 'TP-Link Archer AX23 AX1800 Dual-Band Wi-Fi 6 Router',
+    slug: 'tp-link-archer-ax23-ax1800-wifi6-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'New',
+    regularPrice: 5500,
+    discountPrice: 4900,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 134,
+    stockStatus: 'In Stock',
+    stockCount: 60,
+    images: ['/images/products/tp-link-archer-ax23.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 (802.11ax): 1201Mbps (5GHz) + 574Mbps (2.4GHz)',
+      'OFDMA & MU-MIMO for efficient multi-device performance',
+      '4× Gigabit LAN + 1× Gigabit WAN | 4× External Antennas',
+      'Connect 40+ devices simultaneously | WPA3'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX1800 (1.8 Gbps)' },
+        { label: '5GHz', value: '1201 Mbps' },
+        { label: '2.4GHz', value: '574 Mbps' },
+        { label: 'Security', value: 'WPA3' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-01'
+  },
+  {
+    id: 'prod-r006',
+    name: 'TP-Link Archer AX55 AX3000 Dual-Band Wi-Fi 6 Router (OFDMA, MU-MIMO)',
+    slug: 'tp-link-archer-ax55-ax3000-wifi6-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 8000,
+    discountPrice: 7200,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 97,
+    stockStatus: 'In Stock',
+    stockCount: 40,
+    images: ['/images/products/tp-link-archer-ax55.webp'],
+    shortSpecs: [
+      'Wi-Fi 6: 2402Mbps (5GHz) + 574Mbps (2.4GHz) = AX3000',
+      '5× Gigabit Ports | USB 3.0 Port for NAS sharing',
+      'OFDMA + MU-MIMO + HT160 for blazing fast speeds',
+      'HomeShield Pro security | WPA3 | 50+ device support'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX3000' },
+        { label: '5GHz', value: '2402 Mbps' },
+        { label: '2.4GHz', value: '574 Mbps' },
+        { label: 'USB', value: '1× USB 3.0' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 600,
+    reviews: [], questions: [], createdDate: '2024-03-10'
+  },
+  {
+    id: 'prod-r007',
+    name: 'TP-Link Archer AX73 AX5400 Dual-Band Wi-Fi 6 Router (6 Antennas)',
+    slug: 'tp-link-archer-ax73-ax5400-wifi6-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 11000,
+    discountPrice: 9800,
+    discountPercentage: 11,
+    rating: 4.8,
+    reviewCount: 55,
+    stockStatus: 'In Stock',
+    stockCount: 25,
+    images: ['/images/products/tp-link-archer-ax73.webp'],
+    shortSpecs: [
+      'Wi-Fi 6: 4804Mbps (5GHz) + 574Mbps (2.4GHz) = AX5400',
+      '6× High-Performance External Antennas',
+      'USB 3.0 | 4× Gigabit LAN + 1× Gigabit WAN',
+      'Airtime Fairness | Beamforming | WPA3'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX5400' },
+        { label: '5GHz', value: '4804 Mbps' },
+        { label: 'Antennas', value: '6× External' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 817,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+  {
+    id: 'prod-r008',
+    name: 'TP-Link TL-MR100 300Mbps 4G LTE Router (SIM Card Slot)',
+    slug: 'tp-link-tl-mr100-4g-lte-router',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: '4g-lte-router',
+    badge: 'Hot',
+    regularPrice: 4500,
+    discountPrice: 4000,
+    discountPercentage: 11,
+    rating: 4.5,
+    reviewCount: 176,
+    stockStatus: 'In Stock',
+    stockCount: 70,
+    images: ['/images/products/tp-link-tl-mr100.webp'],
+    shortSpecs: [
+      '4G LTE Cat4 with Nano SIM card slot — no ISP cable needed',
+      '300 Mbps Wi-Fi (2.4GHz) | Plug and play setup',
+      '4× 10/100 Mbps LAN Ports | WAN/LAN switch port',
+      'Works with Grameenphone, Robi, Banglalink, Teletalk SIM'
+    ],
+    specifications: {
+      'Connectivity': [
+        { label: 'LTE Category', value: 'Cat 4 (150 Mbps DL / 50 Mbps UL)' },
+        { label: 'SIM Slot', value: 'Nano SIM' },
+        { label: 'Wi-Fi Speed', value: '300 Mbps (2.4GHz)' },
+        { label: 'LAN Ports', value: '4× Fast Ethernet' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-15'
+  },
+  {
+    id: 'prod-r009',
+    name: 'TP-Link Deco XE75 AX3600 Wi-Fi 6E Mesh System (2-Pack)',
+    slug: 'tp-link-deco-xe75-ax3600-mesh-2pack',
+    brand: 'TP-Link',
+    category: 'networking',
+    categoryName: 'Mesh Wi-Fi',
+    subcategory: 'mesh-wifi',
+    badge: 'New',
+    regularPrice: 16000,
+    discountPrice: 14500,
+    discountPercentage: 9,
+    rating: 4.8,
+    reviewCount: 42,
+    stockStatus: 'In Stock',
+    stockCount: 20,
+    images: ['/images/products/tp-link-deco-xe75.webp'],
+    shortSpecs: [
+      'Tri-Band Wi-Fi 6E: 6GHz + 5GHz + 2.4GHz — 3600 Mbps total',
+      'Covers up to 500 sq.m. with 2 units | 100+ devices',
+      'Smart roaming — seamless handoff across rooms',
+      'HomeShield parental controls & security'
+    ],
+    specifications: {
+      'Mesh': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6E (802.11axe)' },
+        { label: 'Coverage', value: '500 sq.m. (2-pack)' },
+        { label: 'Bands', value: 'Tri-Band (2.4 + 5 + 6 GHz)' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1208,
+    reviews: [], questions: [], createdDate: '2024-04-10'
+  },
+
+  // Tenda Routers
+  {
+    id: 'prod-r010',
+    name: 'Tenda N301 300Mbps Wireless Easy Setup Router (2 Antennas)',
+    slug: 'tenda-n301-300mbps-easy-setup-router',
+    brand: 'Tenda',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Best Seller',
+    regularPrice: 950,
+    discountPrice: 850,
+    discountPercentage: 11,
+    rating: 4.3,
+    reviewCount: 420,
+    stockStatus: 'In Stock',
+    stockCount: 300,
+    images: ['/images/products/tenda-n301.webp'],
+    shortSpecs: [
+      '300 Mbps 2.4GHz | 2× 5dBi Omni-directional Antennas',
+      '3× 10/100 Mbps LAN + 1× WAN Port',
+      'One-key setup | WPS button',
+      'Budget-friendly home Wi-Fi for small spaces'
+    ],
+    specifications: {
+      'Basic': [
+        { label: 'Speed', value: '300 Mbps (2.4GHz)' },
+        { label: 'LAN Ports', value: '3× Fast Ethernet' },
+        { label: 'Antennas', value: '2× 5dBi' }
+      ]
+    },
+    warranty: '3 Years Tenda Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-r011',
+    name: 'Tenda AC10 AC1200 Smart Dual-Band Gigabit Wi-Fi Router',
+    slug: 'tenda-ac10-ac1200-dual-band-gigabit-router',
+    brand: 'Tenda',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 2800,
+    discountPrice: 2500,
+    discountPercentage: 11,
+    rating: 4.5,
+    reviewCount: 287,
+    stockStatus: 'In Stock',
+    stockCount: 100,
+    images: ['/images/products/tenda-ac10.webp'],
+    shortSpecs: [
+      'AC1200: 867Mbps (5GHz) + 300Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | MU-MIMO',
+      '4× 6dBi Antennas | Beamforming',
+      'Tenda Wi-Fi App | Parental control | VPN support'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: '5GHz', value: '867 Mbps' },
+        { label: '2.4GHz', value: '300 Mbps' },
+        { label: 'LAN Ports', value: '4× Gigabit' }
+      ]
+    },
+    warranty: '3 Years Tenda Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-15'
+  },
+  {
+    id: 'prod-r012',
+    name: 'Tenda AC19 AC1900 Smart Dual-Band Gigabit Wi-Fi Router',
+    slug: 'tenda-ac19-ac1900-dual-band-router',
+    brand: 'Tenda',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 3800,
+    discountPrice: 3400,
+    discountPercentage: 11,
+    rating: 4.6,
+    reviewCount: 92,
+    stockStatus: 'In Stock',
+    stockCount: 55,
+    images: ['/images/products/tenda-ac19.webp'],
+    shortSpecs: [
+      'AC1900: 1300Mbps (5GHz) + 600Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | USB 2.0',
+      '6× Internal High-Gain Antennas | Beamforming',
+      'MU-MIMO | Parental Controls | VPN support'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Total Speed', value: 'AC1900' },
+        { label: '5GHz', value: '1300 Mbps' }
+      ]
+    },
+    warranty: '3 Years Tenda Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+  {
+    id: 'prod-r013',
+    name: 'Tenda AC23 AC2100 Tri-Band Gigabit Smart Wi-Fi Router (8 Antennas)',
+    slug: 'tenda-ac23-ac2100-triband-gigabit-router',
+    brand: 'Tenda',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 4200,
+    discountPrice: 3700,
+    discountPercentage: 12,
+    rating: 4.6,
+    reviewCount: 118,
+    stockStatus: 'In Stock',
+    stockCount: 60,
+    images: ['/images/products/tenda-ac23.webp'],
+    shortSpecs: [
+      'Tri-Band AC2100: 1733+1733Mbps (5GHz) + 300Mbps (2.4GHz)',
+      '8× High-Gain Antennas | 4× Gigabit LAN + 1× WAN',
+      'USB 3.0 for NAS sharing | MU-MIMO | Beamforming',
+      'Smart load balance across dual 5GHz bands'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac) Tri-Band' },
+        { label: 'Total Speed', value: 'AC2100' },
+        { label: 'Antennas', value: '8× External' }
+      ]
+    },
+    warranty: '3 Years Tenda Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-10'
+  },
+  {
+    id: 'prod-r014',
+    name: 'Tenda RX9 Pro AX3000 Dual-Band Wi-Fi 6 Router (6 Antennas)',
+    slug: 'tenda-rx9-pro-ax3000-wifi6-router',
+    brand: 'Tenda',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'New',
+    regularPrice: 5800,
+    discountPrice: 5200,
+    discountPercentage: 10,
+    rating: 4.7,
+    reviewCount: 65,
+    stockStatus: 'In Stock',
+    stockCount: 40,
+    images: ['/images/products/tenda-rx9-pro.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX3000: 2402Mbps (5GHz) + 574Mbps (2.4GHz)',
+      'OFDMA + MU-MIMO | 6× High-Gain Antennas',
+      'Gigabit WAN/LAN | USB 3.0 | WPA3',
+      'Connect 64+ devices | BSS Coloring'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX3000' },
+        { label: 'Security', value: 'WPA3' }
+      ]
+    },
+    warranty: '3 Years Tenda Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-05'
+  },
+  {
+    id: 'prod-r015',
+    name: 'Tenda 4G06 N300 4G LTE Router with SIM Card Slot',
+    slug: 'tenda-4g06-n300-4g-lte-router',
+    brand: 'Tenda',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: '4g-lte-router',
+    regularPrice: 3200,
+    discountPrice: 2900,
+    discountPercentage: 9,
+    rating: 4.3,
+    reviewCount: 203,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    images: ['/images/products/tenda-4g06.webp'],
+    shortSpecs: [
+      '4G LTE Cat4 150Mbps download | Nano SIM slot',
+      '300 Mbps Wi-Fi (2.4GHz) | 2× 5dBi Antennas',
+      '3× LAN + 1× WAN/LAN switchable port',
+      'Works with all Bangladesh operator SIM cards'
+    ],
+    specifications: {
+      'Connectivity': [
+        { label: 'LTE Category', value: 'Cat 4 (150 Mbps DL)' },
+        { label: 'SIM Slot', value: 'Nano SIM' },
+        { label: 'Wi-Fi', value: '300 Mbps 2.4GHz' }
+      ]
+    },
+    warranty: '3 Years Tenda Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+
+  // D-Link Routers
+  {
+    id: 'prod-r016',
+    name: 'D-Link DIR-615 N300 Wireless Router (2 Antennas)',
+    slug: 'd-link-dir-615-n300-wireless-router',
+    brand: 'D-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 1700,
+    discountPrice: 1500,
+    discountPercentage: 12,
+    rating: 4.2,
+    reviewCount: 156,
+    stockStatus: 'In Stock',
+    stockCount: 90,
+    images: ['/images/products/d-link-dir-615.webp'],
+    shortSpecs: [
+      '300 Mbps Wireless N | 2× External Antennas',
+      '4× 10/100 Mbps LAN + 1× WAN',
+      'WPA/WPA2 security | WPS button',
+      'Easy web-based setup wizard'
+    ],
+    specifications: {
+      'Basic': [
+        { label: 'Speed', value: '300 Mbps (2.4GHz)' },
+        { label: 'LAN Ports', value: '4× Fast Ethernet' }
+      ]
+    },
+    warranty: '3 Years D-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-r017',
+    name: 'D-Link DIR-825 AC1200 Dual-Band Gigabit Wi-Fi Router',
+    slug: 'd-link-dir-825-ac1200-gigabit-router',
+    brand: 'D-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 4500,
+    discountPrice: 4000,
+    discountPercentage: 11,
+    rating: 4.5,
+    reviewCount: 78,
+    stockStatus: 'In Stock',
+    stockCount: 45,
+    images: ['/images/products/d-link-dir-825.png'],
+    shortSpecs: [
+      'AC1200: 867Mbps (5GHz) + 300Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | USB 3.0',
+      'MU-MIMO | Beamforming | 4× External Antennas',
+      'D-Link Wi-Fi App | Parental controls'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Total Speed', value: 'AC1200' },
+        { label: 'USB', value: '1× USB 3.0' }
+      ]
+    },
+    warranty: '3 Years D-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+  {
+    id: 'prod-r018',
+    name: 'D-Link DIR-867 AC1750 MU-MIMO Wi-Fi Router (Gigabit)',
+    slug: 'd-link-dir-867-ac1750-gigabit-router',
+    brand: 'D-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 6000,
+    discountPrice: 5400,
+    discountPercentage: 10,
+    rating: 4.5,
+    reviewCount: 44,
+    stockStatus: 'In Stock',
+    stockCount: 30,
+    images: ['/images/products/d-link-dir-867.webp'],
+    shortSpecs: [
+      'AC1750: 1300Mbps (5GHz) + 450Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | USB 3.0',
+      'MU-MIMO | 3× Internal + 2× External Antennas',
+      'Smart Connect automatically assigns device to best band'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Total Speed', value: 'AC1750' },
+        { label: '5GHz', value: '1300 Mbps' }
+      ]
+    },
+    warranty: '3 Years D-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-15'
+  },
+  {
+    id: 'prod-r019',
+    name: 'D-Link DWR-M921 4G LTE N300 Wi-Fi Router with SIM Slot',
+    slug: 'd-link-dwr-m921-4g-lte-router',
+    brand: 'D-Link',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: '4g-lte-router',
+    regularPrice: 5500,
+    discountPrice: 4900,
+    discountPercentage: 11,
+    rating: 4.3,
+    reviewCount: 62,
+    stockStatus: 'In Stock',
+    stockCount: 35,
+    images: ['/images/products/d-link-dwr-m921.png'],
+    shortSpecs: [
+      '4G LTE Cat 6 (300 Mbps DL / 50 Mbps UL) | Nano SIM',
+      '300 Mbps Wi-Fi (2.4GHz) | 2× Detachable Antennas',
+      '4× Fast Ethernet LAN | WAN Failover support',
+      'SMS management via web UI'
+    ],
+    specifications: {
+      'Connectivity': [
+        { label: 'LTE Category', value: 'Cat 6 (300 Mbps DL)' },
+        { label: 'SIM Slot', value: 'Nano SIM' },
+        { label: 'LAN Ports', value: '4× Fast Ethernet' }
+      ]
+    },
+    warranty: '3 Years D-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-01'
+  },
+
+  // MikroTik Routers
+  {
+    id: 'prod-r020',
+    name: 'MikroTik hAP lite RB941-2nD 2.4GHz Home Access Point Router',
+    slug: 'mikrotik-hap-lite-rb941-2nd-router',
+    brand: 'MikroTik',
+    category: 'networking',
+    categoryName: 'MikroTik Routers',
+    subcategory: 'mikrotik',
+    regularPrice: 2800,
+    discountPrice: 2500,
+    discountPercentage: 11,
+    rating: 4.4,
+    reviewCount: 132,
+    stockStatus: 'In Stock',
+    stockCount: 60,
+    images: ['/images/products/mikrotik-hap-lite.webp'],
+    shortSpecs: [
+      '2.4GHz 802.11b/g/n | RouterOS Level 4',
+      '4× 10/100 Mbps LAN + 1× WAN | 2× Internal Antennas',
+      'RouterOS with full firewall, NAT, VPN support',
+      'Compact desktop form factor | ISP & home use'
+    ],
+    specifications: {
+      'Hardware': [
+        { label: 'CPU', value: 'QCA9531 650 MHz' },
+        { label: 'RAM', value: '32 MB' },
+        { label: 'Storage', value: '16 MB Flash' },
+        { label: 'RouterOS', value: 'Level 4 License' }
+      ]
+    },
+    warranty: '1 Year MikroTik Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-r021',
+    name: 'MikroTik hAP ac² RB952Ui-5ac2nD Dual-Band Gigabit Router',
+    slug: 'mikrotik-hap-ac2-rb952-dual-band-gigabit',
+    brand: 'MikroTik',
+    category: 'networking',
+    categoryName: 'MikroTik Routers',
+    subcategory: 'mikrotik',
+    badge: 'Best Seller',
+    regularPrice: 6500,
+    discountPrice: 5800,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 189,
+    stockStatus: 'In Stock',
+    stockCount: 50,
+    images: ['/images/products/mikrotik-hap-ac2.webp'],
+    shortSpecs: [
+      'Dual-Band: 2.4GHz 802.11b/g/n + 5GHz 802.11a/n/ac',
+      '5× Gigabit Ethernet (1 PoE-in, 1 PoE-out)',
+      'RouterOS Level 4 | USB 2.0 | Dual-chain radio',
+      'Compact design — popular for ISP & office use in Bangladesh'
+    ],
+    specifications: {
+      'Hardware': [
+        { label: 'CPU', value: 'IPQ4018 716 MHz (4-core)' },
+        { label: 'RAM', value: '128 MB' },
+        { label: 'RouterOS', value: 'Level 4 License' },
+        { label: 'Ports', value: '5× Gigabit (PoE-in/out)' }
+      ]
+    },
+    warranty: '1 Year MikroTik Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-10'
+  },
+  {
+    id: 'prod-r022',
+    name: 'MikroTik RB951Ui-2HnD 2.4GHz 5-Port Router with PoE and USB',
+    slug: 'mikrotik-rb951ui-2hnd-5port-poe-router',
+    brand: 'MikroTik',
+    category: 'networking',
+    categoryName: 'MikroTik Routers',
+    subcategory: 'mikrotik',
+    regularPrice: 6200,
+    discountPrice: 5500,
+    discountPercentage: 11,
+    rating: 4.6,
+    reviewCount: 97,
+    stockStatus: 'In Stock',
+    stockCount: 40,
+    images: ['/images/products/mikrotik-rb951ui-2hnd.webp'],
+    shortSpecs: [
+      '2.4GHz 802.11b/g/n | 5× Gigabit Ethernet (PoE)',
+      'USB 2.0 | RouterOS Level 4 | 1× SFP port',
+      'AP + Router + Switch modes | Full RouterOS features',
+      'Widely used by Bangladeshi ISPs for CPE deployments'
+    ],
+    specifications: {
+      'Hardware': [
+        { label: 'CPU', value: 'AR9344 600 MHz' },
+        { label: 'RAM', value: '128 MB' },
+        { label: 'RouterOS', value: 'Level 4' },
+        { label: 'PoE Output', value: 'Port 5 (15.4W)' }
+      ]
+    },
+    warranty: '1 Year MikroTik Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-15'
+  },
+  {
+    id: 'prod-r023',
+    name: 'MikroTik hEX RB750Gr3 Gigabit Ethernet Router (5-Port, no Wi-Fi)',
+    slug: 'mikrotik-hex-rb750gr3-gigabit-router',
+    brand: 'MikroTik',
+    category: 'networking',
+    categoryName: 'MikroTik Routers',
+    subcategory: 'mikrotik',
+    badge: 'Best Seller',
+    regularPrice: 5500,
+    discountPrice: 4900,
+    discountPercentage: 11,
+    rating: 4.8,
+    reviewCount: 231,
+    stockStatus: 'In Stock',
+    stockCount: 65,
+    images: ['/images/products/mikrotik-rb750gr3.webp'],
+    shortSpecs: [
+      '5× Gigabit Ethernet | RouterOS Level 4 | USB 2.0',
+      'IPsec hardware acceleration | VPN gateway',
+      '880 MHz CPU, 256 MB RAM | PoE-in on port 1',
+      'Most popular wired router for ISP & office in Bangladesh'
+    ],
+    specifications: {
+      'Hardware': [
+        { label: 'CPU', value: 'MT7621A 880 MHz (dual-core)' },
+        { label: 'RAM', value: '256 MB' },
+        { label: 'Ports', value: '5× Gigabit Ethernet' },
+        { label: 'RouterOS', value: 'Level 4' }
+      ]
+    },
+    warranty: '1 Year MikroTik Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-05'
+  },
+  {
+    id: 'prod-r024',
+    name: 'MikroTik RB4011iGS+5HacQ2HnD-IN Dual-Band Wi-Fi Router (10-Port)',
+    slug: 'mikrotik-rb4011-dual-band-10port-router',
+    brand: 'MikroTik',
+    category: 'networking',
+    categoryName: 'MikroTik Routers',
+    subcategory: 'mikrotik',
+    badge: 'Hot',
+    regularPrice: 25000,
+    discountPrice: 22000,
+    discountPercentage: 12,
+    rating: 4.9,
+    reviewCount: 44,
+    stockStatus: 'In Stock',
+    stockCount: 15,
+    images: ['/images/products/mikrotik-rb4011.webp'],
+    shortSpecs: [
+      '10× Gigabit Ports + 1× SFP+ (10G) | RouterOS Level 5',
+      'Dual-Band 802.11ac Wave 2 Wi-Fi | 1.4 GHz quad-core CPU',
+      '1 GB RAM | 512 MB Storage | IPsec 1.5 Gbps',
+      'Enterprise-grade for ISPs and corporate networks'
+    ],
+    specifications: {
+      'Hardware': [
+        { label: 'CPU', value: 'AL21400 1.4 GHz (4-core)' },
+        { label: 'RAM', value: '1 GB' },
+        { label: 'SFP+', value: '1× 10G SFP+' },
+        { label: 'RouterOS', value: 'Level 5' }
+      ]
+    },
+    warranty: '1 Year MikroTik Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1833,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+
+  // ASUS Routers
+  {
+    id: 'prod-r025',
+    name: 'ASUS RT-AX55 AX1800 Dual-Band Wi-Fi 6 Router (4 Antennas)',
+    slug: 'asus-rt-ax55-ax1800-wifi6-router',
+    brand: 'Asus',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 7000,
+    discountPrice: 6200,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 88,
+    stockStatus: 'In Stock',
+    stockCount: 35,
+    images: ['/images/products/asus-rt-ax55.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX1800: 1201Mbps (5GHz) + 574Mbps (2.4GHz)',
+      'OFDMA + MU-MIMO | 4× Gigabit LAN + 1× WAN',
+      'AiProtection Pro (powered by Trend Micro) lifetime',
+      'ASUS Router App | Parental controls | WPA3'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX1800' },
+        { label: 'Security', value: 'AiProtection Pro (Trend Micro)' }
+      ]
+    },
+    warranty: '3 Years ASUS Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+  {
+    id: 'prod-r026',
+    name: 'ASUS RT-AX58U AX3000 Dual-Band Wi-Fi 6 Router',
+    slug: 'asus-rt-ax58u-ax3000-wifi6-router',
+    brand: 'Asus',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 12000,
+    discountPrice: 10500,
+    discountPercentage: 13,
+    rating: 4.8,
+    reviewCount: 72,
+    stockStatus: 'In Stock',
+    stockCount: 22,
+    images: ['/images/products/asus-rt-ax58u.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX3000: 2402Mbps (5GHz) + 574Mbps (2.4GHz)',
+      'USB 3.0 + USB 2.0 | 4× Gigabit LAN + 1× WAN',
+      'AiMesh compatible | AiProtection Pro | OFDMA',
+      '1.8 GHz dual-core CPU | Works as mesh node'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX3000' },
+        { label: 'USB', value: '1× USB 3.0 + 1× USB 2.0' }
+      ]
+    },
+    warranty: '3 Years ASUS Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 875,
+    reviews: [], questions: [], createdDate: '2024-03-01'
+  },
+  {
+    id: 'prod-r027',
+    name: 'ASUS RT-AX86U Pro AX5700 Dual-Band Wi-Fi 6 Gaming Router',
+    slug: 'asus-rt-ax86u-pro-ax5700-gaming-router',
+    brand: 'Asus',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 24000,
+    discountPrice: 21500,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 38,
+    stockStatus: 'Limited Stock',
+    stockCount: 8,
+    isGaming: true,
+    images: ['/images/products/asus-rt-ax86u-pro.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX5700: 4804Mbps (5GHz) + 861Mbps (2.4GHz)',
+      '2.5G WAN + 4× Gigabit LAN + 1× 2.5G LAN | USB 3.0',
+      'Mobile Game Mode: dedicated 5GHz for gaming devices',
+      'AiProtection Pro | Adaptive QoS | VPN Fusion'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX5700' },
+        { label: '2.5G Port', value: 'WAN + 1× LAN' },
+        { label: 'Gaming Feature', value: 'Mobile Game Mode' }
+      ]
+    },
+    warranty: '3 Years ASUS Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1792,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+  {
+    id: 'prod-r028',
+    name: 'ASUS ROG Rapture GT-AX11000 Pro Tri-Band Wi-Fi 6E Gaming Router',
+    slug: 'asus-rog-rapture-gt-ax11000-pro-wifi6e-gaming',
+    brand: 'Asus',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 55000,
+    discountPrice: 49000,
+    discountPercentage: 11,
+    rating: 5.0,
+    reviewCount: 18,
+    stockStatus: 'Limited Stock',
+    stockCount: 4,
+    isGaming: true,
+    images: ['/images/products/asus-gt-ax11000-pro.webp'],
+    shortSpecs: [
+      'Wi-Fi 6E Tri-Band: 4804+4804Mbps (5GHz) + 1148Mbps (2.4GHz)',
+      '2.5G WAN + 4× Gigabit LAN + 2× 2.5G LAN | USB 3.0',
+      'ROG Gaming features: Game acceleration, VPN Fusion',
+      '8× High-Performance Antennas | AiMesh support'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6E (802.11axe)' },
+        { label: 'Total Speed', value: 'AX11000' },
+        { label: 'Tri-Band', value: '2.4GHz + 5GHz + 5GHz' }
+      ]
+    },
+    warranty: '3 Years ASUS Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 4083,
+    reviews: [], questions: [], createdDate: '2024-04-15'
+  },
+
+  // Mercusys Routers
+  {
+    id: 'prod-r029',
+    name: 'Mercusys AC12G AC1200 Dual-Band Gigabit Wi-Fi Router',
+    slug: 'mercusys-ac12g-ac1200-gigabit-router',
+    brand: 'Mercusys',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Best Seller',
+    regularPrice: 2400,
+    discountPrice: 2100,
+    discountPercentage: 13,
+    rating: 4.5,
+    reviewCount: 195,
+    stockStatus: 'In Stock',
+    stockCount: 120,
+    images: ['/images/products/mercusys-ac12g.webp'],
+    shortSpecs: [
+      'AC1200: 867Mbps (5GHz) + 300Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | 4× Antennas',
+      'MU-MIMO | Beamforming | Parental controls',
+      'Budget-friendly gigabit router for home users'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Total Speed', value: 'AC1200' },
+        { label: 'LAN Ports', value: '4× Gigabit' }
+      ]
+    },
+    warranty: '3 Years Mercusys Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-15'
+  },
+  {
+    id: 'prod-r030',
+    name: 'Mercusys MR70X AX1800 Dual-Band Wi-Fi 6 Router',
+    slug: 'mercusys-mr70x-ax1800-wifi6-router',
+    brand: 'Mercusys',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'New',
+    regularPrice: 4000,
+    discountPrice: 3500,
+    discountPercentage: 13,
+    rating: 4.6,
+    reviewCount: 82,
+    stockStatus: 'In Stock',
+    stockCount: 65,
+    images: ['/images/products/mercusys-mr70x.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX1800: 1201Mbps (5GHz) + 574Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | OFDMA + MU-MIMO',
+      '4× High-Gain Antennas | WPA3 | BSS Coloring',
+      'Best value Wi-Fi 6 router for home use'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX1800' },
+        { label: 'Security', value: 'WPA3' }
+      ]
+    },
+    warranty: '3 Years Mercusys Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-01'
+  },
+  {
+    id: 'prod-r031',
+    name: 'Mercusys MR90X AX6000 Dual-Band Wi-Fi 6 Router (8 Antennas)',
+    slug: 'mercusys-mr90x-ax6000-wifi6-router',
+    brand: 'Mercusys',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 10000,
+    discountPrice: 9000,
+    discountPercentage: 10,
+    rating: 4.7,
+    reviewCount: 36,
+    stockStatus: 'In Stock',
+    stockCount: 20,
+    images: ['/images/products/mercusys-mr90x.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX6000: 4804Mbps (5GHz) + 1148Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× 2.5G WAN | OFDMA + MU-MIMO',
+      '8× High-Gain Antennas | 160MHz channels',
+      'HT160 for 4.8Gbps max single-link speed'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX6000' },
+        { label: 'WAN Port', value: '1× 2.5G' }
+      ]
+    },
+    warranty: '3 Years Mercusys Bangladesh Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 750,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  // Xiaomi Routers
+  {
+    id: 'prod-r032',
+    name: 'Xiaomi Router 4A Gigabit Edition 1200Mbps Dual-Band Router',
+    slug: 'xiaomi-router-4a-gigabit-1200mbps',
+    brand: 'Xiaomi',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Best Seller',
+    regularPrice: 3000,
+    discountPrice: 2700,
+    discountPercentage: 10,
+    rating: 4.5,
+    reviewCount: 268,
+    stockStatus: 'In Stock',
+    stockCount: 90,
+    images: ['/images/products/xiaomi-4a-gigabit.webp'],
+    shortSpecs: [
+      'AC1200: 867Mbps (5GHz) + 300Mbps (2.4GHz)',
+      '3× Gigabit LAN + 1× Gigabit WAN | 4× Antennas',
+      'MiWiFi App control | Parental controls | QoS',
+      'Sleek minimalist design — popular for home use'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Total Speed', value: 'AC1200' },
+        { label: 'LAN Ports', value: '3× Gigabit' }
+      ]
+    },
+    warranty: '1 Year Xiaomi Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-20'
+  },
+  {
+    id: 'prod-r033',
+    name: 'Xiaomi AX3200 Wi-Fi 6 Router (Dual-Band, 4 Antennas)',
+    slug: 'xiaomi-ax3200-wifi6-dual-band-router',
+    brand: 'Xiaomi',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 5500,
+    discountPrice: 5000,
+    discountPercentage: 9,
+    rating: 4.6,
+    reviewCount: 144,
+    stockStatus: 'In Stock',
+    stockCount: 50,
+    images: ['/images/products/xiaomi-ax3200.png'],
+    shortSpecs: [
+      'Wi-Fi 6 AX3200: 2402Mbps (5GHz) + 800Mbps (2.4GHz)',
+      '3× Gigabit LAN + 1× Gigabit WAN | OFDMA + MU-MIMO',
+      '4× High-Gain Antennas | WPA3 | IPv6 support',
+      'MiWiFi 3.0 App | Mesh support via MiWiFi ecosystem'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX3200' },
+        { label: 'Security', value: 'WPA3' }
+      ]
+    },
+    warranty: '1 Year Xiaomi Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-15'
+  },
+  {
+    id: 'prod-r034',
+    name: 'Xiaomi AX6000 Wi-Fi 6 Router (8 Antennas, 2.5G WAN)',
+    slug: 'xiaomi-ax6000-wifi6-8-antenna-router',
+    brand: 'Xiaomi',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 12000,
+    discountPrice: 10800,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 67,
+    stockStatus: 'In Stock',
+    stockCount: 22,
+    images: ['/images/products/xiaomi-ax6000.webp'],
+    shortSpecs: [
+      'Wi-Fi 6 AX6000: 4804Mbps (5GHz) + 1148Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× 2.5G WAN | USB 3.0',
+      '8× High-Gain Antennas | MLO | 160MHz channels',
+      'Mi Home App integration | NAS storage support'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX6000' },
+        { label: 'WAN', value: '1× 2.5G + 1× Gigabit' }
+      ]
+    },
+    warranty: '1 Year Xiaomi Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 900,
+    reviews: [], questions: [], createdDate: '2024-03-20'
+  },
+
+  // Netgear Routers
+  {
+    id: 'prod-r035',
+    name: 'Netgear RAX30 Nighthawk AX2400 Dual-Band Wi-Fi 6 Router',
+    slug: 'netgear-rax30-nighthawk-ax2400-wifi6-router',
+    brand: 'Netgear',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    regularPrice: 10000,
+    discountPrice: 9000,
+    discountPercentage: 10,
+    rating: 4.6,
+    reviewCount: 42,
+    stockStatus: 'In Stock',
+    stockCount: 18,
+    images: ['/images/products/netgear-rax30.jpg'],
+    shortSpecs: [
+      'Wi-Fi 6 AX2400: 1800Mbps (5GHz) + 600Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× Gigabit WAN | 4× Antennas',
+      'OFDMA + MU-MIMO | 4× stream antenna design',
+      'Nighthawk App | NETGEAR Armor (Bitdefender) security'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX2400' },
+        { label: 'Security', value: 'NETGEAR Armor (Bitdefender)' }
+      ]
+    },
+    warranty: '2 Years Netgear Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-01'
+  },
+  {
+    id: 'prod-r036',
+    name: 'Netgear Nighthawk RAX50 AX5400 Dual-Band Wi-Fi 6 Router',
+    slug: 'netgear-nighthawk-rax50-ax5400-wifi6-router',
+    brand: 'Netgear',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Hot',
+    regularPrice: 18000,
+    discountPrice: 16000,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 29,
+    stockStatus: 'In Stock',
+    stockCount: 10,
+    images: ['/images/products/netgear-rax50.jpg'],
+    shortSpecs: [
+      'Wi-Fi 6 AX5400: 4804Mbps (5GHz) + 574Mbps (2.4GHz)',
+      '5× Gigabit LAN + 1× Gigabit WAN | USB 3.0',
+      '6× High-Performance Antennas | 160MHz channels',
+      'NETGEAR Armor | ReadySHARE USB | Dynamic QoS'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Total Speed', value: 'AX5400' },
+        { label: 'USB', value: '1× USB 3.0' }
+      ]
+    },
+    warranty: '2 Years Netgear Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1333,
+    reviews: [], questions: [], createdDate: '2024-04-05'
+  },
+
+  // Huawei Routers
+  {
+    id: 'prod-r037',
+    name: 'Huawei WiFi AX3 Pro Dual-Band Wi-Fi 6 Plus Router (Quad-Core)',
+    slug: 'huawei-wifi-ax3-pro-wifi6plus-quad-core-router',
+    brand: 'Huawei',
+    category: 'networking',
+    categoryName: 'Routers',
+    subcategory: 'wifi-routers',
+    badge: 'Best Seller',
+    regularPrice: 6500,
+    discountPrice: 5800,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 152,
+    stockStatus: 'In Stock',
+    stockCount: 55,
+    images: ['/images/products/huawei-ax3-pro.jpg'],
+    shortSpecs: [
+      'Wi-Fi 6 Plus AX3000: 2402Mbps (5GHz) + 574Mbps (2.4GHz)',
+      'Quad-Core 1.4GHz CPU | 256MB RAM',
+      '3× Gigabit LAN + 1× Gigabit WAN | HUAWEI HiLink App',
+      'HarmonyOS Mesh support | 5GHz-to-5GHz backhaul'
+    ],
+    specifications: {
+      'Wireless': [
+        { label: 'Wi-Fi Standard', value: 'Wi-Fi 6 Plus (802.11ax)' },
+        { label: 'Total Speed', value: 'AX3000' },
+        { label: 'CPU', value: 'Quad-Core 1.4 GHz' }
+      ]
+    },
+    warranty: '1 Year Huawei Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-10'
+  },
+
+  // ═══════════════════════════════════════════════════════
+  // ONU / ONT DEVICES — Bangladesh Market (approx. prices)
+  // ═══════════════════════════════════════════════════════
+
+  // ZTE ONU Devices
+  {
+    id: 'prod-onu001',
+    name: 'ZTE F609 GPON ONU (4 LAN + 2 Phone Ports, 1 USB)',
+    slug: 'zte-f609-gpon-onu-4lan-2phone',
+    brand: 'ZTE',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    badge: 'Best Seller',
+    regularPrice: 2500,
+    discountPrice: 2200,
+    discountPercentage: 12,
+    rating: 4.4,
+    reviewCount: 317,
+    stockStatus: 'In Stock',
+    stockCount: 200,
+    images: ['/images/products/zte-f609.webp'],
+    shortSpecs: [
+      'GPON ONU — ITU-T G.984 standard',
+      '4× Gigabit LAN + 2× POTS (phone) + 1× USB 2.0',
+      'Built-in Wi-Fi 802.11b/g/n 300Mbps (2.4GHz)',
+      'WPA/WPA2 | DHCP | NAT | VLAN | SIP VoIP support',
+      'Widely used by Bangladesh ISPs (Fiber@Home, Link3, etc.)'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: 'Up to 2.488 Gbps' },
+        { label: 'Upstream', value: 'Up to 1.244 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN Ports', value: '4× Gigabit Ethernet' },
+        { label: 'Phone Ports', value: '2× POTS (VoIP)' },
+        { label: 'USB', value: '1× USB 2.0' },
+        { label: 'Wi-Fi', value: '802.11b/g/n 300 Mbps' }
+      ]
+    },
+    warranty: '1 Year ZTE Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-onu002',
+    name: 'ZTE F660 GPON ONU (4 LAN + 2 USB + Wi-Fi)',
+    slug: 'zte-f660-gpon-onu-4lan-2usb-wifi',
+    brand: 'ZTE',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    regularPrice: 3200,
+    discountPrice: 2800,
+    discountPercentage: 13,
+    rating: 4.4,
+    reviewCount: 189,
+    stockStatus: 'In Stock',
+    stockCount: 120,
+    images: ['/images/products/zte-f660.webp'],
+    shortSpecs: [
+      'GPON ONU — ITU-T G.984 | Dual USB for storage sharing',
+      '4× Gigabit LAN + 2× POTS + 2× USB 2.0',
+      'Built-in Wi-Fi 802.11b/g/n (2.4GHz)',
+      'TR-069 remote management | VoIP SIP support'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' },
+        { label: 'Upstream', value: '1.244 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit' },
+        { label: 'USB', value: '2× USB 2.0' },
+        { label: 'Wi-Fi', value: '300 Mbps (2.4GHz)' }
+      ]
+    },
+    warranty: '1 Year ZTE Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-onu003',
+    name: 'ZTE F670L GPON ONU Wi-Fi 6 AX1800 (Dual-Band, 4 Gigabit LAN)',
+    slug: 'zte-f670l-gpon-onu-wifi6-ax1800',
+    brand: 'ZTE',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    badge: 'New',
+    regularPrice: 5000,
+    discountPrice: 4500,
+    discountPercentage: 10,
+    rating: 4.6,
+    reviewCount: 92,
+    stockStatus: 'In Stock',
+    stockCount: 60,
+    images: ['/images/products/zte-f670l.webp'],
+    shortSpecs: [
+      'GPON ONU with Wi-Fi 6 (AX1800): 1201Mbps (5GHz) + 574Mbps (2.4GHz)',
+      '4× Gigabit LAN + 1× GPON optical fiber port',
+      'OFDMA + MU-MIMO | WPA3 | IPv6 support',
+      'Latest Wi-Fi 6 ONU — ideal for fiber broadband subscribers'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' }
+      ],
+      'Wi-Fi': [
+        { label: 'Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Speed', value: 'AX1800' },
+        { label: 'Security', value: 'WPA3' }
+      ]
+    },
+    warranty: '1 Year ZTE Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-01'
+  },
+  {
+    id: 'prod-onu004',
+    name: 'ZTE ZXHN H267A GPON ONU Wi-Fi 6 AX3000 (Dual-Band)',
+    slug: 'zte-zxhn-h267a-gpon-onu-wifi6-ax3000',
+    brand: 'ZTE',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    badge: 'New',
+    regularPrice: 6000,
+    discountPrice: 5400,
+    discountPercentage: 10,
+    rating: 4.7,
+    reviewCount: 54,
+    stockStatus: 'In Stock',
+    stockCount: 35,
+    images: ['/images/products/zte-h267a.webp'],
+    shortSpecs: [
+      'GPON ONU + Wi-Fi 6 AX3000 built-in router',
+      'Dual-Band: 2402Mbps (5GHz) + 574Mbps (2.4GHz)',
+      '4× Gigabit LAN + 2× POTS | OFDMA + MU-MIMO',
+      'All-in-one fiber gateway with Wi-Fi 6 — no separate router needed'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' }
+      ],
+      'Wi-Fi': [
+        { label: 'Standard', value: 'Wi-Fi 6 (802.11ax)' },
+        { label: 'Speed', value: 'AX3000' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit' },
+        { label: 'Phone', value: '2× POTS (VoIP)' }
+      ]
+    },
+    warranty: '1 Year ZTE Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+  {
+    id: 'prod-onu005',
+    name: 'ZTE F612W GPON ONU Dual-Band 1200Mbps Wi-Fi (2.4GHz + 5GHz)',
+    slug: 'zte-f612w-gpon-onu-dual-band-1200mbps',
+    brand: 'ZTE',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    regularPrice: 3500,
+    discountPrice: 3100,
+    discountPercentage: 11,
+    rating: 4.4,
+    reviewCount: 138,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    images: ['/images/products/zte-f612w.webp'],
+    shortSpecs: [
+      'GPON ONU with dual-band 802.11ac Wi-Fi (1200Mbps)',
+      '4× Gigabit LAN + 2× POTS (VoIP phone ports)',
+      '867Mbps (5GHz) + 300Mbps (2.4GHz) | WPA2',
+      'Popular all-in-one fiber gateway in Bangladesh'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' }
+      ],
+      'Wi-Fi': [
+        { label: 'Standard', value: 'Wi-Fi 5 (802.11ac)' },
+        { label: 'Speed', value: 'AC1200' }
+      ]
+    },
+    warranty: '1 Year ZTE Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-15'
+  },
+
+  // Huawei ONU Devices
+  {
+    id: 'prod-onu006',
+    name: 'Huawei EG8145V5 GPON ONT (4 LAN + 1 USB + Wi-Fi 5)',
+    slug: 'huawei-eg8145v5-gpon-ont-4lan-wifi5',
+    brand: 'Huawei',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    badge: 'Best Seller',
+    regularPrice: 3800,
+    discountPrice: 3400,
+    discountPercentage: 11,
+    rating: 4.5,
+    reviewCount: 224,
+    stockStatus: 'In Stock',
+    stockCount: 150,
+    images: ['/images/products/huawei-eg8145v5.webp'],
+    shortSpecs: [
+      'GPON ONT — ITU-T G.984 | 2× Gbps downstream capacity',
+      '4× Gigabit LAN + 1× USB 2.0 + Wi-Fi 802.11b/g/n/ac',
+      '300Mbps (2.4GHz) | WPA2 | IPv4/IPv6 dual stack',
+      'Widely deployed by Bangladesh ISPs — reliable & stable'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' },
+        { label: 'Upstream', value: '1.244 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit Ethernet' },
+        { label: 'Wi-Fi', value: '300 Mbps (2.4GHz)' },
+        { label: 'USB', value: '1× USB 2.0' }
+      ]
+    },
+    warranty: '1 Year Huawei Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-onu007',
+    name: 'Huawei HG8245H5 GPON ONT (4 LAN + 2 Phone + Wi-Fi)',
+    slug: 'huawei-hg8245h5-gpon-ont-4lan-2phone-wifi',
+    brand: 'Huawei',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    badge: 'Hot',
+    regularPrice: 5000,
+    discountPrice: 4500,
+    discountPercentage: 10,
+    rating: 4.6,
+    reviewCount: 148,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    images: ['/images/products/huawei-hg8245h5.jpg'],
+    shortSpecs: [
+      'GPON ONT with 4× Gigabit LAN + 2× POTS phone ports',
+      'Dual-Band Wi-Fi: 300Mbps (2.4GHz) + 867Mbps (5GHz)',
+      'TR-069 remote management | VLAN | QoS | SIP VoIP',
+      'Business-grade GPON ONT with VoIP support'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit' },
+        { label: 'Phone', value: '2× POTS (SIP VoIP)' },
+        { label: 'Wi-Fi', value: 'Dual-Band AC1200' }
+      ]
+    },
+    warranty: '1 Year Huawei Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-15'
+  },
+  {
+    id: 'prod-onu008',
+    name: 'Huawei EG8247H5 GPON ONT (4 LAN + 2 USB + 2 Phone + Wi-Fi)',
+    slug: 'huawei-eg8247h5-gpon-ont-full-featured',
+    brand: 'Huawei',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    regularPrice: 6000,
+    discountPrice: 5500,
+    discountPercentage: 8,
+    rating: 4.7,
+    reviewCount: 76,
+    stockStatus: 'In Stock',
+    stockCount: 40,
+    images: ['/images/products/huawei-eg8247h5.jpg'],
+    shortSpecs: [
+      'Full-featured GPON ONT: 4× GE LAN + 2× USB + 2× POTS',
+      'Dual-Band Wi-Fi AC1200 | TR-069 management',
+      '300Mbps (2.4GHz) + 867Mbps (5GHz) | WPA2',
+      'VoIP + NAS sharing via USB — ideal for home/SOHO'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit + 2× POTS + 2× USB' },
+        { label: 'Wi-Fi', value: 'AC1200 Dual-Band' }
+      ]
+    },
+    warranty: '1 Year Huawei Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+  {
+    id: 'prod-onu009',
+    name: 'Huawei HG8546M GPON ONU (4 LAN + Wi-Fi, No Phone Port)',
+    slug: 'huawei-hg8546m-gpon-onu-4lan-wifi',
+    brand: 'Huawei',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    regularPrice: 3200,
+    discountPrice: 2800,
+    discountPercentage: 13,
+    rating: 4.3,
+    reviewCount: 112,
+    stockStatus: 'In Stock',
+    stockCount: 95,
+    images: ['/images/products/huawei-hg8546m.webp'],
+    shortSpecs: [
+      'GPON ONU with 4× 10/100 LAN + 802.11b/g/n Wi-Fi',
+      '300 Mbps Wi-Fi (2.4GHz) | WPA/WPA2 security',
+      'Budget GPON ONU — most affordable Huawei option',
+      'Suitable for residential fiber connections'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Fast Ethernet (10/100)' },
+        { label: 'Wi-Fi', value: '300 Mbps (2.4GHz)' }
+      ]
+    },
+    warranty: '1 Year Huawei Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+
+  // FiberHome ONU Devices
+  {
+    id: 'prod-onu010',
+    name: 'FiberHome AN5506-04-FG GPON ONU (4 LAN + 2 Phone + Wi-Fi)',
+    slug: 'fiberhome-an5506-04-fg-gpon-onu',
+    brand: 'FiberHome',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    badge: 'Best Seller',
+    regularPrice: 3500,
+    discountPrice: 3100,
+    discountPercentage: 11,
+    rating: 4.4,
+    reviewCount: 143,
+    stockStatus: 'In Stock',
+    stockCount: 100,
+    images: ['/images/products/fiberhome-an5506-04-fg.webp'],
+    shortSpecs: [
+      'GPON ONU — ITU-T G.984 standard',
+      '4× Gigabit LAN + 2× POTS phone ports',
+      'Built-in Wi-Fi 802.11b/g/n 300Mbps (2.4GHz)',
+      'TR-069 remote management | Used by BTCL & ISPs'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' },
+        { label: 'Upstream', value: '1.244 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit' },
+        { label: 'Phone', value: '2× POTS' },
+        { label: 'Wi-Fi', value: '300 Mbps (2.4GHz)' }
+      ]
+    },
+    warranty: '1 Year FiberHome Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-onu011',
+    name: 'FiberHome AN5506-04-FA EPON ONU (4 LAN + 2 Phone + Wi-Fi)',
+    slug: 'fiberhome-an5506-04-fa-epon-onu',
+    brand: 'FiberHome',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'epon-onu',
+    regularPrice: 3200,
+    discountPrice: 2800,
+    discountPercentage: 13,
+    rating: 4.3,
+    reviewCount: 88,
+    stockStatus: 'In Stock',
+    stockCount: 75,
+    images: ['/images/products/fiberhome-an5506-04-fa.webp'],
+    shortSpecs: [
+      'EPON ONU — IEEE 802.3ah standard',
+      '4× Gigabit LAN + 2× POTS phone ports + Wi-Fi',
+      '300 Mbps Wi-Fi (2.4GHz) | WPA2 | DHCP | NAT',
+      'Used in EPON-based fiber networks across Bangladesh'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'EPON (IEEE 802.3ah)' },
+        { label: 'Downstream', value: '1.25 Gbps' },
+        { label: 'Upstream', value: '1.25 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit' },
+        { label: 'Phone', value: '2× POTS' }
+      ]
+    },
+    warranty: '1 Year FiberHome Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+
+  // TP-Link ONU Devices
+  {
+    id: 'prod-onu012',
+    name: 'TP-Link XZ000-G7 GPON ONU (1 Gigabit LAN, SFP Stick Module)',
+    slug: 'tp-link-xz000-g7-gpon-onu-sfp-stick',
+    brand: 'TP-Link',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    badge: 'New',
+    regularPrice: 3500,
+    discountPrice: 3200,
+    discountPercentage: 9,
+    rating: 4.6,
+    reviewCount: 67,
+    stockStatus: 'In Stock',
+    stockCount: 45,
+    images: ['/images/products/tp-link-xz000-g7.webp'],
+    shortSpecs: [
+      'GPON SFP Stick ONU — plugs directly into SFP+ router slot',
+      'Eliminates need for separate ONU box | SC/UPC connector',
+      'Compatible with MikroTik, Ubiquiti, and other SFP routers',
+      'Full GPON ONT functionality in a small form-factor'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Form Factor', value: 'SFP Stick Module' },
+        { label: 'Connector', value: 'SC/UPC' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-03-15'
+  },
+  {
+    id: 'prod-onu013',
+    name: 'TP-Link TX-6610 GPON ONU (1 Gigabit LAN, No Wi-Fi)',
+    slug: 'tp-link-tx-6610-gpon-onu-1lan',
+    brand: 'TP-Link',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    regularPrice: 3800,
+    discountPrice: 3400,
+    discountPercentage: 11,
+    rating: 4.5,
+    reviewCount: 54,
+    stockStatus: 'In Stock',
+    stockCount: 50,
+    images: ['/images/products/tp-link-tx-6610.webp'],
+    shortSpecs: [
+      'GPON ONU — ITU-T G.984 | 1× Gigabit LAN port',
+      'Bridging mode — pair with your own router',
+      'SC/APC optical connector | Auto-negotiation',
+      'Clean setup for users who want dedicated routers'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' },
+        { label: 'LAN', value: '1× Gigabit Ethernet' }
+      ]
+    },
+    warranty: '3 Years TP-Link Bangladesh Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-10'
+  },
+
+  // Nokia ONU
+  {
+    id: 'prod-onu014',
+    name: 'Nokia G-240W-F GPON ONT (4 LAN + 2 Phone + Wi-Fi + USB)',
+    slug: 'nokia-g240wf-gpon-ont-4lan-2phone-wifi',
+    brand: 'Nokia',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'wifi-onu',
+    badge: 'Hot',
+    regularPrice: 5500,
+    discountPrice: 5000,
+    discountPercentage: 9,
+    rating: 4.7,
+    reviewCount: 38,
+    stockStatus: 'In Stock',
+    stockCount: 25,
+    images: ['/images/products/nokia-g-240w-f.webp'],
+    shortSpecs: [
+      'Nokia GPON ONT — enterprise-grade reliability',
+      '4× Gigabit LAN + 2× POTS + 1× USB 2.0',
+      'Dual-Band 802.11ac Wi-Fi (1200Mbps) | WPA2',
+      'TR-069 / OMCI management | Used by major ISPs'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'Downstream', value: '2.488 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '4× Gigabit' },
+        { label: 'Phone', value: '2× POTS' },
+        { label: 'Wi-Fi', value: 'AC1200 Dual-Band' }
+      ]
+    },
+    warranty: '1 Year Nokia Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-02-01'
+  },
+
+  // VSOL ONU Devices
+  {
+    id: 'prod-onu015',
+    name: 'VSOL V2801F EPON ONU (1 Gigabit LAN, Bridge Mode)',
+    slug: 'vsol-v2801f-epon-onu-1lan-bridge',
+    brand: 'VSOL',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'epon-onu',
+    regularPrice: 2500,
+    discountPrice: 2200,
+    discountPercentage: 12,
+    rating: 4.2,
+    reviewCount: 76,
+    stockStatus: 'In Stock',
+    stockCount: 90,
+    images: ['/images/products/vsol-v2801f.webp'],
+    shortSpecs: [
+      'EPON ONU — IEEE 802.3ah | 1× Gigabit LAN port',
+      'Bridge mode — works with any router for PPPoE',
+      'SC/APC connector | Low power consumption',
+      'Budget EPON ONU — popular among small ISPs'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'EPON (IEEE 802.3ah)' },
+        { label: 'Downstream', value: '1.25 Gbps' },
+        { label: 'LAN', value: '1× Gigabit Ethernet' }
+      ]
+    },
+    warranty: '1 Year VSOL Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+  {
+    id: 'prod-onu016',
+    name: 'VSOL V2802F GPON ONU (1 Gigabit LAN, Bridge Mode)',
+    slug: 'vsol-v2802f-gpon-onu-1lan-bridge',
+    brand: 'VSOL',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'gpon-onu',
+    regularPrice: 2800,
+    discountPrice: 2500,
+    discountPercentage: 11,
+    rating: 4.2,
+    reviewCount: 62,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    images: ['/images/products/vsol-v2802f.webp'],
+    shortSpecs: [
+      'GPON ONU — ITU-T G.984 | 1× Gigabit LAN port',
+      'Bridge mode | SC/APC optical connector',
+      'Auto-negotiation | Low power draw',
+      'Budget GPON ONU — used by small ISPs in Bangladesh'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'GPON (ITU-T G.984)' },
+        { label: 'LAN', value: '1× Gigabit Ethernet' }
+      ]
+    },
+    warranty: '1 Year VSOL Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-01-01'
+  },
+
+  // CIG XGS-PON ONU
+  {
+    id: 'prod-onu017',
+    name: 'CIG XG-99S XGS-PON ONU (2× 2.5G LAN, 10G Fiber, Wi-Fi 6)',
+    slug: 'cig-xg99s-xgspon-onu-10g-wifi6',
+    brand: 'CIG',
+    category: 'onu-device',
+    categoryName: 'ONU / ONT Device',
+    subcategory: 'xgs-pon-onu',
+    badge: 'New',
+    regularPrice: 8000,
+    discountPrice: 7200,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 22,
+    stockStatus: 'Limited Stock',
+    stockCount: 12,
+    images: ['/images/products/cig-xg-99s.webp'],
+    shortSpecs: [
+      'XGS-PON ONU — ITU-T G.9807.1 (10 Gbps symmetrical)',
+      '2× 2.5G Multi-Gig LAN ports | SC/UPC fiber connector',
+      'Built-in Wi-Fi 6 AX3000 dual-band router',
+      '10G fiber future-proof ONU for next-gen ISP networks'
+    ],
+    specifications: {
+      'PON': [
+        { label: 'Standard', value: 'XGS-PON (ITU-T G.9807.1)' },
+        { label: 'Downstream', value: '10 Gbps' },
+        { label: 'Upstream', value: '10 Gbps' }
+      ],
+      'Ports': [
+        { label: 'LAN', value: '2× 2.5G Multi-Gig' },
+        { label: 'Wi-Fi', value: 'Wi-Fi 6 AX3000' }
+      ]
+    },
+    warranty: '1 Year CIG Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-20'
+  }
+,
+
+// ── SECURITY SURVEILLANCE & ACCESS CONTROL PRODUCTS ──
+  {
+    id: 'prod-sec001',
+    name: 'EZVIZ C6N 2MP Smart Wi-Fi Pan & Tilt Indoor Security Camera',
+    slug: 'ezviz-c6n-2mp-smart-wifi-camera',
+    brand: 'EZVIZ',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'portable-wifi-camera',
+    badge: 'Best Seller',
+    regularPrice: 2400,
+    discountPrice: 2100,
+    discountPercentage: 12,
+    rating: 4.8,
+    reviewCount: 420,
+    stockStatus: 'In Stock',
+    stockCount: 150,
+    isSmartHome: true,
+    images: ['/images/products/ezviz-c6n.webp'],
+    shortSpecs: [
+      'Resolution: 1080p Full HD (1920 × 1080)',
+      '360° Visual Coverage with Motorized Pan & Tilt',
+      'Smart Night Vision with Smart IR (Up to 10m)',
+      'Motion Detection & Smart Tracking | Two-Way Audio',
+      'Supports MicroSD Card (Up to 256GB) & EZVIZ Cloud'
+    ],
+    specifications: {
+      "Camera": [
+            {
+                  "label": "Image Sensor",
+                  "value": "1/4' Progressive Scan CMOS"
+            },
+            {
+                  "label": "Lens",
+                  "value": "4mm@ F2.4, view angle: 85°"
+            },
+            {
+                  "label": "Pan/Tilt Angle",
+                  "value": "Pan: 340°, Tilt: 55°"
+            },
+            {
+                  "label": "Night Vision",
+                  "value": "Max. 10 meters"
+            }
+      ]
+},
+    warranty: '1 Year Brand Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec002',
+    name: 'EZVIZ C8C 2MP Outdoor Pan/Tilt Color Night Vision Wi-Fi Camera',
+    slug: 'ezviz-c8c-2mp-outdoor-ptz-wifi-camera',
+    brand: 'EZVIZ',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'portable-wifi-camera',
+    badge: 'Hot',
+    regularPrice: 5400,
+    discountPrice: 4800,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 195,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    isSmartHome: true,
+    images: ['/images/products/ezviz-c8c.webp'],
+    shortSpecs: [
+      '1080p FHD Outdoor Pan/Tilt Security Camera',
+      '352° Horizontal & 95° Vertical Rotation Coverage',
+      'Color Night Vision with Built-in Dual Spotlights (30m)',
+      'AI-Powered Person Detection & Active Defense Siren',
+      'IP65 Dustproof & Waterproof Weatherproof Design'
+    ],
+    specifications: {
+      "Camera": [
+            {
+                  "label": "Resolution",
+                  "value": "1080p FHD"
+            },
+            {
+                  "label": "Night Vision",
+                  "value": "30m Color & Black/White"
+            },
+            {
+                  "label": "Ingress Protection",
+                  "value": "IP65 Weatherproof"
+            }
+      ]
+},
+    warranty: '1 Year Brand Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec003',
+    name: 'Imou Ranger 2 4MP 360° AI Smart Human Detection Wi-Fi Security Camera',
+    slug: 'imou-ranger-2-4mp-wifi-camera',
+    brand: 'Imou',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'portable-wifi-camera',
+    badge: 'Best Seller',
+    regularPrice: 3200,
+    discountPrice: 2850,
+    discountPercentage: 11,
+    rating: 4.9,
+    reviewCount: 512,
+    stockStatus: 'In Stock',
+    stockCount: 200,
+    isSmartHome: true,
+    images: ['/images/products/imou-ranger-2.webp'],
+    shortSpecs: [
+      '4MP QHD Resolution (2560 × 1440) Crystal Clear Video',
+      '0~355° Pan & -5~80° Tilt for Full 360° Coverage',
+      'Advanced AI Human Detection & Smart Tracking',
+      'Two-Way Audio with Built-in Siren to Deter Intruders',
+      'Privacy Mode with One Click in Imou Life App'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "4MP QHD (2560 x 1440)"
+            },
+            {
+                  "label": "Zoom",
+                  "value": "16x Digital Zoom"
+            },
+            {
+                  "label": "Night Vision",
+                  "value": "10m Distance"
+            }
+      ]
+},
+    warranty: '1 Year Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec004',
+    name: 'TP-Link Tapo C200 Pan/Tilt Home Security Wi-Fi Camera',
+    slug: 'tp-link-tapo-c200-pan-tilt-wifi-camera',
+    brand: 'TP-Link',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'portable-wifi-camera',
+    badge: 'Popular',
+    regularPrice: 2650,
+    discountPrice: 2350,
+    discountPercentage: 11,
+    rating: 4.8,
+    reviewCount: 380,
+    stockStatus: 'In Stock',
+    stockCount: 140,
+    isSmartHome: true,
+    images: ['/images/products/tapo-c200.webp'],
+    shortSpecs: [
+      'High-Definition 1080p Crystal Clear Video',
+      'Pan and Tilt: 360º Horizontal and 114º Vertical Range',
+      'Advanced Night Vision up to 30 ft (850nm IR)',
+      'Motion Detection and Notifications via Tapo App',
+      'Sound and Light Alarm | Two-Way Audio'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "1080p Full HD"
+            },
+            {
+                  "label": "Storage",
+                  "value": "Supports MicroSD up to 128GB"
+            },
+            {
+                  "label": "Wireless",
+                  "value": "11Mbps (802.11b), 54Mbps (802.11g)"
+            }
+      ]
+},
+    warranty: '1 Year TP-Link Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec005',
+    name: 'Xiaomi Smart Camera C300 2K Ultra-Clear 360° Panoramic View',
+    slug: 'xiaomi-smart-camera-c300-2k',
+    brand: 'Xiaomi',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'portable-wifi-camera',
+    regularPrice: 3600,
+    discountPrice: 3200,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 220,
+    stockStatus: 'In Stock',
+    stockCount: 75,
+    isSmartHome: true,
+    images: ['/images/products/xiaomi-c300.webp'],
+    shortSpecs: [
+      '2K Ultra-Clear HD (2304 × 1296) Resolution with 3MP Lens',
+      'F1.4 Large Aperture for clear images even in low light',
+      'Full 360° Horizontal & 108° Vertical Viewing Angle',
+      'AI Human Detection with Reduced False Alarms',
+      'Supports Xiaomi Home App & Google Home / Alexa'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "2304 × 1296 (2K 3MP)"
+            },
+            {
+                  "label": "Aperture",
+                  "value": "F1.4"
+            },
+            {
+                  "label": "Connectivity",
+                  "value": "Wi-Fi IEEE 802.11 b/g/n 2.4 GHz"
+            }
+      ]
+},
+    warranty: '6 Months Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec006',
+    name: 'Hikvision DS-2CD1023G0E-I 2MP IR Fixed Bullet Network IP Camera',
+    slug: 'hikvision-ds-2cd1023g0e-i-2mp-bullet-ip-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera',
+    badge: 'Best Seller',
+    regularPrice: 3000,
+    discountPrice: 2700,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 280,
+    stockStatus: 'In Stock',
+    stockCount: 160,
+    images: ['/images/products/hikvision-1023g0e.webp'],
+    shortSpecs: [
+      '1/2.8" Progressive Scan CMOS, 2 Megapixel (1920 × 1080)',
+      '4mm Fixed Lens with 86° Horizontal Field of View',
+      'Up to 30m Infrared Night Vision Range (EXIR 2.0)',
+      'Efficient H.265+ Compression Technology',
+      'IP67 Water and Dust Resistant Metal & Plastic Housing'
+    ],
+    specifications: {
+      "Camera": [
+            {
+                  "label": "Resolution",
+                  "value": "2MP (1920 × 1080 @ 30fps)"
+            },
+            {
+                  "label": "IR Distance",
+                  "value": "Up to 30 meters"
+            },
+            {
+                  "label": "Power",
+                  "value": "12V DC ± 25% or PoE (802.3af)"
+            }
+      ]
+},
+    warranty: '2 Years Hikvision Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec007',
+    name: 'Hikvision DS-2CD1123G0E-I 2MP Vandal-Proof Dome Network IP Camera',
+    slug: 'hikvision-ds-2cd1123g0e-i-2mp-dome-ip-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera',
+    regularPrice: 3100,
+    discountPrice: 2750,
+    discountPercentage: 11,
+    rating: 4.8,
+    reviewCount: 195,
+    stockStatus: 'In Stock',
+    stockCount: 120,
+    images: ['/images/products/hikvision-1123g0e.webp'],
+    shortSpecs: [
+      '2 Megapixel 1080p High Resolution Dome IP Camera',
+      'IK10 Vandal-Proof & IP67 Weatherproof Rating',
+      '30m EXIR Night Vision with Smart IR',
+      'H.265+ / H.265 / H.264+ Video Compression',
+      'Power over Ethernet (PoE 802.3af) Supported'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "1920 × 1080"
+            },
+            {
+                  "label": "Protection",
+                  "value": "IK10 Vandal-Proof + IP67"
+            },
+            {
+                  "label": "Lens",
+                  "value": "2.8mm / 4mm Fixed Focal"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec008',
+    name: 'Hikvision DS-2CD1043G0-I 4MP WDR IR Fixed Bullet IP Camera',
+    slug: 'hikvision-ds-2cd1043g0-i-4mp-bullet-ip-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera',
+    badge: 'Popular',
+    regularPrice: 4700,
+    discountPrice: 4200,
+    discountPercentage: 11,
+    rating: 4.9,
+    reviewCount: 165,
+    stockStatus: 'In Stock',
+    stockCount: 90,
+    images: ['/images/products/hikvision-1043g0.webp'],
+    shortSpecs: [
+      '4MP QHD Resolution (2560 × 1440 @ 20fps)',
+      '120dB True WDR (Wide Dynamic Range) for Clear Backlighting',
+      'EXIR 2.0: Advanced Infrared with 30m Range',
+      '3D Digital Noise Reduction (3D DNR)',
+      'IP67 Weatherproof Housing for Outdoor Security'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "4 Megapixel (2560 × 1440)"
+            },
+            {
+                  "label": "WDR",
+                  "value": "120 dB True WDR"
+            },
+            {
+                  "label": "Power",
+                  "value": "PoE 802.3af / 12V DC"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec009',
+    name: 'Dahua DH-IPC-HFW1230S1P-S5 2MP Entry IR Bullet IP Camera',
+    slug: 'dahua-dh-ipc-hfw1230s1p-s5-2mp-ip-camera',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera',
+    regularPrice: 2900,
+    discountPrice: 2600,
+    discountPercentage: 10,
+    rating: 4.7,
+    reviewCount: 140,
+    stockStatus: 'In Stock',
+    stockCount: 110,
+    images: ['/images/products/dahua-hfw1230s1p.webp'],
+    shortSpecs: [
+      '2MP 1/2.8" CMOS Image Sensor, Low Illuminance & High Definition',
+      'Outputs max. 2MP (1920 × 1080) @ 25/30 fps',
+      'Built-in IR LED, Max. IR Distance: 30 meters',
+      'SMART H.264+ / H.265+ Flexible Coding',
+      'IP67 Weatherproof Protection | PoE Supported'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "2MP 1080p"
+            },
+            {
+                  "label": "IR Range",
+                  "value": "30 Meters"
+            },
+            {
+                  "label": "Lens",
+                  "value": "2.8mm / 3.6mm"
+            }
+      ]
+},
+    warranty: '2 Years Dahua Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec010',
+    name: 'Dahua DH-IPC-HDW1230T1P-S5 2MP Entry IR Eyeball Dome IP Camera',
+    slug: 'dahua-dh-ipc-hdw1230t1p-s5-2mp-dome-ip-camera',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera',
+    regularPrice: 2950,
+    discountPrice: 2650,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 130,
+    stockStatus: 'In Stock',
+    stockCount: 85,
+    images: ['/images/products/dahua-hdw1230t1p.webp'],
+    shortSpecs: [
+      '2 Megapixel Full HD Eyeball Dome Network Camera',
+      'High Quality Metal & Plastic Eyeball Construction',
+      'Up to 30m Smart Infrared Distance',
+      'IP67 Ingress Protection for Indoor & Outdoor Installation',
+      'DWDR, 3D NR, HLC, BLC, Digital Watermarking'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "2MP (1920 × 1080)"
+            },
+            {
+                  "label": "Power",
+                  "value": "PoE (802.3af) / 12V DC"
+            },
+            {
+                  "label": "Lens",
+                  "value": "2.8mm (102° FOV)"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec011',
+    name: 'Uniview IPC2122LR3-PF40M-D 2MP HD Mini Bullet IP Camera',
+    slug: 'uniview-ipc2122lr3-pf40m-d-2mp-ip-camera',
+    brand: 'Uniview',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera',
+    regularPrice: 2800,
+    discountPrice: 2500,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 95,
+    stockStatus: 'In Stock',
+    stockCount: 70,
+    images: ['/images/products/uniview-ipc2122.webp'],
+    shortSpecs: [
+      '2MP HD Optical Glass Window with Higher Light Transmittance',
+      'Day/Night Functionality with Smart IR (Up to 30m)',
+      'Ultra 265, H.265, H.264 Video Compression',
+      'ONVIF Conformance (Profile S, Profile T)',
+      'Wide Voltage Range of ±25% & IP67 Rated'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "2MP 1080p"
+            },
+            {
+                  "label": "IR Range",
+                  "value": "30 Meters"
+            },
+            {
+                  "label": "Standard",
+                  "value": "ONVIF Compliant"
+            }
+      ]
+},
+    warranty: '2 Years Uniview Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec012',
+    name: 'Hikvision DS-2CE16D0T-IRPF 2MP Turbo HD Fixed Bullet CC Camera',
+    slug: 'hikvision-ds-2ce16d0t-irpf-2mp-bullet-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera',
+    badge: 'Best Seller',
+    regularPrice: 1600,
+    discountPrice: 1450,
+    discountPercentage: 9,
+    rating: 4.9,
+    reviewCount: 650,
+    stockStatus: 'In Stock',
+    stockCount: 300,
+    images: ['/images/products/hikvision-16d0t.webp'],
+    shortSpecs: [
+      '2 Megapixel High-Performance CMOS Sensor',
+      '1920 × 1080 Resolution Turbo HD Video Output',
+      'Smart IR Night Vision up to 20 meters',
+      '4 in 1 Video Output (Switchable TVI/AHD/CVI/CVBS)',
+      'IP66 Weatherproof Rated for Outdoor Surveillance'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "2.0 Megapixel 1080p"
+            },
+            {
+                  "label": "Lens",
+                  "value": "3.6mm Fixed Lens (82.2° FOV)"
+            },
+            {
+                  "label": "Night Vision",
+                  "value": "20m Smart IR"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec013',
+    name: 'Hikvision DS-2CE56D0T-IRPF 2MP Turbo HD Indoor Dome CC Camera',
+    slug: 'hikvision-ds-2ce56d0t-irpf-2mp-dome-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera',
+    regularPrice: 1550,
+    discountPrice: 1400,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 420,
+    stockStatus: 'In Stock',
+    stockCount: 250,
+    images: ['/images/products/hikvision-56d0t.webp'],
+    shortSpecs: [
+      '2MP High-Performance CMOS Indoor Dome Camera',
+      '1080p Full HD Analog Video Output via BNC',
+      'Smart IR with 20m Night Vision Distance',
+      '3-Axis Angle Adjustment for Easy Ceiling Mounting',
+      '4 in 1 Switchable Output (TVI/AHD/CVI/CVBS)'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "1080p Full HD"
+            },
+            {
+                  "label": "Mounting",
+                  "value": "Ceiling / Wall Indoor"
+            },
+            {
+                  "label": "Power",
+                  "value": "12V DC Max 4W"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec014',
+    name: 'Hikvision DS-2CE10DF0T-F ColorVu 2MP 24/7 Full Color Bullet CC Camera',
+    slug: 'hikvision-colorvu-2mp-bullet-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera',
+    badge: 'Popular',
+    regularPrice: 2450,
+    discountPrice: 2200,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 340,
+    stockStatus: 'In Stock',
+    stockCount: 180,
+    images: ['/images/products/hikvision-colorvu-bullet.webp'],
+    shortSpecs: [
+      'ColorVu Technology: 24/7 Full-Time Color Imaging Even in Pitch Darkness',
+      '2 Megapixel 1080p Crystal Clear Color Video',
+      '20m White Light Distance for Night Illumination',
+      'F1.0 Super Aperture Lens Captures 4x More Light',
+      'IP67 Water and Dust Resistant Metal Housing'
+    ],
+    specifications: {
+      "ColorVu": [
+            {
+                  "label": "Color Night Vision",
+                  "value": "24/7 Full Color 20m"
+            },
+            {
+                  "label": "Aperture",
+                  "value": "F1.0 Super Aperture"
+            },
+            {
+                  "label": "Protection",
+                  "value": "IP67 Waterproof"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec015',
+    name: 'Hikvision DS-2CE70DF0T-PF ColorVu 2MP Full Color Indoor Dome CC Camera',
+    slug: 'hikvision-colorvu-2mp-dome-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera',
+    regularPrice: 2400,
+    discountPrice: 2150,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 260,
+    stockStatus: 'In Stock',
+    stockCount: 150,
+    images: ['/images/products/hikvision-colorvu-dome.webp'],
+    shortSpecs: [
+      'ColorVu 24/7 Vivid Color Imaging for Indoors',
+      '2MP Full HD 1080p Resolution with F1.0 Lens',
+      'Warm White Light LED up to 20 meters',
+      '3D DNR Delivers Clean and Sharp Images',
+      'Ideal for Homes, Offices, Showrooms & Bank Counters'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "1080p Full HD"
+            },
+            {
+                  "label": "Aperture",
+                  "value": "F1.0"
+            },
+            {
+                  "label": "Color Vision",
+                  "value": "24/7 Full Color"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec016',
+    name: 'Dahua DH-HAC-B1A21P 2MP Cooper HDCVI IR Bullet Camera',
+    slug: 'dahua-dh-hac-b1a21p-2mp-bullet-camera',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera',
+    regularPrice: 1500,
+    discountPrice: 1350,
+    discountPercentage: 10,
+    rating: 4.7,
+    reviewCount: 310,
+    stockStatus: 'In Stock',
+    stockCount: 220,
+    images: ['/images/products/dahua-b1a21p.webp'],
+    shortSpecs: [
+      '2MP Max 30fps@1080P HDCVI Video Output',
+      'Switchable Output: HDCVI, CVBS, AHD, TVI',
+      'Smart IR Night Vision up to 20 meters',
+      'High Durability Plastic Housing with IP67 Weatherproof',
+      'Cost-Effective Solution for Home & Retail Security'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "1080p (1920 × 1080)"
+            },
+            {
+                  "label": "Lens",
+                  "value": "3.6mm Fixed Lens"
+            },
+            {
+                  "label": "IR Range",
+                  "value": "20m Smart IR"
+            }
+      ]
+},
+    warranty: '2 Years Dahua Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec017',
+    name: 'Dahua DH-HAC-T1A21P 2MP Cooper HDCVI IR Eyeball Dome Camera',
+    slug: 'dahua-dh-hac-t1a21p-2mp-dome-camera',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera',
+    regularPrice: 1450,
+    discountPrice: 1300,
+    discountPercentage: 10,
+    rating: 4.7,
+    reviewCount: 290,
+    stockStatus: 'In Stock',
+    stockCount: 210,
+    images: ['/images/products/dahua-t1a21p.webp'],
+    shortSpecs: [
+      '2 Megapixel 1080p HDCVI Indoor Eyeball Dome Camera',
+      'Smart IR Illumination up to 20m Distance',
+      'Easy 3-Axis Installation for Wall or Ceiling',
+      'Multi-Format Video Output (HDCVI/CVBS/AHD/TVI)',
+      'Reliable Performance for Residences and Small Shops'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "2MP 1080p"
+            },
+            {
+                  "label": "Mounting",
+                  "value": "Indoor Dome Eyeball"
+            }
+      ]
+},
+    warranty: '2 Years Dahua Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec018',
+    name: 'Hikvision DS-2DE4225IW-DE 2MP 25× Network IR Speed Dome PTZ Camera',
+    slug: 'hikvision-ds-2de4225iw-de-2mp-25x-ptz-camera',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ptz-camera',
+    badge: 'Top Tier',
+    regularPrice: 42000,
+    discountPrice: 38000,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 45,
+    stockStatus: 'In Stock',
+    stockCount: 20,
+    images: ['/images/products/hikvision-ptz-2225.webp'],
+    shortSpecs: [
+      '1/2.8" Progressive Scan CMOS with 2 Megapixel 1080p',
+      'Powerful 25× Optical Zoom & 16× Digital Zoom',
+      'DarkFighter Technology for Ultra-Low Light Performance',
+      'Up to 100 meters Smart IR Night Distance',
+      'Smart Tracking, Perimeter Protection & Face Capture'
+    ],
+    specifications: {
+      "PTZ": [
+            {
+                  "label": "Optical Zoom",
+                  "value": "25× Optical Zoom (4.8mm - 120mm)"
+            },
+            {
+                  "label": "Pan/Tilt",
+                  "value": "360° Endless Pan, -15° to 90° Tilt"
+            },
+            {
+                  "label": "IR Distance",
+                  "value": "100m"
+            },
+            {
+                  "label": "Weatherproof",
+                  "value": "IP66 & TVS 4000V Lightning Surge"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 3166,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec019',
+    name: 'Dahua SD49425XB-HNR 4MP 25x Starlight IR WizSense PTZ Network Camera',
+    slug: 'dahua-sd49425xb-hnr-4mp-25x-ptz-camera',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ptz-camera',
+    badge: 'Best Seller',
+    regularPrice: 46000,
+    discountPrice: 42000,
+    discountPercentage: 9,
+    rating: 4.9,
+    reviewCount: 38,
+    stockStatus: 'In Stock',
+    stockCount: 15,
+    images: ['/images/products/dahua-ptz-49425.webp'],
+    shortSpecs: [
+      '1/2.8" STARVIS™ CMOS Sensor with 4MP Crystal Resolution',
+      '25× Optical Zoom with Fast and Precise Auto Focus',
+      'Starlight Technology with IR Distance up to 100 meters',
+      'WizSense AI: Auto-Tracking, Tripwire & Intrusion Detection',
+      'PoE+ (802.3at) Power & IP66 Weatherproof Protection'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Resolution",
+                  "value": "4MP (2560 × 1440 @ 30fps)"
+            },
+            {
+                  "label": "Optical Zoom",
+                  "value": "25x"
+            },
+            {
+                  "label": "AI Features",
+                  "value": "Auto-Tracking, SMD Plus"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 3500,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec020',
+    name: 'Uniview IPC6412LR-X5P 2MP 5x Optical Zoom PTZ Network Dome Camera',
+    slug: 'uniview-ipc6412lr-x5p-2mp-5x-ptz-camera',
+    brand: 'Uniview',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ptz-camera',
+    regularPrice: 16500,
+    discountPrice: 14500,
+    discountPercentage: 12,
+    rating: 4.8,
+    reviewCount: 52,
+    stockStatus: 'In Stock',
+    stockCount: 25,
+    images: ['/images/products/uniview-ptz-6412.webp'],
+    shortSpecs: [
+      '2MP Mini PTZ Speed Dome Camera with 5x Optical Zoom',
+      'LightHunter Technology Ensures High Quality in Low Light',
+      'Smart IR up to 30 meters Night Vision',
+      'Built-in Mic & Speaker for Two-Way Audio Communication',
+      'IP66 Weatherproof & IK10 Vandal-Resistant Housing'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Zoom",
+                  "value": "5x Optical Zoom"
+            },
+            {
+                  "label": "Audio",
+                  "value": "Built-in Mic & Speaker"
+            },
+            {
+                  "label": "Protection",
+                  "value": "IP66 / IK10"
+            }
+      ]
+},
+    warranty: '2 Years Uniview Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1208,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec021',
+    name: 'Hikvision 4-Camera Turbo HD Complete CCTV Security Package with DVR & 500GB HDD',
+    slug: 'hikvision-4-camera-turbo-hd-package',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-package',
+    badge: 'Super Deal',
+    regularPrice: 13000,
+    discountPrice: 11500,
+    discountPercentage: 12,
+    rating: 4.9,
+    reviewCount: 380,
+    stockStatus: 'In Stock',
+    stockCount: 60,
+    images: ['/images/products/hikvision-4cam-pkg.webp'],
+    shortSpecs: [
+      '4× Hikvision 2MP Turbo HD Cameras (2 Bullet + 2 Dome)',
+      '1× Hikvision 4-Channel 1080p H.265 DVR (DS-7104HGHI-M1)',
+      '1× 500GB Surveillance Hard Disk Drive Installed',
+      '1× Central CCTV Power Supply 12V 5A + BNC & DC Connectors',
+      '1× 60-Meter High Quality CCTV Cat6 / 3C2V Cable Roll'
+    ],
+    specifications: {
+      "Package Includes": [
+            {
+                  "label": "Cameras",
+                  "value": "4× 2MP Hikvision 1080p (2 Outdoor + 2 Indoor)"
+            },
+            {
+                  "label": "DVR",
+                  "value": "4CH Turbo HD H.265 DVR"
+            },
+            {
+                  "label": "Storage",
+                  "value": "500GB Surveillance HDD"
+            },
+            {
+                  "label": "Accessories",
+                  "value": "Power Supply, 8× BNC, 4× DC, 60m Cable"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty on Cameras & DVR',
+    emiAvailable: true,
+    emiStartingBDT: 958,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec022',
+    name: 'Hikvision ColorVu 4-Camera 24/7 Full Color HD Complete CCTV Package with 1TB HDD',
+    slug: 'hikvision-colorvu-4-camera-package-1tb',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-package',
+    badge: 'Hot Deal',
+    regularPrice: 17500,
+    discountPrice: 15800,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 290,
+    stockStatus: 'In Stock',
+    stockCount: 45,
+    images: ['/images/products/hikvision-colorvu-pkg.webp'],
+    shortSpecs: [
+      '4× Hikvision 2MP ColorVu 24/7 Full Color Night Vision Cameras',
+      '1× Hikvision 4CH Turbo HD AcuSense DVR',
+      '1× Seagate SkyHawk / WD Purple 1TB Surveillance Hard Disk',
+      '1× 12V 10A Central Power Supply Unit',
+      '100-Meter Solid Copper Cable, Video Balun & DC Jacks'
+    ],
+    specifications: {
+      "Package": [
+            {
+                  "label": "Camera Type",
+                  "value": "24/7 Full Color Daytime & Nighttime"
+            },
+            {
+                  "label": "Storage",
+                  "value": "1TB Surveillance HDD (15-20 Days Recording)"
+            },
+            {
+                  "label": "Mobile App",
+                  "value": "Hik-Connect Live View on Android/iPhone"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1316,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec023',
+    name: 'Dahua 8-Camera Complete HDCVI Surveillance Package with 8CH XVR & 2TB HDD',
+    slug: 'dahua-8-camera-complete-surveillance-package',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-package',
+    regularPrice: 26000,
+    discountPrice: 23500,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 160,
+    stockStatus: 'In Stock',
+    stockCount: 30,
+    images: ['/images/products/dahua-8cam-pkg.webp'],
+    shortSpecs: [
+      '8× Dahua 2MP Cooper HDCVI Cameras (4 Bullet + 4 Dome)',
+      '1× Dahua 8-Channel WizSense AI XVR (DH-XVR1B08-I)',
+      '1× 2TB WD Purple Surveillance Hard Disk Drive',
+      '1× Central Power Box 12V 15A 9-Port with Metal Cabinet',
+      '1× 150m Heavy-Duty CCTV Video Cable Roll + BNC & DC'
+    ],
+    specifications: {
+      "Package Details": [
+            {
+                  "label": "Cameras",
+                  "value": "8× Dahua 2MP (Indoor + Outdoor Mix)"
+            },
+            {
+                  "label": "Recorder",
+                  "value": "8CH WizSense AI Recorder"
+            },
+            {
+                  "label": "HDD",
+                  "value": "2TB Surveillance Hard Drive"
+            }
+      ]
+},
+    warranty: '2 Years Warranty on Cameras & XVR',
+    emiAvailable: true,
+    emiStartingBDT: 1958,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec024',
+    name: 'Hikvision 4-Channel 2MP IP PoE Complete Network Security Package with 1TB HDD',
+    slug: 'hikvision-4-channel-ip-poe-package',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera-package',
+    badge: 'Popular',
+    regularPrice: 21000,
+    discountPrice: 18500,
+    discountPercentage: 12,
+    rating: 4.9,
+    reviewCount: 180,
+    stockStatus: 'In Stock',
+    stockCount: 35,
+    images: ['/images/products/hikvision-ip-pkg.webp'],
+    shortSpecs: [
+      '4× Hikvision 2MP Network IP Cameras (2 Bullet + 2 Dome)',
+      '1× Hikvision 4-Channel 4K PoE NVR (Plug & Play - No separate power)',
+      '1× 1TB Surveillance Grade Dedicated Hard Disk',
+      '1× 100m Cat6 Pure Copper Network Cable Roll + RJ45 Connectors',
+      'Crystal Clear Digital Video with Zero Signal Loss over Distance'
+    ],
+    specifications: {
+      "IP Package": [
+            {
+                  "label": "NVR",
+                  "value": "4CH PoE 4K NVR (Built-in 4 PoE Ports)"
+            },
+            {
+                  "label": "Cabling",
+                  "value": "Cat6 Pure Copper High Speed"
+            },
+            {
+                  "label": "Remote View",
+                  "value": "Hik-Connect Cloud with Zero Static IP needed"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1541,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec025',
+    name: 'Dahua 8-Channel 4MP WizSense AI IP Camera PoE Package with 2TB HDD',
+    slug: 'dahua-8-channel-4mp-wizsense-ip-package',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'ip-camera-package',
+    badge: 'Pro Grade',
+    regularPrice: 44000,
+    discountPrice: 39000,
+    discountPercentage: 11,
+    rating: 5,
+    reviewCount: 75,
+    stockStatus: 'In Stock',
+    stockCount: 20,
+    images: ['/images/products/dahua-ip-pkg.webp'],
+    shortSpecs: [
+      '8× Dahua 4MP WizSense AI IP Cameras (4 Bullet + 4 Eyeball Dome)',
+      '1× Dahua 8CH PoE 4K Network Video Recorder (NVR4108HS-8P)',
+      '1× 2TB WD Purple 24/7 Surveillance Hard Drive',
+      'AI Smart Motion Detection SMD Plus & Perimeter Fence Protection',
+      '1× 200m Cat6 UTP Network Cable + 20× RJ45 Connectors'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Cameras",
+                  "value": "8× 4MP Ultra HD WizSense AI"
+            },
+            {
+                  "label": "NVR",
+                  "value": "8CH 4K with 8 Independent PoE Ports"
+            },
+            {
+                  "label": "HDD",
+                  "value": "2TB Western Digital Purple"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 3250,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec026',
+    name: 'Hikvision DS-7104HGHI-M1 4-Channel 1080p Lite Mini 1U H.265 DVR',
+    slug: 'hikvision-ds-7104hghi-m1-4ch-dvr',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'dvr',
+    badge: 'Best Seller',
+    regularPrice: 3500,
+    discountPrice: 3150,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 310,
+    stockStatus: 'In Stock',
+    stockCount: 140,
+    images: ['/images/products/hikvision-7104hghi.webp'],
+    shortSpecs: [
+      '4-Channel Video Recording up to 1080p Lite Resolution',
+      'H.265 Pro+ / H.265 / H.264 Video Compression',
+      'Supports HDTVI / AHD / CVI / CVBS / IP Video Input',
+      '1× SATA Interface (Supports up to 4TB Capacity)',
+      'HDMI and VGA Simultaneous Output'
+    ],
+    specifications: {
+      "DVR": [
+            {
+                  "label": "Channels",
+                  "value": "4 Channels BNC"
+            },
+            {
+                  "label": "Encoding",
+                  "value": "H.265 Pro+ (Saves up to 80% Storage)"
+            },
+            {
+                  "label": "Hard Drive",
+                  "value": "1 SATA port, up to 4TB"
+            }
+      ]
+},
+    warranty: '2 Years Hikvision Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec027',
+    name: 'Hikvision DS-7208HGHI-M1 8-Channel 1080p Lite 1U H.265 DVR',
+    slug: 'hikvision-ds-7208hghi-m1-8ch-dvr',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'dvr',
+    regularPrice: 5300,
+    discountPrice: 4800,
+    discountPercentage: 9,
+    rating: 4.8,
+    reviewCount: 220,
+    stockStatus: 'In Stock',
+    stockCount: 95,
+    images: ['/images/products/hikvision-7208hghi.webp'],
+    shortSpecs: [
+      '8-Channel BNC Video Inputs + 2 Extra IP Cameras Supported',
+      'Deep learning-based Motion Detection 2.0 on all analog channels',
+      'H.265 Pro+ compression improves encoding efficiency',
+      'Supports up to 10TB Storage Capacity per HDD',
+      'Full HD 1080p Lite Recording @ 15fps'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "8 Channels"
+            },
+            {
+                  "label": "SATA",
+                  "value": "1 SATA interface up to 10TB"
+            },
+            {
+                  "label": "Smart Feature",
+                  "value": "Motion Detection 2.0 (Human/Vehicle)"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec028',
+    name: 'Hikvision DS-7216HGHI-M1 16-Channel 1080p Lite 1U DVR Recorder',
+    slug: 'hikvision-ds-7216hghi-m1-16ch-dvr',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'dvr',
+    regularPrice: 9200,
+    discountPrice: 8200,
+    discountPercentage: 11,
+    rating: 4.7,
+    reviewCount: 110,
+    stockStatus: 'In Stock',
+    stockCount: 50,
+    images: ['/images/products/hikvision-7216hghi.webp'],
+    shortSpecs: [
+      '16 Analog Channel Inputs + 2 Extra IP Channel Support',
+      'Motion Detection 2.0 Human and Vehicle Target Classification',
+      '1 SATA Interface supporting up to 10TB HDD',
+      'HDMI / VGA Simultaneous 1080p Output',
+      'Smart Search for Efficient Playback'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "16 Channels BNC"
+            },
+            {
+                  "label": "Output",
+                  "value": "HDMI (1920×1080), VGA"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec029',
+    name: 'Hikvision DS-7604NI-Q1/4P 4-Channel 4K PoE Network Video Recorder',
+    slug: 'hikvision-ds-7604ni-q1-4p-poe-nvr',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'nvr',
+    badge: 'Popular',
+    regularPrice: 8200,
+    discountPrice: 7500,
+    discountPercentage: 9,
+    rating: 4.9,
+    reviewCount: 175,
+    stockStatus: 'In Stock',
+    stockCount: 80,
+    images: ['/images/products/hikvision-7604ni.webp'],
+    shortSpecs: [
+      '4-Channel IP Camera Inputs with 4 Built-in PoE Ports',
+      'Up to 4K Ultra HD (3840 × 2160) Resolution Output via HDMI',
+      'H.265+ Compression Technology Reduces Bandwidth & Storage',
+      'Incoming Bandwidth: 40 Mbps | Outgoing Bandwidth: 80 Mbps',
+      '1 SATA Interface up to 8TB Capacity'
+    ],
+    specifications: {
+      "NVR": [
+            {
+                  "label": "Channels",
+                  "value": "4 IP Channels (4× PoE RJ45)"
+            },
+            {
+                  "label": "Resolution",
+                  "value": "Up to 8MP 4K"
+            },
+            {
+                  "label": "PoE Power",
+                  "value": "Max 36W Total"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec030',
+    name: 'Hikvision DS-7608NI-Q1 8-Channel 4K Network Video Recorder (NVR)',
+    slug: 'hikvision-ds-7608ni-q1-8ch-4k-nvr',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'nvr',
+    regularPrice: 8000,
+    discountPrice: 7200,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 190,
+    stockStatus: 'In Stock',
+    stockCount: 90,
+    images: ['/images/products/hikvision-7608ni.webp'],
+    shortSpecs: [
+      'Supports up to 8 IP Network Security Cameras up to 8MP',
+      '4K HDMI Video Output (3840 × 2160)',
+      'Incoming Bandwidth: 80 Mbps, Outgoing: 80 Mbps',
+      'Supports Multiple VCA (Video Content Analytics) Events',
+      '1 SATA Interface supporting up to 8TB Capacity'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "8 Channels IP"
+            },
+            {
+                  "label": "Decoding",
+                  "value": "1-ch @ 8 MP / 4-ch @ 1080p"
+            },
+            {
+                  "label": "Storage",
+                  "value": "1 SATA port up to 8TB"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec031',
+    name: 'Dahua NVR4108HS-4KS2/L 8-Channel 4K Compact 1U Lite Network Video Recorder',
+    slug: 'dahua-nvr4108hs-4ks2-l-8ch-4k-nvr',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'nvr',
+    regularPrice: 9500,
+    discountPrice: 8500,
+    discountPercentage: 11,
+    rating: 4.8,
+    reviewCount: 120,
+    stockStatus: 'In Stock',
+    stockCount: 65,
+    images: ['/images/products/dahua-4108hs.webp'],
+    shortSpecs: [
+      '8-Channel 4K Network Video Recorder (80 Mbps Max Bandwidth)',
+      'Smart H.265+ / H.264+ Dual Codec Decoding',
+      'Max 8MP Resolution for Preview and Playback',
+      'HDMI / VGA Simultaneous Output (HDMI up to 4K)',
+      '1 SATA III Port, Up to 10 TB Capacity'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "8 Channels"
+            },
+            {
+                  "label": "Bandwidth",
+                  "value": "80 Mbps"
+            },
+            {
+                  "label": "HDD",
+                  "value": "1 SATA up to 10TB"
+            }
+      ]
+},
+    warranty: '2 Years Dahua Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec032',
+    name: 'Dahua NVR4216-16P-4KS2/L 16-Channel 16-PoE 4K Network Video Recorder',
+    slug: 'dahua-nvr4216-16p-4ks2-l-16ch-poe-nvr',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'nvr',
+    badge: 'Enterprise',
+    regularPrice: 21000,
+    discountPrice: 18500,
+    discountPercentage: 12,
+    rating: 4.9,
+    reviewCount: 65,
+    stockStatus: 'In Stock',
+    stockCount: 25,
+    images: ['/images/products/dahua-4216-16p.webp'],
+    shortSpecs: [
+      '16-Channel IP Inputs with 16 Independent Built-in PoE Ports',
+      'Dual SATA Ports (Supports 2× 10TB HDDs = 20TB Total)',
+      'Max 160 Mbps Incoming Bandwidth for High Bitrate 4K Streams',
+      'AI by Camera: Perimeter Protection, Face Detection, SMD Plus',
+      '1U Rackmount Housing with Advanced Cooling Fans'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "16 Channels PoE"
+            },
+            {
+                  "label": "SATA Ports",
+                  "value": "2 SATA III (Up to 20TB Total)"
+            },
+            {
+                  "label": "PoE Budget",
+                  "value": "130W Total PoE Power"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1541,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec033',
+    name: 'Dahua DH-XVR1B04-I 4-Channel WizSense 1080p Cooper 1U Digital Video Recorder',
+    slug: 'dahua-dh-xvr1b04-i-4ch-wizsense-xvr',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'xvr',
+    badge: 'Best Seller',
+    regularPrice: 3800,
+    discountPrice: 3400,
+    discountPercentage: 11,
+    rating: 4.8,
+    reviewCount: 210,
+    stockStatus: 'In Stock',
+    stockCount: 115,
+    images: ['/images/products/dahua-xvr1b04.webp'],
+    shortSpecs: [
+      'H.265+/H.265 Dual-stream Video Compression',
+      'Full-channel AI-Coding for High Bandwidth & Storage Savings',
+      'Supports HDCVI / AHD / TVI / CVBS / IP Video Inputs',
+      'SMD Plus (Smart Motion Detection Plus) Human & Vehicle Filter',
+      'Supports 1 SATA HDD up to 6TB Capacity'
+    ],
+    specifications: {
+      "XVR": [
+            {
+                  "label": "Channels",
+                  "value": "4 Channels BNC + 1 IP"
+            },
+            {
+                  "label": "AI",
+                  "value": "SMD Plus Human & Vehicle Classification"
+            },
+            {
+                  "label": "SATA",
+                  "value": "1 Port up to 6TB"
+            }
+      ]
+},
+    warranty: '2 Years Dahua Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec034',
+    name: 'Dahua DH-XVR1B08-I 8-Channel WizSense 1080p Cooper 1U Digital Video Recorder',
+    slug: 'dahua-dh-xvr1b08-i-8ch-wizsense-xvr',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'xvr',
+    regularPrice: 5800,
+    discountPrice: 5200,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 175,
+    stockStatus: 'In Stock',
+    stockCount: 85,
+    images: ['/images/products/dahua-xvr1b08.webp'],
+    shortSpecs: [
+      '8-Channel BNC Hybrid Video Inputs + 2 Extra IP Channels (Up to 6MP)',
+      'SMD Plus Human and Vehicle False Alarm Filtering',
+      'H.265+ Dual-Stream Encoding with Up to 70% Less Storage Draw',
+      'Audio over Coaxial (AoC) Supported on all channels',
+      '1 SATA Port up to 6TB Capacity'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "8 Analog Channels"
+            },
+            {
+                  "label": "Audio",
+                  "value": "Broadcast-Quality Audio over Coax"
+            },
+            {
+                  "label": "Storage",
+                  "value": "1 SATA up to 6TB"
+            }
+      ]
+},
+    warranty: '2 Years Dahua Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec035',
+    name: 'Dahua DH-XVR5116H-I3 16-Channel WizSense 5MP-N 1U Hybrid XVR Recorder',
+    slug: 'dahua-dh-xvr5116h-i3-16ch-wizsense-xvr',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'xvr',
+    regularPrice: 14000,
+    discountPrice: 12500,
+    discountPercentage: 11,
+    rating: 4.9,
+    reviewCount: 80,
+    stockStatus: 'In Stock',
+    stockCount: 40,
+    images: ['/images/products/dahua-xvr5116h.webp'],
+    shortSpecs: [
+      '16 Channels BNC Supporting up to 5MP Resolution Cameras',
+      'Up to 24 Channels IPC Access (16 Analog + 8 IP Cameras)',
+      'Perimeter Protection & Face Recognition 1 Channel',
+      'SMD Plus on all 16 Channels for Accurate Target Warning',
+      '1 SATA Port Supporting up to 16TB Capacity'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Channels",
+                  "value": "16 BNC + 8 IP (24 Channels Total)"
+            },
+            {
+                  "label": "Max Res",
+                  "value": "5MP HD Recording"
+            },
+            {
+                  "label": "Storage",
+                  "value": "1 SATA up to 16TB"
+            }
+      ]
+},
+    warranty: '2 Years Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1041,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec036',
+    name: 'Seagate SkyHawk 1TB Surveillance Internal 3.5" Hard Disk Drive (ST1000VX005)',
+    slug: 'seagate-skyhawk-1tb-surveillance-hdd',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-accessories',
+    badge: 'Essential',
+    regularPrice: 5200,
+    discountPrice: 4800,
+    discountPercentage: 8,
+    rating: 4.9,
+    reviewCount: 480,
+    stockStatus: 'In Stock',
+    stockCount: 220,
+    images: ['/images/products/seagate-skyhawk-1tb.webp'],
+    shortSpecs: [
+      'ImagePerfect™ Firmware Ensures Smooth, Zero-Drop Video Streaming',
+      'Engineered for 24×7 Surveillance Workloads (180 TB/year)',
+      '1TB Capacity | 5900 RPM | 64MB Cache | SATA 6Gb/s',
+      'Tarnish-Resistant Components Protect Drive in Hostile Environments',
+      'Supports up to 64 HD Surveillance Cameras Simultaneously'
+    ],
+    specifications: {
+      "HDD": [
+            {
+                  "label": "Capacity",
+                  "value": "1TB (1000GB)"
+            },
+            {
+                  "label": "Workload",
+                  "value": "180TB/year 24/7 Surveillance"
+            },
+            {
+                  "label": "Interface",
+                  "value": "SATA 6.0 Gb/s"
+            }
+      ]
+},
+    warranty: '3 Years Replacement Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec037',
+    name: 'Western Digital WD Purple 2TB Surveillance 3.5" Hard Drive (WD23PURZ)',
+    slug: 'wd-purple-2tb-surveillance-hard-drive',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-accessories',
+    badge: 'Best Seller',
+    regularPrice: 7200,
+    discountPrice: 6600,
+    discountPercentage: 8,
+    rating: 4.9,
+    reviewCount: 390,
+    stockStatus: 'In Stock',
+    stockCount: 175,
+    images: ['/images/products/wd-purple-2tb.webp'],
+    shortSpecs: [
+      'Exclusive AllFrame™ Technology Reduces Frame Loss & Video Errors',
+      'Tuned for Write-Intensive, Low Bitrate Surveillance Systems',
+      '2TB Capacity | 5400 RPM | 64MB Cache | 3.5-Inch Form Factor',
+      'Workload Rating of Up to 180 TB/year | 1 Million Hours MTBF',
+      'Compatible with Industry Leading Security System Brands'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Capacity",
+                  "value": "2TB"
+            },
+            {
+                  "label": "Technology",
+                  "value": "AllFrame AI Video Tuning"
+            },
+            {
+                  "label": "Cameras Supported",
+                  "value": "Up to 64 Cameras"
+            }
+      ]
+},
+    warranty: '3 Years Replacement Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec038',
+    name: 'Central CCTV Power Supply 12V 10A 9-Port Metal Box with Key Lock & Fuse Protection',
+    slug: 'central-cctv-power-supply-12v-10a-9port',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-accessories',
+    regularPrice: 1700,
+    discountPrice: 1450,
+    discountPercentage: 15,
+    rating: 4.7,
+    reviewCount: 160,
+    stockStatus: 'In Stock',
+    stockCount: 120,
+    images: ['/images/products/cctv-power-box.webp'],
+    shortSpecs: [
+      '12V DC 10 Amp Total Regulated Output for Up to 9 Cameras',
+      'Heavy Duty Wall Mount Metal Casing with Key Lock',
+      'Individual PTC Auto-Reset Fuses on Each Port for Short Circuit Safety',
+      'LED Status Indicator for AC Power and DC Output',
+      'Over-Voltage, Over-Current and Surge Protection'
+    ],
+    specifications: {
+      "Power Box": [
+            {
+                  "label": "Input",
+                  "value": "AC 110V - 240V 50/60Hz"
+            },
+            {
+                  "label": "Output",
+                  "value": "DC 12V 10A (9 Terminals)"
+            },
+            {
+                  "label": "Protection",
+                  "value": "PTC Resettable Fuse per Channel"
+            }
+      ]
+},
+    warranty: '1 Year Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec039',
+    name: 'Passive HD Video Balun 1-Pair for Cat5e/Cat6 CCTV Transmission (Up to 300m)',
+    slug: 'passive-hd-video-balun-1pair-cctv',
+    brand: 'Dahua',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-accessories',
+    regularPrice: 250,
+    discountPrice: 180,
+    discountPercentage: 28,
+    rating: 4.6,
+    reviewCount: 520,
+    stockStatus: 'In Stock',
+    stockCount: 500,
+    images: ['/images/products/video-balun.webp'],
+    shortSpecs: [
+      'Real-Time Transmission over UTP Cat5e/Cat6 Cable',
+      'Compatible with HD-TVI, HD-CVI, AHD and CVBS Formats',
+      'Transmission Distance: Up to 300m for 1080p, 200m for 5MP',
+      'Push-Pin Terminal Block for Tool-Free Cable Installation',
+      'Built-in Transient Suppression & 60dB Crosstalk Protection'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Type",
+                  "value": "Passive HD Video Balun"
+            },
+            {
+                  "label": "Distance",
+                  "value": "Max 300 meters"
+            },
+            {
+                  "label": "Connector",
+                  "value": "BNC Male to Press-Fit Terminal"
+            }
+      ]
+},
+    warranty: 'Checking Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec040',
+    name: 'D-Link NCB-C6UGRYR-305 Cat6 UTP Solid Copper 305M Network Cable Box',
+    slug: 'd-link-cat6-utp-solid-copper-305m-cable',
+    brand: 'D-Link',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'cc-camera-accessories',
+    badge: 'Pure Copper',
+    regularPrice: 9500,
+    discountPrice: 8500,
+    discountPercentage: 11,
+    rating: 4.9,
+    reviewCount: 140,
+    stockStatus: 'In Stock',
+    stockCount: 60,
+    images: ['/images/products/dlink-cat6-box.webp'],
+    shortSpecs: [
+      '305 Meters (1000 ft) Easy-Pull Reelex Box Package',
+      '23 AWG Solid Bare Copper Conductors for Maximum Signal Purity',
+      'Supports Gigabit Ethernet & PoE (Power over Ethernet) Cameras',
+      'FR-PVC Fire-Retardant Jacket with High Durability',
+      'Ideal for IP CCTV Installations, Office Networking & Server Racks'
+    ],
+    specifications: {
+      "Cable": [
+            {
+                  "label": "Length",
+                  "value": "305 Meters (1000ft)"
+            },
+            {
+                  "label": "Conductor",
+                  "value": "100% Solid Pure Copper 23 AWG"
+            },
+            {
+                  "label": "Frequency",
+                  "value": "Up to 250 MHz"
+            }
+      ]
+},
+    warranty: 'Official D-Link Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec041',
+    name: 'ZKTeco TL400B Biometric Fingerprint Smart Door Lock with Bluetooth & RFID Card',
+    slug: 'zkteco-tl400b-biometric-smart-door-lock',
+    brand: 'ZKTeco',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'door-lock',
+    badge: 'Popular',
+    regularPrice: 18500,
+    discountPrice: 16500,
+    discountPercentage: 11,
+    rating: 4.9,
+    reviewCount: 68,
+    stockStatus: 'In Stock',
+    stockCount: 30,
+    isSmartHome: true,
+    images: ['/images/products/zkteco-tl400b.webp'],
+    shortSpecs: [
+      'Semi-Conductor Fingerprint Sensor (Reads in under 0.5 seconds)',
+      'Multiple Unlock Modes: Fingerprint, IC Card, Password, App & Mechanical Key',
+      'Bluetooth Connectivity with ZSmart / Tuya Mobile App Management',
+      'Voice Guide for Easy Setup | Random Password Protection',
+      'Emergency External 9V Battery Terminal | Anti-Theft Mortise'
+    ],
+    specifications: {
+      "Door Lock": [
+            {
+                  "label": "Fingerprint Capacity",
+                  "value": "100 Users"
+            },
+            {
+                  "label": "Card Capacity",
+                  "value": "100 Cards"
+            },
+            {
+                  "label": "Door Thickness",
+                  "value": "35mm - 55mm"
+            }
+      ]
+},
+    warranty: '1 Year ZKTeco Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1375,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec042',
+    name: 'ZKTeco ML100 Smart Fingerprint Digital Door Lock with Tuya App & Keypad',
+    slug: 'zkteco-ml100-smart-fingerprint-door-lock',
+    brand: 'ZKTeco',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'door-lock',
+    regularPrice: 13500,
+    discountPrice: 11800,
+    discountPercentage: 13,
+    rating: 4.7,
+    reviewCount: 54,
+    stockStatus: 'In Stock',
+    stockCount: 40,
+    isSmartHome: true,
+    images: ['/images/products/zkteco-ml100.webp'],
+    shortSpecs: [
+      'Smart Fingerprint Recognition Integrated into Handle for Fast 1-Touch Open',
+      'Connects directly to Wi-Fi with Tuya Smart App Remote Unlock',
+      'Generate One-Time Temporary Passcodes for Visitors & Guests',
+      'Low Battery Alarm Warning with Micro-USB Emergency Charging',
+      'Fits Standard Wooden Doors and Interior Bedroom/Office Doors'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Unlock Methods",
+                  "value": "Fingerprint, Passcode, Tuya App, Mechanical Key"
+            },
+            {
+                  "label": "Power",
+                  "value": "4× AA Alkaline Batteries (1 Year Life)"
+            }
+      ]
+},
+    warranty: '1 Year ZKTeco Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec043',
+    name: 'Xiaomi Smart Door Lock E10 Fingerprint, Bluetooth & Keypad Digital Lock',
+    slug: 'xiaomi-smart-door-lock-e10',
+    brand: 'Xiaomi',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'door-lock',
+    badge: 'Hot',
+    regularPrice: 22000,
+    discountPrice: 19500,
+    discountPercentage: 11,
+    rating: 4.9,
+    reviewCount: 88,
+    stockStatus: 'In Stock',
+    stockCount: 25,
+    isSmartHome: true,
+    images: ['/images/products/xiaomi-door-lock-e10.webp'],
+    shortSpecs: [
+      'Class C High-Security Lock Cylinder for Superior Anti-Theft Defense',
+      'Fingerprint Recognition Accuracy of 99% with Fast 0.5s Unlock',
+      'Mi Home / Xiaomi Home App Integration & Smart Home Automation',
+      'Multiple Anti-Tamper Sensors Trigger Loud Alarm on Forced Entry',
+      'Up to 12 Months Battery Life with 8× AA Batteries'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Unlock Modes",
+                  "value": "Fingerprint, PIN, NFC, Bluetooth, Emergency Key"
+            },
+            {
+                  "label": "Cylinder",
+                  "value": "Grade C In-Line Lock Cylinder"
+            },
+            {
+                  "label": "Battery",
+                  "value": "8 AA Batteries (12 Months)"
+            }
+      ]
+},
+    warranty: '1 Year Official Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1625,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec044',
+    name: 'ZKTeco K40 Fingerprint Time Attendance & Access Control Terminal with Battery Backup',
+    slug: 'zkteco-k40-fingerprint-time-attendance',
+    brand: 'ZKTeco',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'access-control',
+    badge: 'Best Seller',
+    regularPrice: 8000,
+    discountPrice: 7200,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 310,
+    stockStatus: 'In Stock',
+    stockCount: 90,
+    images: ['/images/products/zkteco-k40.webp'],
+    shortSpecs: [
+      'Fingerprint Capacity: 1,000 | Record Capacity: 80,000 Transactions',
+      '2.8-inch TFT Color Screen with Graphical UI for Easy Operation',
+      'TCP/IP Network Communication & USB Host Data Export to Excel',
+      'Built-in Battery Backup Keeps Terminal Operating during Load Shedding',
+      'Simple Access Control Interface for Electric Magnetic Door Lock'
+    ],
+    specifications: {
+      "Terminal": [
+            {
+                  "label": "Fingerprint Capacity",
+                  "value": "1,000 Fingerprints"
+            },
+            {
+                  "label": "Log Capacity",
+                  "value": "80,000 Events"
+            },
+            {
+                  "label": "Communication",
+                  "value": "TCP/IP, USB-Host"
+            },
+            {
+                  "label": "Backup Battery",
+                  "value": "Built-in 2000mAh Battery"
+            }
+      ]
+},
+    warranty: '1 Year ZKTeco Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec045',
+    name: 'ZKTeco IN01-A Fingerprint Time Attendance & Access Control with Proximity RFID',
+    slug: 'zkteco-in01-a-fingerprint-access-control',
+    brand: 'ZKTeco',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'access-control',
+    regularPrice: 12800,
+    discountPrice: 11500,
+    discountPercentage: 10,
+    rating: 4.8,
+    reviewCount: 145,
+    stockStatus: 'In Stock',
+    stockCount: 45,
+    images: ['/images/products/zkteco-in01.webp'],
+    shortSpecs: [
+      'Fingerprint Capacity: 3,000 | Card Capacity: 10,000 | Log: 100,000',
+      '3.0-Inch TFT Screen with Elegant Touch Keypad',
+      'Professional Access Control Interface: Lock, Door Sensor, Exit Button, Alarm',
+      'Built-in 2000mAh Backup Battery Eliminates Power Failure Worries',
+      'Supports ZKTime.Net and BioTime 8.5 Payroll Software'
+    ],
+    specifications: {
+      "Specs": [
+            {
+                  "label": "Fingerprints",
+                  "value": "3,000 Templates"
+            },
+            {
+                  "label": "Cards",
+                  "value": "10,000 RFID Cards"
+            },
+            {
+                  "label": "Communication",
+                  "value": "TCP/IP, RS232/485, USB Host"
+            }
+      ]
+},
+    warranty: '1 Year Official Warranty',
+    emiAvailable: false,
+    reviews: [], questions: [], createdDate: '2024-04-01'
+  },
+
+  {
+    id: 'prod-sec046',
+    name: 'Hikvision DS-K1T341AMF Face Recognition Access Control Terminal with Fingerprint',
+    slug: 'hikvision-ds-k1t341amf-face-recognition-terminal',
+    brand: 'Hikvision',
+    category: 'security',
+    categoryName: 'Security',
+    subcategory: 'access-control',
+    badge: 'AI Powered',
+    regularPrice: 19500,
+    discountPrice: 17500,
+    discountPercentage: 10,
+    rating: 4.9,
+    reviewCount: 95,
+    stockStatus: 'In Stock',
+    stockCount: 35,
+    images: ['/images/products/hikvision-k1t341.webp'],
+    shortSpecs: [
+      'Deep Learning Algorithm with 99% Face Recognition Accuracy',
+      'Face Capacity: 3,000 | Fingerprint: 3,000 | Card: 3,000 | Event: 150,000',
+      '4.3-inch LCD Touch Screen with 2MP Dual Wide-Angle Lens',
+      'Face Recognition Duration under 0.2 seconds per user',
+      'Supports Anti-Spoofing (Detects photos, videos, masks)'
+    ],
+    specifications: {
+      "Face Terminal": [
+            {
+                  "label": "Face Capacity",
+                  "value": "3,000 Faces"
+            },
+            {
+                  "label": "Camera",
+                  "value": "2MP Dual-Lens with WDR & IR Light"
+            },
+            {
+                  "label": "Recognition Speed",
+                  "value": "< 0.2s"
+            }
+      ]
+},
+    warranty: '2 Years Hikvision Warranty',
+    emiAvailable: true,
+    emiStartingBDT: 1458,
+    reviews: [], questions: [], createdDate: '2024-04-01'
   }
 ];
 
@@ -1424,4 +5648,5 @@ export const MOCK_ORDERS: Order[] = [
       { title: 'Delivered', date: 'Pending', completed: false }
     ]
   }
+
 ];

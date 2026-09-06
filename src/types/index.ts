@@ -10,6 +10,7 @@ export type CategoryId =
   | 'camera'
   | 'security'
   | 'networking'
+  | 'onu-device'
   | 'software'
   | 'server-storage'
   | 'accessories'
@@ -51,7 +52,36 @@ export type BrandName =
   | 'Hikvision'
   | 'Dahua'
   | 'TP-Link'
-  | 'Logitech';
+  | 'Logitech'
+  | 'Tenda'
+  | 'D-Link'
+  | 'MikroTik'
+  | 'Mercusys'
+  | 'Netgear'
+  | 'Huawei'
+  | 'ZTE'
+  | 'FiberHome'
+  | 'Nokia'
+  | 'VSOL'
+  | 'CIG'
+  | 'Honor'
+  | 'Canon'
+  | 'Nikon'
+  | 'Fujifilm'
+  | 'GoPro'
+  | 'DJI'
+  | 'Insta360'
+  | 'SJCAM'
+  | 'Sigma'
+  | 'Tamron'
+  | 'Benro'
+  | 'Manfrotto'
+  | 'Zhiyun'
+  | 'EZVIZ'
+  | 'Imou'
+  | 'Uniview'
+  | 'ZKTeco'
+  | 'Tiandy';
 
 export interface ProductSpecification {
   label: string;
@@ -91,7 +121,7 @@ export interface Product {
   category: CategoryId;
   categoryName: string;
   subcategory?: string;
-  badge?: 'Hot' | 'New' | 'Flash Sale' | 'Best Seller' | 'Offer';
+  badge?: 'Hot' | 'New' | 'Flash Sale' | 'Best Seller' | 'Offer' | 'Popular' | 'Top Tier' | 'Super Deal' | 'Hot Deal' | 'Pro Grade' | 'Enterprise' | 'Essential' | 'Pure Copper' | 'AI Powered' | (string & {});
   regularPrice: number; // in BDT
   discountPrice: number; // in BDT
   discountPercentage: number;
@@ -126,6 +156,7 @@ export interface SubCategory {
   popular?: boolean;
   hasChildren?: boolean;
   isShowAll?: boolean;
+  children?: { id: string; name: string; nameBn: string; brand?: string }[];
 }
 
 export interface Category {

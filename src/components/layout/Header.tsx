@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { CATEGORIES } from '../../data/mockData';
 import { Logo } from '../common/Logo';
@@ -25,6 +25,7 @@ import {
   Tv,
   Laptop,
   ChevronRight,
+  ChevronDown,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -53,6 +54,22 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearch, setMobileSearch]     = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [hoveredSubCategory, setHoveredSubCategory] = useState<string | null>(null);
+  const [expandedMobileCat, setExpandedMobileCat] = useState<string | null>(null);
+  const [expandedMobileSubCat, setExpandedMobileSubCat] = useState<string | null>(null);
+  const categoryNavRef = useRef<HTMLDivElement>(null);
+
+  // Close desktop/tablet category dropdown when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (categoryNavRef.current && !categoryNavRef.current.contains(e.target as Node)) {
+        setHoveredCategory(null);
+        setHoveredSubCategory(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -291,27 +308,43 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
       </div>
 
       {/* ── Category Navigation Bar (All 18 Categories from User) ── */}
-      <div className="hidden md:block bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm relative z-30">
+      <div ref={categoryNavRef} className="hidden md:block bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm relative z-30">
         <div className="max-w-[1440px] mx-auto px-2 sm:px-4 flex items-center justify-between">
           {/* Horizontal list of all 18 categories */}
-          <nav className="flex items-center gap-0 overflow-x-auto no-scrollbar py-0 flex-1 justify-between">
+          <nav className="flex items-center gap-0 overflow-visible no-scrollbar py-0 flex-1 justify-between relative">
             {CATEGORIES.map((category, idx) => {
               const isSelected = filters.category === category.id;
               const isHovered = hoveredCategory === category.id;
-              const isRightAligned = idx >= 11;
+              const isRightAligned = idx >= 8;
 
               return (
                 <div
                   key={category.id}
                   className="relative group"
-                  onMouseEnter={() => setHoveredCategory(category.id)}
-                  onMouseLeave={() => setHoveredCategory(null)}
+                  onMouseEnter={() => {
+                    setHoveredCategory(category.id);
+                    setHoveredSubCategory(null);
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredCategory(null);
+                    setHoveredSubCategory(null);
+                  }}
                 >
                   <button
-                    onClick={() => {
-                      setFilters(prev => ({ ...prev, category: category.id }));
+                    onClick={(e) => {
+                      // On touch/tablet devices, if category has dropdown subcategories, first tap toggles it open
+                      if (category.subCategories && category.subCategories.length > 0) {
+                        if (hoveredCategory !== category.id) {
+                          e.stopPropagation();
+                          setHoveredCategory(category.id);
+                          setHoveredSubCategory(null);
+                          return;
+                        }
+                      }
+                      setFilters(prev => ({ ...prev, category: category.id, brand: [] }));
                       setCurrentView('shop');
                       setHoveredCategory(null);
+                      setHoveredSubCategory(null);
                     }}
                     className={`px-2 lg:px-2.5 xl:px-3 py-3 text-[12px] lg:text-[12.5px] xl:text-[13px] font-semibold whitespace-nowrap transition-all flex items-center gap-0.5 relative ${
                       isHovered || isSelected
@@ -326,40 +359,92 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
                     <span>{category.name}</span>
                   </button>
 
-                  {/* Hover Dropdown matching user screenshot */}
+                  {/* Hover / Tap Dropdown matching user screenshot */}
                   {category.subCategories && category.subCategories.length > 0 && isHovered && (
                     <div
-                      className={`absolute top-full ${isRightAligned ? 'right-0' : 'left-0'} min-w-[220px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-[0_12px_36px_rgba(0,0,0,0.16)] border-t-2 border-t-orange-600 dark:border-t-orange-500 py-1.5 z-50 animate-fadeIn`}
+                      className={`absolute top-full ${isRightAligned ? 'right-0' : 'left-0'} min-w-[230px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-[0_12px_36px_rgba(0,0,0,0.18)] border-t-2 border-t-orange-600 dark:border-t-orange-500 py-1.5 z-50 animate-fadeIn`}
                     >
-                      <div className="max-h-[480px] overflow-y-auto no-scrollbar py-0.5">
+                      <div className="max-h-[500px] overflow-visible py-0.5">
                         {category.subCategories.map(sub => {
                           const isShowAll = sub.isShowAll;
+                          const hasChildren = sub.hasChildren || (sub.children && sub.children.length > 0);
+
                           return (
-                            <button
+                            <div
                               key={sub.id}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (isShowAll) {
-                                  setFilters(prev => ({ ...prev, category: category.id }));
-                                } else {
-                                  setFilters(prev => ({ ...prev, category: category.id }));
-                                }
-                                setCurrentView('shop');
-                                setHoveredCategory(null);
-                              }}
-                              className={`w-full text-left px-4 py-1.5 text-[13px] transition-colors flex items-center justify-between group/item ${
-                                isShowAll
-                                  ? 'font-bold text-slate-900 dark:text-white border-t border-slate-100 dark:border-slate-800 mt-1 pt-2 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-orange-50/50 dark:hover:bg-slate-800'
-                                  : 'font-normal text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-slate-50 dark:hover:bg-slate-800/80'
-                              }`}
+                              className="relative group/sub"
+                              onMouseEnter={() => setHoveredSubCategory(sub.id)}
                             >
-                              <span>{sub.name}</span>
-                              {sub.hasChildren && (
-                                <span className="text-[#f87171] text-sm font-bold opacity-75 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all">
-                                  ›
-                                </span>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  // On touch devices, if sub has children, toggle flyout
+                                  if (hasChildren && hoveredSubCategory !== sub.id) {
+                                    setHoveredSubCategory(sub.id);
+                                    return;
+                                  }
+                                  if (isShowAll) {
+                                    setFilters(prev => ({ ...prev, category: category.id, brand: [] }));
+                                  } else {
+                                    setFilters(prev => ({ ...prev, category: sub.id, brand: [] }));
+                                  }
+                                  setCurrentView('shop');
+                                  setHoveredCategory(null);
+                                  setHoveredSubCategory(null);
+                                }}
+                                className={`w-full text-left px-4 py-2 text-[13px] transition-colors flex items-center justify-between group-hover/sub:bg-slate-50 dark:group-hover/sub:bg-slate-800/80 group-hover/sub:text-orange-600 dark:group-hover/sub:text-orange-400 ${
+                                  isShowAll
+                                    ? 'font-bold text-slate-900 dark:text-white border-t border-slate-100 dark:border-slate-800 mt-1 pt-2 hover:bg-orange-50/50 dark:hover:bg-slate-800'
+                                    : 'font-normal text-slate-700 dark:text-slate-200'
+                                }`}
+                              >
+                                <span>{sub.name}</span>
+                                {hasChildren && (
+                                  <span className="text-[#f87171] text-sm font-bold opacity-75 group-hover/sub:opacity-100 group-hover/sub:translate-x-0.5 transition-all">
+                                    ›
+                                  </span>
+                                )}
+                              </button>
+
+                              {/* Nested 2nd-level Flyout on hover or tap */}
+                              {sub.children && sub.children.length > 0 && (
+                                <div
+                                  className={`absolute top-0 ${isRightAligned ? 'right-full -mr-1' : 'left-full -ml-1'} min-w-[215px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-[0_12px_36px_rgba(0,0,0,0.22)] border-t-2 border-t-orange-600 dark:border-t-orange-500 py-1.5 z-[60] animate-fadeIn ${
+                                    hoveredSubCategory === sub.id ? 'block' : 'hidden group-hover/sub:block'
+                                  }`}
+                                >
+                                  <div className="max-h-[460px] overflow-y-auto no-scrollbar py-0.5">
+                                    {sub.children.map(child => (
+                                      <button
+                                        key={child.name}
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          if (child.brand) {
+                                            setFilters(prev => ({
+                                              ...prev,
+                                              category: child.id || category.id,
+                                              brand: [child.brand as any]
+                                            }));
+                                          } else {
+                                            setFilters(prev => ({
+                                              ...prev,
+                                              category: child.id,
+                                              brand: []
+                                            }));
+                                          }
+                                          setCurrentView('shop');
+                                          setHoveredCategory(null);
+                                          setHoveredSubCategory(null);
+                                        }}
+                                        className="w-full text-left px-4 py-2 text-[12.5px] font-normal text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors flex items-center justify-between"
+                                      >
+                                        <span>{child.name}</span>
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
                               )}
-                            </button>
+                            </div>
                           );
                         })}
                       </div>
@@ -372,6 +457,45 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
         </div>
       </div>
 
+      {/* ── Mobile Horizontal Quick Category Strip (1-Tap Access) ── */}
+      <div className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-3 py-2 overflow-x-auto no-scrollbar flex items-center gap-1.5 shadow-sm">
+        <button
+          onClick={() => setMobileMenuOpen(true)}
+          className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-[11px] px-3 py-1.5 rounded-xl flex-shrink-0 shadow-sm"
+        >
+          <Menu className="w-3.5 h-3.5" />
+          <span>{language === 'EN' ? 'Categories' : 'ক্যাটাগরি'}</span>
+        </button>
+        {CATEGORIES.map(cat => {
+          const isSelected = filters.category === cat.id;
+          return (
+            <button
+              key={cat.id}
+              onClick={() => {
+                if (cat.subCategories && cat.subCategories.length > 0) {
+                  setExpandedMobileCat(cat.id);
+                  setExpandedMobileSubCat(null);
+                  setMobileMenuOpen(true);
+                } else {
+                  setFilters(p => ({ ...p, category: cat.id, brand: [] }));
+                  setCurrentView('shop');
+                }
+              }}
+              className={`text-[11.5px] font-semibold px-2.5 py-1.5 rounded-xl whitespace-nowrap flex-shrink-0 transition-all border flex items-center gap-1 ${
+                isSelected
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-sm font-bold'
+                  : 'bg-slate-100/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border-slate-200/80 dark:border-slate-700/60 hover:border-orange-500'
+              }`}
+            >
+              <span>{language === 'EN' ? cat.name : cat.nameBn}</span>
+              {cat.subCategories && cat.subCategories.length > 0 && (
+                <ChevronDown className="w-2.5 h-2.5 opacity-60" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
       {/* ── Mobile Slide-Down Menu ───────────────────────────── */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 z-50 glass-nav border-b border-slate-200 dark:border-slate-800 shadow-2xl animate-fade-down max-h-[85vh] overflow-y-auto">
@@ -381,31 +505,178 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
             <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Official Tech Store</span>
           </div>
 
-          {/* All 18 Categories */}
-          <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800">
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">All Categories (18)</p>
-              <span className="text-[10px] text-blue-500 font-bold">100% Genuine</span>
+          {/* All 18 Categories - Interactive Accordion Dropdowns for Mobile */}
+          <div className="px-3 py-3 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex items-center justify-between mb-2.5 px-1">
+              <p className="text-[11px] font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+                {language === 'EN' ? 'Categories & Dropdowns (18)' : 'ক্যাটাগরি ও মেনু (১৮টি)'}
+              </p>
+              <span className="text-[10px] bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold px-2 py-0.5 rounded-full">
+                Tap to Expand
+              </span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {CATEGORIES.map(category => (
-                <button
-                  key={category.id}
-                  onClick={() => {
-                    setFilters(p => ({ ...p, category: category.id }));
-                    setCurrentView('shop');
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`text-xs font-bold text-left px-3 py-2 rounded-xl transition-all border flex items-center justify-between ${
-                    filters.category === category.id
-                      ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                      : 'text-slate-800 dark:text-slate-200 bg-slate-100/80 dark:bg-slate-800/80 border-slate-200/80 dark:border-slate-700/60 hover:border-blue-500'
-                  }`}
-                >
-                  <span className="truncate">{category.name}</span>
-                  <ChevronRight className="w-3 h-3 opacity-50 flex-shrink-0 ml-1" />
-                </button>
-              ))}
+
+            <div className="space-y-1.5">
+              {CATEGORIES.map(category => {
+                const isCatExpanded = expandedMobileCat === category.id;
+                const isCatSelected = filters.category === category.id;
+                const hasSubs = category.subCategories && category.subCategories.length > 0;
+
+                return (
+                  <div
+                    key={category.id}
+                    className={`rounded-xl border transition-all overflow-hidden ${
+                      isCatExpanded
+                        ? 'border-orange-500/50 bg-orange-50/40 dark:bg-slate-800/90 shadow-sm'
+                        : isCatSelected
+                        ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-950/30'
+                        : 'border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 hover:border-slate-300 dark:hover:border-slate-700'
+                    }`}
+                  >
+                    {/* Category Header Row */}
+                    <div className="flex items-center justify-between p-2">
+                      <button
+                        onClick={() => {
+                          setFilters(p => ({ ...p, category: category.id, brand: [] }));
+                          setCurrentView('shop');
+                          setMobileMenuOpen(false);
+                        }}
+                        className="flex-1 flex items-center gap-2.5 text-left min-w-0"
+                      >
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
+                          isCatSelected
+                            ? 'bg-blue-600 text-white shadow-sm'
+                            : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600'
+                        }`}>
+                          {category.name.slice(0, 2).toUpperCase()}
+                        </span>
+                        <div className="min-w-0">
+                          <p className={`text-xs font-bold truncate ${
+                            isCatSelected ? 'text-blue-600 dark:text-blue-400' : 'text-slate-800 dark:text-slate-200'
+                          }`}>
+                            {language === 'EN' ? category.name : category.nameBn}
+                          </p>
+                          <p className="text-[10px] text-slate-400">
+                            {category.itemCount} {language === 'EN' ? 'products' : 'পণ্য'}
+                          </p>
+                        </div>
+                      </button>
+
+                      {/* Dropdown Expand Toggle */}
+                      {hasSubs && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpandedMobileCat(prev => prev === category.id ? null : category.id);
+                            setExpandedMobileSubCat(null);
+                          }}
+                          className={`px-2 py-1 rounded-lg transition-all flex items-center gap-1 text-[11px] font-bold ${
+                            isCatExpanded
+                              ? 'bg-orange-500 text-white shadow-sm'
+                              : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 border border-slate-200 dark:border-slate-600'
+                          }`}
+                          aria-label={`Toggle ${category.name} dropdown`}
+                        >
+                          <span className="text-[10px]">{isCatExpanded ? 'Close' : 'Menu'}</span>
+                          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isCatExpanded ? 'rotate-180' : ''}`} />
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Level 1 Subcategories Accordion */}
+                    {hasSubs && isCatExpanded && (
+                      <div className="border-t border-orange-200/60 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 px-2 py-2 space-y-1 animate-fadeIn">
+                        {/* Show All link */}
+                        <button
+                          onClick={() => {
+                            setFilters(p => ({ ...p, category: category.id, brand: [] }));
+                            setCurrentView('shop');
+                            setMobileMenuOpen(false);
+                          }}
+                          className="w-full text-left px-2.5 py-1.5 rounded-lg bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 font-extrabold text-[11.5px] hover:bg-orange-100 flex items-center justify-between"
+                        >
+                          <span>{language === 'EN' ? `View All ${category.name} Products` : `${category.nameBn} এর সকল পণ্য দেখুন`}</span>
+                          <ChevronRight className="w-3.5 h-3.5 text-orange-500" />
+                        </button>
+
+                        {/* Subcategories list */}
+                        {category.subCategories!.map(sub => {
+                          const hasChildren = sub.children && sub.children.length > 0;
+                          const isSubExpanded = expandedMobileSubCat === sub.id;
+
+                          return (
+                            <div key={sub.id} className="rounded-lg overflow-hidden border border-slate-100 dark:border-slate-800/80">
+                              <div className="flex items-center justify-between px-2.5 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <button
+                                  onClick={() => {
+                                    if (sub.isShowAll) {
+                                      setFilters(p => ({ ...p, category: category.id, brand: [] }));
+                                    } else {
+                                      setFilters(p => ({ ...p, category: sub.id, brand: [] }));
+                                    }
+                                    setCurrentView('shop');
+                                    setMobileMenuOpen(false);
+                                  }}
+                                  className="text-left flex-1 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 truncate"
+                                >
+                                  {sub.name}
+                                </button>
+
+                                {hasChildren && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setExpandedMobileSubCat(prev => prev === sub.id ? null : sub.id);
+                                    }}
+                                    className={`p-1 rounded text-slate-400 hover:text-orange-500 transition-all ${
+                                      isSubExpanded ? 'text-orange-500' : ''
+                                    }`}
+                                  >
+                                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isSubExpanded ? 'rotate-180' : ''}`} />
+                                  </button>
+                                )}
+                              </div>
+
+                              {/* Level 2 Sub-options / Brands (Mobile flyout accordion) */}
+                              {hasChildren && isSubExpanded && (
+                                <div className="pl-3 pr-2 py-1.5 space-y-1 bg-slate-50/80 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800">
+                                  {sub.children!.map(child => (
+                                    <button
+                                      key={child.name}
+                                      onClick={() => {
+                                        if (child.brand) {
+                                          setFilters(p => ({
+                                            ...p,
+                                            category: child.id || category.id,
+                                            brand: [child.brand as any]
+                                          }));
+                                        } else {
+                                          setFilters(p => ({
+                                            ...p,
+                                            category: child.id,
+                                            brand: []
+                                          }));
+                                        }
+                                        setCurrentView('shop');
+                                        setMobileMenuOpen(false);
+                                      }}
+                                      className="w-full text-left px-2.5 py-1 text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-white dark:hover:bg-slate-700 rounded-md transition-colors flex items-center justify-between"
+                                    >
+                                      <span>{child.name}</span>
+                                      <ChevronRight className="w-2.5 h-2.5 opacity-40 text-orange-500" />
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 

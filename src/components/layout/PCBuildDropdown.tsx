@@ -184,15 +184,19 @@ export const PCBuildDropdown: React.FC = () => {
       {open && (
         <div
           ref={panelRef}
-          className="absolute right-0 top-full mt-2 z-[60] flex shadow-2xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700"
+          className={`fixed inset-x-2 top-16 bottom-20 sm:bottom-auto sm:inset-auto sm:absolute sm:right-0 sm:top-full sm:mt-2 z-[60] flex shadow-2xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 sm:max-h-[560px] ${
+            activePickerSlot ? 'sm:w-[680px]' : 'sm:w-[400px]'
+          }`}
           style={{
-            width: activePickerSlot ? '680px' : '400px',
-            maxHeight: '560px',
             animation: 'slideUpBounce 0.3s cubic-bezier(0.22,1,0.36,1) both',
           }}
         >
           {/* ── Left: Component Slots ──────────────────────── */}
-          <div className="flex flex-col bg-white dark:bg-slate-900 flex-shrink-0" style={{ width: activePickerSlot ? '300px' : '100%' }}>
+          <div
+            className={`flex flex-col bg-white dark:bg-slate-900 flex-shrink-0 ${
+              activePickerSlot ? 'hidden sm:flex sm:w-[300px]' : 'w-full'
+            }`}
+          >
             {/* Panel Header */}
             <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-slate-900 to-blue-950 text-white flex-shrink-0">
               <div className="flex items-center gap-2">

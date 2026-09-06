@@ -127,6 +127,16 @@ export const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
+                <button onClick={() => { setFilters(p => ({ ...p, category: 'networking' })); setCurrentView('shop'); }} className="hover:text-orange-400 flex items-center gap-1.5 transition-colors">
+                  <ChevronRight className="w-3 h-3 text-slate-600" /> Networking & Wi-Fi Routers
+                </button>
+              </li>
+              <li>
+                <button onClick={() => { setFilters(p => ({ ...p, category: 'onu-device' })); setCurrentView('shop'); }} className="hover:text-emerald-400 flex items-center gap-1.5 transition-colors text-emerald-400 font-medium">
+                  <ChevronRight className="w-3 h-3 text-emerald-600" /> ONU / ONT Fiber Devices
+                </button>
+              </li>
+              <li>
                 <button onClick={() => setCurrentView('pc-builder')} className="hover:text-orange-400 flex items-center gap-1.5 transition-colors font-bold text-blue-400">
                   <ChevronRight className="w-3 h-3 text-blue-400" /> Custom PC Builder Tool
                 </button>

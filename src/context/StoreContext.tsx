@@ -344,7 +344,19 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         (cat === 'tv' && (product.category === 'tv' || product.category === 'tv-appliance')) ||
         (cat === 'appliance' && (product.category === 'appliance' || product.category === 'air-conditioner')) ||
         (cat === 'phone' && (product.category === 'phone' || product.category === 'mobile-tablet')) ||
-        (cat === 'tablet' && (product.category === 'tablet' || product.category === 'mobile-tablet'));
+        (cat === 'tablet' && (product.category === 'tablet' || product.category === 'mobile-tablet')) ||
+        (cat === 'networking' && (product.category === 'networking')) ||
+        (cat === 'onu-device' && product.category === 'onu-device') ||
+        // subcategory filters inside networking
+        (cat === 'wifi-routers' && product.category === 'networking' && product.subcategory === 'wifi-routers') ||
+        (cat === '4g-lte-router' && product.category === 'networking' && product.subcategory === '4g-lte-router') ||
+        (cat === 'mesh-wifi' && product.category === 'networking' && product.subcategory === 'mesh-wifi') ||
+        (cat === 'mikrotik' && product.category === 'networking' && product.subcategory === 'mikrotik') ||
+        // subcategory filters inside onu-device
+        (cat === 'gpon-onu' && product.category === 'onu-device' && product.subcategory === 'gpon-onu') ||
+        (cat === 'epon-onu' && product.category === 'onu-device' && product.subcategory === 'epon-onu') ||
+        (cat === 'xgs-pon-onu' && product.category === 'onu-device' && product.subcategory === 'xgs-pon-onu') ||
+        (cat === 'wifi-onu' && product.category === 'onu-device' && product.subcategory === 'wifi-onu');
       if (!isMatch) return false;
     }
     

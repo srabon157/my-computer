@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
-import { Laptop, Cpu, Tv, ChevronRight, Sparkles } from 'lucide-react';
+import { Laptop, Cpu, Tv, ChevronRight, Sparkles, Signal } from 'lucide-react';
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -64,7 +64,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
           </ul>
         </div>
 
-        {/* Column 2: Components & Enterprise */}
+        {/* Column 2: Components & Infrastructure */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">
             <Cpu className="w-5 h-5 text-orange-500" />
@@ -89,10 +89,23 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
-            <li>
+            {/* ── Networking + ONU side-by-side ── */}
+            <li className="border-t border-slate-100 dark:border-slate-800 pt-2 mt-1">
               <button onClick={() => navigateCategory('networking')} className="hover:text-orange-500 flex items-center justify-between w-full py-1">
-                <span>📶 Networking (Wi-Fi 7 Routers & Switches)</span>
+                <span>📶 Networking (Routers, MikroTik, Switches)</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => navigateCategory('onu-device')}
+                className="flex items-center justify-between w-full py-1.5 px-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 transition-colors"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Signal className="w-3.5 h-3.5" />
+                  <span className="font-semibold">ONU / ONT Fiber Devices</span>
+                </span>
+                <ChevronRight className="w-3.5 h-3.5 opacity-70" />
               </button>
             </li>
             <li>
@@ -164,7 +177,7 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
             <p className="text-xs text-blue-100 leading-relaxed">
               {language === 'EN'
                 ? 'Check part compatibility, calculate power consumption & instantly print quotation in BDT.'
-                : 'পার্টস সামঞ্জস্যতা পরীক্ষা করুন, পাওয়ার হিসেব করুন এবং প্রিন্ট করুন।'}
+                : 'পার্টস সামঞ্জস্যতা পরীক্ষা করুন, পাওয়ার হিসেব করুন এবং প্রিন্ট করুন।'}
             </p>
 
             <button
@@ -191,3 +204,4 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
     </div>
   );
 };
+

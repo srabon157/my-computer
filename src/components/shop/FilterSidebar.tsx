@@ -113,9 +113,9 @@ export const FilterSidebar: React.FC = () => {
 
         <input
           type="range"
-          min="5000"
+          min="1000"
           max="500000"
-          step="5000"
+          step="1000"
           value={filters.priceRange[1]}
           onChange={e =>
             setFilters(prev => ({
