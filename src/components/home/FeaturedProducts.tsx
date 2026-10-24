@@ -6,11 +6,11 @@ import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal';
 import { Sparkles, ChevronRight } from 'lucide-react';
 
 const TABS = [
-  { id: 'all',        label: { EN: 'All Products',   BN: 'সকল পণ্য' },       emoji: '🛒', color: 'blue' },
-  { id: 'laptop',     label: { EN: 'Laptops',        BN: 'ল্যাপটপ' },         emoji: '💻', color: 'blue' },
-  { id: 'components', label: { EN: 'PC Parts',       BN: 'পিসি পার্টস' },     emoji: '⚙️', color: 'blue' },
-  { id: 'gaming',     label: { EN: 'Gaming',         BN: 'গেমিং' },           emoji: '🎮', color: 'purple' },
-  { id: 'smart-home', label: { EN: 'TV & AC',        BN: 'টিভি ও এসি' },      emoji: '📺', color: 'emerald' },
+  { id: 'all',        label: { EN: 'All',       BN: 'সকল' },        emoji: '🛒', color: 'blue' },
+  { id: 'laptop',     label: { EN: 'Laptops',   BN: 'ল্যাপটপ' },     emoji: '💻', color: 'blue' },
+  { id: 'components', label: { EN: 'PC Parts',  BN: 'পিসি পার্টস' }, emoji: '⚙️', color: 'blue' },
+  { id: 'gaming',     label: { EN: 'Gaming',    BN: 'গেমিং' },       emoji: '🎮', color: 'purple' },
+  { id: 'smart-home', label: { EN: 'TV & AC',   BN: 'টিভি ও এসি' },  emoji: '📺', color: 'emerald' },
 ] as const;
 
 type TabId = typeof TABS[number]['id'];
@@ -31,44 +31,54 @@ export const FeaturedProducts: React.FC = () => {
   const { containerRef, inView: gridInView } = useStaggerReveal<HTMLDivElement>(8);
 
   return (
-    <section className="py-8">
+    <section>
       {/* Header & Tabs */}
       <div
         ref={headerRef}
-        className={`flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-700 ${
+        className={`flex flex-col gap-3 mb-5 transition-all duration-700 ${
           headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <div>
+        {/* Title row */}
+        <div className="flex items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Sparkles
-              className="w-5 h-5 text-orange-500"
+              className="w-5 h-5 text-orange-500 flex-shrink-0"
               style={{ animation: headerInView ? 'iconSpinPop 0.6s 0.2s cubic-bezier(0.34,1.56,0.64,1) both' : 'none' }}
             />
-            <h2 className={`text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white animated-underline ${headerInView ? 'in-view' : ''}`}>
-              {language === 'EN' ? 'Featured Technology' : 'বিশেষ আকর্ষণ'}
-            </h2>
+            <div>
+              <h2 className={`text-lg sm:text-xl md:text-2xl font-black tracking-tight text-slate-950 animated-underline ${headerInView ? 'in-view' : ''}`}>
+                {language === 'EN' ? 'Featured Technology' : 'বিশেষ আকর্ষণ'}
+              </h2>
+              <p className="text-xs text-slate-600 font-medium mt-0.5 hidden sm:block">
+                Top laptops, components &amp; gadgets with BD official warranty
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
-            Top performing gadgets, laptops &amp; components with full BD official warranty
-          </p>
+          <button
+            onClick={() => { setFilters(p => ({ ...p, category: null })); setCurrentView('shop'); }}
+            className="text-xs font-bold text-blue-600 hover:text-orange-600 flex items-center gap-1 group transition-colors whitespace-nowrap flex-shrink-0"
+          >
+            <span className="hidden sm:inline">{language === 'EN' ? 'View All' : 'সবগুলো'}</span>
+            <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
           {TABS.map((tab, i) => {
             const isActive = activeTab === tab.id;
             const colorMap: Record<string, string> = {
-              blue: isActive ? 'bg-blue-600 text-white shadow-md shadow-blue-500/30' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700',
-              purple: isActive ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700',
-              emerald: isActive ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/30' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700',
+              blue:    isActive ? 'bg-blue-600 text-white shadow-md'   : 'bg-white text-slate-700 border border-slate-200 hover:border-blue-300',
+              purple:  isActive ? 'bg-purple-600 text-white shadow-md' : 'bg-white text-slate-700 border border-slate-200 hover:border-purple-300',
+              emerald: isActive ? 'bg-emerald-600 text-white shadow-md': 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-300',
             };
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${colorMap[tab.color]} hover:-translate-y-0.5 active:translate-y-0`}
-                style={{ transitionDelay: `${i * 0.05}s` }}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${colorMap[tab.color]} hover:-translate-y-0.5 active:translate-y-0`}
+                style={{ transitionDelay: `${i * 0.04}s` }}
               >
                 {tab.emoji} {language === 'EN' ? tab.label.EN : tab.label.BN}
               </button>
@@ -77,36 +87,37 @@ export const FeaturedProducts: React.FC = () => {
         </div>
       </div>
 
-      {/* Grid of Product Cards — staggered */}
+      {/* Grid */}
       <div
         ref={containerRef}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
-        key={activeTab}  // re-trigger stagger when tab changes
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-7 gap-y-7"
+        key={activeTab}
       >
         {filtered.slice(0, 8).map((product, idx) => (
           <div
             key={product.id}
             className="stagger-item in-view"
-            style={{ transitionDelay: `${idx * 0.07}s` }}
+            style={{ transitionDelay: `${idx * 0.06}s` }}
           >
             <ProductCard product={product} />
           </div>
         ))}
       </div>
 
-      {/* View All Button */}
-      <div
-        className={`mt-8 text-center transition-all duration-700 delay-300 ${gridInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-      >
+      {/* View All */}
+      <div className={`mt-4 text-center transition-all duration-700 delay-300 ${gridInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <button
           onClick={() => {
-            setFilters(prev => ({ ...prev, category: null }));
+            const catMap: Record<TabId, string | null> = {
+              all: null, laptop: 'laptop', components: 'processor', gaming: 'gaming-pc', 'smart-home': 'tv-appliance'
+            };
+            setFilters(p => ({ ...p, category: catMap[activeTab] }));
             setCurrentView('shop');
           }}
-          className="inline-flex items-center gap-2 bg-slate-900 dark:bg-blue-600 hover:bg-orange-500 dark:hover:bg-orange-500 text-white font-extrabold text-xs px-8 py-3.5 rounded-xl transition-all shadow-md hover:shadow-orange-500/30 hover:-translate-y-1 active:translate-y-0 btn-ripple"
+          className="inline-flex items-center gap-2 bg-slate-900 hover:bg-blue-600 text-white font-bold text-sm px-8 py-3 rounded-2xl transition-all shadow-md hover:shadow-blue-500/25 hover:-translate-y-0.5 active:translate-y-0"
         >
-          <span>{language === 'EN' ? 'Explore Full Store Catalog' : 'সম্পূর্ণ ক্যাটালগ দেখুন'}</span>
-          <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <span>{language === 'EN' ? 'See All Products in Category' : 'সকল পণ্য দেখুন'}</span>
+          <ChevronRight className="w-4 h-4" />
         </button>
       </div>
     </section>

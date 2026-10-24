@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { Logo } from '../common/Logo';
 import { ShieldCheck, Truck, Wrench } from 'lucide-react';
@@ -23,32 +23,32 @@ export const AboutPage: React.FC = () => {
 
       {/* 4 Key Pillars */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-          <div className="p-3 rounded-2xl bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400 w-fit">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-3">
+          <div className="p-3 rounded-2xl bg-blue-100 text-blue-600 w-fit">
             <ShieldCheck className="w-6 h-6" />
           </div>
-          <h3 className="font-extrabold text-lg text-slate-900 dark:text-white">100% Official Warranty</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <h3 className="font-extrabold text-lg text-slate-900">100% Official Warranty</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
             All laptops, graphics cards, and processors sold at My Computer come with verified manufacturer warranties backed directly by Asus, Apple, Dell, HP, Lenovo & Intel.
           </p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-          <div className="p-3 rounded-2xl bg-orange-100 text-orange-600 dark:bg-orange-950 dark:text-orange-400 w-fit">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-3">
+          <div className="p-3 rounded-2xl bg-orange-100 text-orange-600 w-fit">
             <Wrench className="w-6 h-6" />
           </div>
-          <h3 className="font-extrabold text-lg text-slate-900 dark:text-white">Expert PC Building</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <h3 className="font-extrabold text-lg text-slate-900">Expert PC Building</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
             Our certified hardware engineers assemble custom rigs with precision cable management, thermal compound application, stress testing & BIOS optimization.
           </p>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-          <div className="p-3 rounded-2xl bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400 w-fit">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-3">
+          <div className="p-3 rounded-2xl bg-emerald-100 text-emerald-600 w-fit">
             <Truck className="w-6 h-6" />
           </div>
-          <h3 className="font-extrabold text-lg text-slate-900 dark:text-white">Rapid Delivery Nationwide</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <h3 className="font-extrabold text-lg text-slate-900">Rapid Delivery Nationwide</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
             Same-day express delivery within Dhaka metropolitan area and insured courier dispatch across all 64 districts of Bangladesh.
           </p>
         </div>

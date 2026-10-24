@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
 
@@ -17,7 +17,7 @@ export const ToastContainer: React.FC = () => {
               ? 'bg-amber-500/90 text-white border-amber-400/50'
               : toast.type === 'info'
               ? 'bg-blue-600/90 text-white border-blue-400/50'
-              : 'bg-slate-900/95 text-white border-blue-500/40 dark:bg-slate-900/95'
+              : 'bg-slate-900/95 text-white border-blue-500/40'
           }`}
         >
           <div className="mr-3 mt-0.5 text-orange-400">

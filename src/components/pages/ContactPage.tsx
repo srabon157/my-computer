@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PhoneCall, Mail, MapPin, Send, MessageSquare, Clock } from 'lucide-react';
 
@@ -38,12 +38,12 @@ export const ContactPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Contact Info Sidebar */}
         <div className="space-y-4">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-4">
-            <h3 className="font-extrabold text-base text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-4">
+            <h3 className="font-extrabold text-base text-slate-900 border-b border-slate-200 pb-3">
               Corporate Headquarters
             </h3>
 
-            <div className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+            <div className="space-y-3 text-xs text-slate-600">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <span>Shop #304-308 (3rd Floor), BCS Computer City, IDB Bhaban, Agargaon, Dhaka-1207</span>
@@ -51,7 +51,7 @@ export const ContactPage: React.FC = () => {
 
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-orange-500 shrink-0" />
-                <span className="font-semibold text-slate-900 dark:text-white">support@mycomputerbd.com</span>
+                <span className="font-semibold text-slate-900">support@mycomputerbd.com</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -63,53 +63,53 @@ export const ContactPage: React.FC = () => {
         </div>
 
         {/* Form */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
-          <h3 className="font-extrabold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+        <div className="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6">
+          <h3 className="font-extrabold text-lg text-slate-900 flex items-center gap-2">
             <MessageSquare className="w-5 h-5 text-blue-600" />
             <span>Send Us a Direct Inquiry</span>
           </h3>
 
           {submitted ? (
-            <div className="p-8 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center space-y-2">
-              <h4 className="font-extrabold text-lg text-emerald-800 dark:text-emerald-300">Inquiry Received!</h4>
-              <p className="text-xs text-emerald-700 dark:text-emerald-400">Our customer care team will contact your phone or email shortly.</p>
+            <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
+              <h4 className="font-extrabold text-lg text-emerald-800">Inquiry Received!</h4>
+              <p className="text-xs text-emerald-700">Our customer care team will contact your phone or email shortly.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Your Full Name *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Your Full Name *</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Shakib Ahmed"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Mobile Phone Number *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Mobile Phone Number *</label>
                   <input
                     type="tel"
                     required
                     value={formData.phone}
                     onChange={e => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="01711000000"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Message Details *</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Message Details *</label>
                 <textarea
                   rows={4}
                   required
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us what product specs or quotation you need..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-medium text-slate-900 dark:text-white focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-xs font-medium text-slate-900 focus:outline-none focus:border-blue-500"
                 ></textarea>
               </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS } from '../../data/mockData';
 import type { Product, PCBuildComponent } from '../../types';
@@ -49,37 +49,37 @@ const ProductPicker: React.FC<ProductPickerProps> = ({ slotId, slotLabel, onSele
   return (
     <div className="flex flex-col h-full">
       {/* Picker Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 bg-slate-50 flex-shrink-0">
         <div className="flex items-center gap-2">
           <Wrench className="w-4 h-4 text-orange-500" />
-          <span className="font-bold text-sm text-slate-900 dark:text-white">
+          <span className="font-bold text-sm text-slate-900">
             Select {slotLabel}
           </span>
         </div>
         <button
           onClick={onClose}
-          className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+          className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-all"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Search */}
-      <div className="px-3 py-2 border-b border-slate-100 dark:border-slate-700/50 flex-shrink-0">
-        <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 rounded-xl px-3 py-1.5">
+      <div className="px-3 py-2 border-b border-slate-100 flex-shrink-0">
+        <div className="flex items-center gap-2 bg-slate-100 rounded-xl px-3 py-1.5">
           <Search className="w-3.5 h-3.5 text-slate-400" />
           <input
             autoFocus
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search product..."
-            className="bg-transparent text-xs text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none flex-1"
+            className="bg-transparent text-xs text-slate-800 placeholder-slate-400 focus:outline-none flex-1"
           />
         </div>
       </div>
 
       {/* Product List */}
-      <div className="overflow-y-auto flex-1 divide-y divide-slate-100 dark:divide-slate-700/50">
+      <div className="overflow-y-auto flex-1 divide-y divide-slate-100">
         {products.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-slate-400">
             <Monitor className="w-8 h-8 mb-2 opacity-40" />
@@ -91,15 +91,15 @@ const ProductPicker: React.FC<ProductPickerProps> = ({ slotId, slotLabel, onSele
             <button
               key={p.id}
               onClick={() => { onSelect(p); onClose(); }}
-              className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-blue-50 dark:hover:bg-slate-700/60 transition-colors text-left group"
+              className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-blue-50 transition-colors text-left group"
             >
               <img
                 src={p.images[0]}
                 alt={p.name}
-                className="w-10 h-10 object-contain rounded-lg bg-slate-100 dark:bg-slate-800 p-1 flex-shrink-0"
+                className="w-10 h-10 object-contain rounded-lg bg-slate-100 p-1 flex-shrink-0"
               />
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-semibold text-slate-900 dark:text-white line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <p className="text-[12px] font-semibold text-slate-900 line-clamp-1 group-hover:text-blue-600 transition-colors">
                   {p.name}
                 </p>
                 <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">
@@ -167,7 +167,7 @@ export const PCBuildDropdown: React.FC = () => {
         className={`relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
           open
             ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
-            : 'bg-orange-500/10 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 hover:bg-orange-500 hover:text-white border border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/20'
+            : 'bg-orange-500/10 text-orange-600 hover:bg-orange-500 hover:text-white border border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/20'
         }`}
         title="PC Build Configurator"
       >
@@ -184,7 +184,7 @@ export const PCBuildDropdown: React.FC = () => {
       {open && (
         <div
           ref={panelRef}
-          className={`fixed inset-x-2 top-16 bottom-20 sm:bottom-auto sm:inset-auto sm:absolute sm:right-0 sm:top-full sm:mt-2 z-[60] flex shadow-2xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 sm:max-h-[560px] ${
+          className={`fixed inset-x-2 top-16 bottom-20 sm:bottom-auto sm:inset-auto sm:absolute sm:right-0 sm:top-full sm:mt-2 z-[60] flex shadow-2xl rounded-2xl overflow-hidden border border-slate-200 bg-white sm:max-h-[560px] ${
             activePickerSlot ? 'sm:w-[680px]' : 'sm:w-[400px]'
           }`}
           style={{
@@ -193,7 +193,7 @@ export const PCBuildDropdown: React.FC = () => {
         >
           {/* ── Left: Component Slots ──────────────────────── */}
           <div
-            className={`flex flex-col bg-white dark:bg-slate-900 flex-shrink-0 ${
+            className={`flex flex-col bg-white flex-shrink-0 ${
               activePickerSlot ? 'hidden sm:flex sm:w-[300px]' : 'w-full'
             }`}
           >
@@ -216,10 +216,10 @@ export const PCBuildDropdown: React.FC = () => {
             {/* Compatibility Banner */}
             <div className={`mx-3 mt-2 mb-1 px-3 py-1.5 rounded-xl text-[10px] font-semibold flex items-center gap-2 ${
               pcBuildCompatibilityIssue
-                ? 'bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20'
+                ? 'bg-red-500/10 text-red-600 border border-red-500/20'
                 : filledCount > 0
-                  ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700'
+                  ? 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20'
+                  : 'bg-slate-100 text-slate-500 border border-slate-200'
             }`}>
               {pcBuildCompatibilityIssue ? (
                 <><AlertTriangle className="w-3 h-3 flex-shrink-0" /><span className="line-clamp-2">{pcBuildCompatibilityIssue}</span></>
@@ -231,7 +231,7 @@ export const PCBuildDropdown: React.FC = () => {
             </div>
 
             {/* Slot List */}
-            <div className="overflow-y-auto flex-1 divide-y divide-slate-100 dark:divide-slate-800">
+            <div className="overflow-y-auto flex-1 divide-y divide-slate-100">
               {SLOT_META.map(meta => {
                 const slot = pcBuildComponents.find(s => s.slotId === meta.id);
                 const product = slot?.product ?? null;
@@ -241,23 +241,23 @@ export const PCBuildDropdown: React.FC = () => {
                   <div
                     key={meta.id}
                     className={`flex items-center gap-2.5 px-3 py-2.5 transition-colors ${
-                      isActivePicker ? 'bg-blue-50 dark:bg-blue-950/30' : 'hover:bg-slate-50 dark:hover:bg-slate-800/40'
+                      isActivePicker ? 'bg-blue-50' : 'hover:bg-slate-50'
                     }`}
                   >
                     {/* Slot Icon */}
-                    <div className={`w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 ${meta.color}`}>
+                    <div className={`w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0 ${meta.color}`}>
                       {meta.icon}
                     </div>
 
                     {/* Product info or empty */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide leading-none mb-0.5">
+                      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wide leading-none mb-0.5">
                         {language === 'EN' ? meta.label : meta.labelBn}
                       </p>
                       {product ? (
                         <div className="flex items-center gap-1.5">
                           <img src={product.images[0]} alt={product.name} className="w-5 h-5 object-contain rounded" />
-                          <p className="text-[11px] font-semibold text-slate-800 dark:text-slate-200 line-clamp-1 flex-1">
+                          <p className="text-[11px] font-semibold text-slate-800 line-clamp-1 flex-1">
                             {product.name}
                           </p>
                           <span className="text-[11px] font-extrabold text-orange-500 flex-shrink-0">
@@ -275,7 +275,7 @@ export const PCBuildDropdown: React.FC = () => {
                         <>
                           <button
                             onClick={() => setActivePickerSlot(isActivePicker ? null : meta.id)}
-                            className="text-[10px] px-2 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-lg font-bold hover:bg-blue-200 transition-colors"
+                            className="text-[10px] px-2 py-1 bg-blue-100 text-blue-600 rounded-lg font-bold hover:bg-blue-200 transition-colors"
                           >
                             Change
                           </button>
@@ -295,7 +295,7 @@ export const PCBuildDropdown: React.FC = () => {
                           className={`flex items-center gap-1 text-[10px] px-2.5 py-1.5 rounded-lg font-bold transition-all ${
                             isActivePicker
                               ? 'bg-blue-600 text-white'
-                              : 'bg-slate-900 dark:bg-slate-700 text-white hover:bg-blue-600'
+                              : 'bg-slate-900 text-white hover:bg-blue-600'
                           }`}
                         >
                           <Plus className="w-3 h-3" />
@@ -309,7 +309,7 @@ export const PCBuildDropdown: React.FC = () => {
             </div>
 
             {/* Footer: Total + Actions */}
-            <div className="px-3 py-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 flex-shrink-0 space-y-2">
+            <div className="px-3 py-3 border-t border-slate-200 bg-slate-50 flex-shrink-0 space-y-2">
               {/* Price summary */}
               <div className="flex items-center justify-between">
                 <div>
@@ -328,7 +328,7 @@ export const PCBuildDropdown: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={clearPCBuild}
-                  className="text-[11px] font-semibold text-slate-500 hover:text-red-500 transition-colors flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20"
+                  className="text-[11px] font-semibold text-slate-500 hover:text-red-500 transition-colors flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-red-50"
                 >
                   <Trash2 className="w-3 h-3" />
                   Reset
@@ -336,7 +336,7 @@ export const PCBuildDropdown: React.FC = () => {
 
                 <button
                   onClick={() => { setOpen(false); setCurrentView('pc-builder'); }}
-                  className="flex-1 flex items-center justify-center gap-1 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-blue-500/40 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-blue-500/40 text-blue-600 hover:bg-blue-50 transition-colors"
                 >
                   <ChevronRight className="w-3 h-3" />
                   Full Builder
@@ -360,7 +360,7 @@ export const PCBuildDropdown: React.FC = () => {
           {/* ── Right: Product Picker ──────────────────────── */}
           {activePickerSlot && activePicker && (
             <div
-              className="flex-1 flex flex-col bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-700"
+              className="flex-1 flex flex-col bg-white border-l border-slate-200"
               style={{ minWidth: 0 }}
             >
               <ProductPicker

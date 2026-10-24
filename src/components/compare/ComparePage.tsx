@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { GitCompare, Trash2, ShoppingCart } from 'lucide-react';
 
@@ -8,10 +8,10 @@ export const ComparePage: React.FC = () => {
   if (compareList.length === 0) {
     return (
       <div className="py-16 text-center max-w-md mx-auto space-y-4">
-        <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-600 flex items-center justify-center mx-auto">
+        <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto">
           <GitCompare className="w-8 h-8" />
         </div>
-        <h2 className="font-extrabold text-xl text-slate-900 dark:text-white">
+        <h2 className="font-extrabold text-xl text-slate-900">
           Comparison Tool Empty
         </h2>
         <p className="text-xs text-slate-500">
@@ -31,7 +31,7 @@ export const ComparePage: React.FC = () => {
     <div className="py-8 space-y-6 animate-fadeIn">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+          <h1 className="text-2xl font-extrabold text-slate-900">
             Product Comparison ({compareList.length}/4)
           </h1>
           <p className="text-xs text-slate-500">Side-by-side specifications and price comparison</p>
@@ -46,12 +46,12 @@ export const ComparePage: React.FC = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden text-xs">
-          <thead className="bg-slate-50 dark:bg-slate-800">
+        <table className="w-full bg-white border border-slate-200 rounded-3xl overflow-hidden text-xs">
+          <thead className="bg-slate-50">
             <tr>
               <th className="p-4 w-48 text-slate-400 font-bold uppercase">Attribute</th>
               {compareList.map(p => (
-                <th key={p.id} className="p-4 min-w-[220px] text-center border-l border-slate-200 dark:border-slate-800 relative">
+                <th key={p.id} className="p-4 min-w-[220px] text-center border-l border-slate-200 relative">
                   <button
                     onClick={() => removeFromCompare(p.id)}
                     className="absolute top-2 right-2 p-1 text-slate-400 hover:text-red-500"
@@ -60,7 +60,7 @@ export const ComparePage: React.FC = () => {
                     ✕
                   </button>
                   <img src={p.images[0]} alt={p.name} className="w-24 h-24 object-contain mx-auto mb-2" />
-                  <h4 className="font-bold text-slate-900 dark:text-white line-clamp-2">{p.name}</h4>
+                  <h4 className="font-bold text-slate-900 line-clamp-2">{p.name}</h4>
                   <span className="font-extrabold text-sm text-orange-500 block mt-1">৳{p.discountPrice.toLocaleString()}</span>
                   <button
                     onClick={() => addToCart(p, 1)}
@@ -72,35 +72,35 @@ export const ComparePage: React.FC = () => {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody className="divide-y divide-slate-100">
             <tr>
               <td className="p-4 font-bold text-slate-500">Brand</td>
               {compareList.map(p => (
-                <td key={p.id} className="p-4 text-center font-bold text-blue-600 border-l border-slate-200 dark:border-slate-800">{p.brand}</td>
+                <td key={p.id} className="p-4 text-center font-bold text-blue-600 border-l border-slate-200">{p.brand}</td>
               ))}
             </tr>
             <tr>
               <td className="p-4 font-bold text-slate-500">Stock Status</td>
               {compareList.map(p => (
-                <td key={p.id} className="p-4 text-center font-semibold text-emerald-500 border-l border-slate-200 dark:border-slate-800">{p.stockStatus}</td>
+                <td key={p.id} className="p-4 text-center font-semibold text-emerald-500 border-l border-slate-200">{p.stockStatus}</td>
               ))}
             </tr>
             <tr>
               <td className="p-4 font-bold text-slate-500">Rating</td>
               {compareList.map(p => (
-                <td key={p.id} className="p-4 text-center font-bold text-amber-500 border-l border-slate-200 dark:border-slate-800">★ {p.rating} ({p.reviewCount})</td>
+                <td key={p.id} className="p-4 text-center font-bold text-amber-500 border-l border-slate-200">★ {p.rating} ({p.reviewCount})</td>
               ))}
             </tr>
             <tr>
               <td className="p-4 font-bold text-slate-500">Warranty</td>
               {compareList.map(p => (
-                <td key={p.id} className="p-4 text-center text-slate-700 dark:text-slate-300 border-l border-slate-200 dark:border-slate-800">{p.warranty}</td>
+                <td key={p.id} className="p-4 text-center text-slate-700 border-l border-slate-200">{p.warranty}</td>
               ))}
             </tr>
             <tr>
               <td className="p-4 font-bold text-slate-500">Key Features</td>
               {compareList.map(p => (
-                <td key={p.id} className="p-4 border-l border-slate-200 dark:border-slate-800 text-left">
+                <td key={p.id} className="p-4 border-l border-slate-200 text-left">
                   <ul className="space-y-1">
                     {p.shortSpecs.map((s, idx) => (
                       <li key={idx} className="truncate">• {s}</li>

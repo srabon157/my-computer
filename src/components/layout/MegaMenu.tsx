@@ -1,6 +1,6 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStore } from '../../context/StoreContext';
-import { Laptop, Cpu, Tv, ChevronRight, Sparkles, Signal } from 'lucide-react';
+import { Laptop, Cpu, Tv, ChevronRight, Sparkles, Signal, ShieldCheck } from 'lucide-react';
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -20,43 +20,43 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="absolute top-full left-0 w-full bg-white dark:bg-slate-900 shadow-2xl border-b border-slate-200 dark:border-slate-800 z-40 animate-fadeIn"
+      className="absolute top-full left-0 w-full bg-white shadow-2xl border-b border-slate-200 z-40 animate-fadeIn"
       onMouseLeave={onClose}
     >
       <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Column 1: Systems & Mobile */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">
-            <Laptop className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          <div className="flex items-center gap-2 font-black text-slate-950 border-b border-slate-200 pb-2">
+            <Laptop className="w-5 h-5 text-blue-600" />
             <span>{language === 'EN' ? 'Systems & Mobile' : 'সিস্টেম ও মোবাইল'}</span>
           </div>
-          <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <ul className="space-y-2 text-sm text-slate-800 font-semibold">
             <li>
-              <button onClick={() => navigateCategory('desktop')} className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('desktop')} className="hover:text-blue-600 flex items-center justify-between w-full py-1">
                 <span>🖥️ Desktop PCs & Workstations</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('laptop')} className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('laptop')} className="hover:text-blue-600 flex items-center justify-between w-full py-1">
                 <span>💻 Laptops & Apple MacBooks</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('phone')} className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('phone')} className="hover:text-blue-600 flex items-center justify-between w-full py-1">
                 <span>📱 Smartphones & iPhones</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('tablet')} className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('tablet')} className="hover:text-blue-600 flex items-center justify-between w-full py-1">
                 <span>📟 Tablets & iPads</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('monitor')} className="hover:text-blue-600 dark:hover:text-blue-400 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('monitor')} className="hover:text-blue-600 flex items-center justify-between w-full py-1">
                 <span>🖥️ Monitors & 4K Displays</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
@@ -66,32 +66,32 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
         {/* Column 2: Components & Infrastructure */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">
+          <div className="flex items-center gap-2 font-black text-slate-950 border-b border-slate-200 pb-2">
             <Cpu className="w-5 h-5 text-orange-500" />
             <span>{language === 'EN' ? 'Components & Infrastructure' : 'কম্পোনেন্ট ও সার্ভার'}</span>
           </div>
-          <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <ul className="space-y-2 text-sm text-slate-800 font-semibold">
             <li>
-              <button onClick={() => navigateCategory('component')} className="hover:text-orange-500 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('component')} className="hover:text-orange-600 flex items-center justify-between w-full py-1">
                 <span>⚙️ Core PC Components (CPU, GPU, RAM)</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('power')} className="hover:text-orange-500 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('power')} className="hover:text-orange-600 flex items-center justify-between w-full py-1">
                 <span>⚡ Power (Online UPS, IPS, Inverter)</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('server-storage')} className="hover:text-orange-500 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('server-storage')} className="hover:text-orange-600 flex items-center justify-between w-full py-1">
                 <span>🗄️ Server & Storage (NAS, SAS HDD)</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
             </li>
             {/* ── Networking + ONU side-by-side ── */}
-            <li className="border-t border-slate-100 dark:border-slate-800 pt-2 mt-1">
-              <button onClick={() => navigateCategory('networking')} className="hover:text-orange-500 flex items-center justify-between w-full py-1">
+            <li className="border-t border-slate-100 pt-2 mt-1">
+              <button onClick={() => navigateCategory('networking')} className="hover:text-orange-600 flex items-center justify-between w-full py-1">
                 <span>📶 Networking (Routers, MikroTik, Switches)</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
@@ -99,17 +99,17 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
             <li>
               <button
                 onClick={() => navigateCategory('onu-device')}
-                className="flex items-center justify-between w-full py-1.5 px-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 transition-colors"
+                className="flex items-center justify-between w-full py-1.5 px-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 transition-colors font-bold"
               >
                 <span className="flex items-center gap-1.5">
                   <Signal className="w-3.5 h-3.5" />
-                  <span className="font-semibold">ONU / ONT Fiber Devices</span>
+                  <span>ONU / ONT Fiber Devices</span>
                 </span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-70" />
               </button>
             </li>
             <li>
-              <button onClick={() => navigateCategory('software')} className="hover:text-orange-500 flex items-center justify-between w-full py-1">
+              <button onClick={() => navigateCategory('software')} className="hover:text-orange-600 flex items-center justify-between w-full py-1">
                 <span>💿 Genuine Software & Antivirus</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
               </button>
@@ -119,15 +119,31 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
         {/* Column 3: Electronics, Office & Gadgets */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2">
-            <Tv className="w-5 h-5 text-emerald-500" />
+          <div className="flex items-center gap-2 font-black text-slate-950 border-b border-slate-200 pb-2">
+            <Tv className="w-5 h-5 text-emerald-600" />
             <span>{language === 'EN' ? 'Electronics & Security' : 'ইলেকট্রনিক্স ও সিকিউরিটি'}</span>
           </div>
-          <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <ul className="space-y-2 text-sm text-slate-800 font-semibold">
             <li>
               <button onClick={() => navigateCategory('security')} className="hover:text-emerald-500 flex items-center justify-between w-full py-1">
                 <span>🛡️ Security & CCTV Systems</span>
                 <ChevronRight className="w-3.5 h-3.5 opacity-50" />
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  setFilters(prev => ({ ...prev, category: 'ezviz-camera', brand: ['EZVIZ'] }));
+                  setCurrentView('shop');
+                  onClose();
+                }}
+                className="flex items-center justify-between w-full py-1.5 px-2 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-800 border border-orange-200 transition-colors font-bold"
+              >
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-orange-600 flex-shrink-0" />
+                  <span>EZVIZ Cameras (ইজভিজ ক্যামেরা)</span>
+                </span>
+                <span className="text-[10px] bg-orange-600 text-white font-extrabold px-1.5 py-0.5 rounded-full">HOT</span>
               </button>
             </li>
             <li>

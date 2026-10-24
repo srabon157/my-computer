@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS } from '../../data/mockData';
 import { Search, Sparkles, X } from 'lucide-react';
@@ -37,7 +37,7 @@ export const AISearchModal: React.FC<AISearchModalProps> = ({ isOpen, onClose })
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-start justify-center pt-16 md:pt-24 p-4 animate-fadeIn">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+      <div className="bg-white w-full max-w-2xl rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
         
         {/* Search Input Bar */}
         <div className="p-4 bg-slate-900 text-white flex items-center space-x-3 border-b border-slate-800">
@@ -56,13 +56,13 @@ export const AISearchModal: React.FC<AISearchModalProps> = ({ isOpen, onClose })
         </div>
 
         {/* Preset Suggestions */}
-        <div className="p-4 bg-slate-50 dark:bg-slate-950/50 border-b border-slate-200 dark:border-slate-800 flex items-center space-x-2 overflow-x-auto no-scrollbar text-xs">
+        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center space-x-2 overflow-x-auto no-scrollbar text-xs">
           <span className="text-slate-400 font-bold flex-shrink-0">Popular:</span>
           {['RTX 4080', 'ROG Strix', 'MacBook M3', '4K TV', 'Hikvision CCTV', 'LGA1700'].map(term => (
             <button
               key={term}
               onClick={() => handlePresetSearch(term)}
-              className="px-3 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold hover:border-orange-500 hover:text-orange-500 transition-all flex-shrink-0"
+              className="px-3 py-1 rounded-full bg-white border border-slate-200 font-semibold hover:border-orange-500 hover:text-orange-500 transition-all flex-shrink-0"
             >
               {term}
             </button>
@@ -85,12 +85,12 @@ export const AISearchModal: React.FC<AISearchModalProps> = ({ isOpen, onClose })
               <div
                 key={p.id}
                 onClick={() => handleSelectProduct(p.id)}
-                className="p-3 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 hover:border-blue-500 cursor-pointer flex items-center justify-between gap-3 transition-all hover:shadow-md"
+                className="p-3 rounded-2xl bg-white border border-slate-200 hover:border-blue-500 cursor-pointer flex items-center justify-between gap-3 transition-all hover:shadow-md"
               >
-                <img src={p.images[0]} alt={p.name} className="w-12 h-12 object-contain rounded-xl bg-slate-50 dark:bg-slate-900 p-1" />
+                <img src={p.images[0]} alt={p.name} className="w-12 h-12 object-contain rounded-xl bg-slate-50 p-1" />
                 <div className="flex-1 min-w-0">
                   <span className="text-[10px] uppercase font-bold text-blue-500">{p.brand}</span>
-                  <h4 className="font-bold text-xs text-slate-900 dark:text-white truncate">{p.name}</h4>
+                  <h4 className="font-bold text-xs text-slate-900 truncate">{p.name}</h4>
                   <p className="text-[11px] text-slate-400 truncate">{p.shortSpecs[0]}</p>
                 </div>
                 <div className="text-right">

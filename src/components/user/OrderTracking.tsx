@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { Search, Truck, CheckCircle2, Clock } from 'lucide-react';
 
@@ -51,25 +51,25 @@ export const OrderTracking: React.FC = () => {
 
       {/* Order Status Timeline Card */}
       {matchedOrder && (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 md:p-8 border border-slate-200/80 dark:border-slate-800 shadow-lg space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/80 shadow-lg space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
             <div>
               <span className="text-xs text-slate-400 font-semibold block">Order Reference</span>
-              <h3 className="font-extrabold text-xl text-slate-900 dark:text-white">
+              <h3 className="font-extrabold text-xl text-slate-900">
                 {matchedOrder.id}
               </h3>
             </div>
 
             <div>
               <span className="text-xs text-slate-400 font-semibold block">Order Status</span>
-              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 font-extrabold text-xs">
+              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 font-extrabold text-xs">
                 {matchedOrder.orderStatus}
               </span>
             </div>
 
             <div>
               <span className="text-xs text-slate-400 font-semibold block">Estimated Delivery</span>
-              <span className="font-bold text-xs text-slate-900 dark:text-white">Within 24-48 Hours</span>
+              <span className="font-bold text-xs text-slate-900">Within 24-48 Hours</span>
             </div>
           </div>
 
@@ -79,7 +79,7 @@ export const OrderTracking: React.FC = () => {
               Tracking Progress Pipeline:
             </h4>
 
-            <div className="relative pl-6 space-y-8 border-l-2 border-slate-200 dark:border-slate-800">
+            <div className="relative pl-6 space-y-8 border-l-2 border-slate-200">
               {matchedOrder.trackingSteps.map((step, idx) => (
                 <div key={idx} className="relative">
                   <div
@@ -88,14 +88,14 @@ export const OrderTracking: React.FC = () => {
                         ? 'bg-emerald-500 text-white border-emerald-400'
                         : step.current
                         ? 'bg-orange-500 text-white border-orange-400 animate-pulse'
-                        : 'bg-slate-200 dark:bg-slate-800 text-slate-400 border-slate-300 dark:border-slate-700'
+                        : 'bg-slate-200 text-slate-400 border-slate-300'
                     }`}
                   >
                     {step.completed ? <CheckCircle2 className="w-4 h-4" /> : <Clock className="w-3.5 h-3.5" />}
                   </div>
 
                   <div>
-                    <h5 className={`font-bold text-sm ${step.completed || step.current ? 'text-slate-900 dark:text-white' : 'text-slate-400'}`}>
+                    <h5 className={`font-bold text-sm ${step.completed || step.current ? 'text-slate-900' : 'text-slate-400'}`}>
                       {step.title}
                     </h5>
                     <p className="text-xs text-slate-400 mt-0.5">{step.date}</p>
@@ -106,14 +106,14 @@ export const OrderTracking: React.FC = () => {
           </div>
 
           {/* Recipient Summary */}
-          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
             <div>
               <span className="text-slate-400 font-semibold block">Recipient Name:</span>
-              <span className="font-bold text-slate-900 dark:text-white">{matchedOrder.customerName} ({matchedOrder.customerPhone})</span>
+              <span className="font-bold text-slate-900">{matchedOrder.customerName} ({matchedOrder.customerPhone})</span>
             </div>
             <div>
               <span className="text-slate-400 font-semibold block">Delivery Address:</span>
-              <span className="font-bold text-slate-900 dark:text-white">{matchedOrder.shippingAddress}, {matchedOrder.district}</span>
+              <span className="font-bold text-slate-900">{matchedOrder.shippingAddress}, {matchedOrder.district}</span>
             </div>
           </div>
         </div>

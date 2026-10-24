@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import type { Product } from '../../types';
 import { useStore } from '../../context/StoreContext';
 import { Star, ShoppingCart, Heart, GitCompare, Eye, Zap } from 'lucide-react';
@@ -23,6 +23,36 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const inWish    = isInWishlist(product.id);
   const inCompare = isInCompare(product.id);
 
+  // ── 3D Interactive Tilt & Specular Light ────────────────────
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({
+    rotX: 0,
+    rotY: 0,
+    glareX: 50,
+    glareY: 50,
+    isHovered: false,
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    // Calculate rotation between -7 and +7 degrees for smooth, natural 3D depth
+    const rotX = ((y - centerY) / centerY) * -6.5;
+    const rotY = ((x - centerX) / centerX) * 6.5;
+    const glareX = (x / rect.width) * 100;
+    const glareY = (y / rect.height) * 100;
+
+    setTilt({ rotX, rotY, glareX, glareY, isHovered: true });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ rotX: 0, rotY: 0, glareX: 50, glareY: 50, isHovered: false });
+  };
+
   const handleAddToCart = () => {
     addToCart(product, 1);
     setAddedPulse(true);
@@ -30,195 +60,225 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   const badgeColors: Record<string, string> = {
-    Hot:          'bg-gradient-to-r from-orange-500 to-red-500',
-    New:          'bg-gradient-to-r from-blue-500 to-indigo-600',
-    'Best Seller':'bg-gradient-to-r from-purple-600 to-violet-600',
-    Sale:         'bg-gradient-to-r from-emerald-500 to-teal-600',
+    Hot:           'bg-blue-600 text-white',
+    New:           'bg-emerald-600 text-white',
+    'Best Seller': 'bg-slate-900 text-white',
   };
 
+  const getCleanBadge = (badge?: string) => {
+    if (!badge || badge.toLowerCase() === 'sale' || badge.toLowerCase() === 'offer') return null;
+    return badge;
+  };
+
+  const cleanBadge = getCleanBadge(product.badge);
+
   return (
-    <div className="product-card group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between p-4 relative overflow-hidden">
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.rotX.toFixed(2)}deg) rotateY(${tilt.rotY.toFixed(2)}deg) translateY(${tilt.isHovered ? '-6px' : '0px'})`,
+        transformStyle: 'preserve-3d',
+        transition: tilt.isHovered
+          ? 'transform 0.08s ease-out, box-shadow 0.25s ease'
+          : 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)',
+      }}
+      className={`product-card group bg-white rounded-2xl border border-slate-200 flex flex-col justify-between p-4 sm:p-5 relative cursor-pointer ${
+        tilt.isHovered
+          ? 'shadow-[0_20px_40px_-15px_rgba(37,99,235,0.15),0_0_20px_-5px_rgba(37,99,235,0.18)] border-blue-500'
+          : 'shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:border-blue-400'
+      }`}
+    >
+      {/* 3D Specular Sheen Reflex */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300 z-30 overflow-hidden"
+        style={{
+          opacity: tilt.isHovered ? 0.35 : 0,
+          background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.15) 40%, transparent 70%)`,
+        }}
+      />
 
-      {/* Shimmer overlay on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden rounded-2xl">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%)',
-            backgroundSize: '200% 100%',
-            animation: 'shimmer 1.8s linear infinite',
-          }}
-        />
-      </div>
-
-      {/* Top Badges */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 pointer-events-none">
-        {product.badge && (
+      {/* Top Badges - 3D Pop Out */}
+      <div
+        className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 pointer-events-none"
+        style={{
+          transform: tilt.isHovered ? 'translateZ(30px)' : 'translateZ(0px)',
+          transition: 'transform 0.25s ease',
+        }}
+      >
+        {cleanBadge && (
           <span
-            className={`px-2.5 py-0.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wider text-white shadow-md ${badgeColors[product.badge] ?? 'bg-slate-600'}`}
-            style={{ animation: product.badge === 'Hot' ? 'glowPulse 2s infinite' : undefined }}
+            className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide shadow-xs ${badgeColors[cleanBadge] ?? 'bg-slate-700 text-white'}`}
           >
-            {product.badge === 'Hot' && '🔥 '}
-            {product.badge}
-          </span>
-        )}
-        {product.discountPercentage > 0 && (
-          <span className="px-2 py-0.5 rounded-lg bg-red-500 text-white font-extrabold text-[10px] shadow-md">
-            -{product.discountPercentage}%
+            {cleanBadge === 'Hot' ? 'Popular' : cleanBadge}
           </span>
         )}
       </div>
 
-      {/* Action Buttons (slide in from right on hover) */}
-      <div className="absolute top-3 right-3 z-10 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-3 group-hover:translate-x-0">
+      {/* Action Buttons - 3D Pop Out */}
+      <div
+        className="absolute top-3 right-3 z-20 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-2 group-hover:translate-x-0"
+        style={{
+          transform: tilt.isHovered ? 'translateZ(35px)' : 'translateZ(0px)',
+          transition: 'transform 0.25s ease, opacity 0.2s ease',
+        }}
+      >
         <button
-          onClick={() => toggleWishlist(product)}
-          className={`p-2 rounded-xl backdrop-blur-md border shadow-md transition-all hover:scale-110 ${
+          onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
+          className={`p-2 rounded-xl backdrop-blur-md border shadow-sm transition-all hover:scale-110 active:scale-95 ${
             inWish
-              ? 'bg-red-500 text-white border-red-400 shadow-red-500/30'
-              : 'bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:text-red-500 border-slate-200 dark:border-slate-700'
+              ? 'bg-rose-500 text-white border-rose-400'
+              : 'bg-white text-slate-700 hover:text-rose-500 border-slate-200 shadow-sm'
           }`}
           title="Add to Wishlist"
         >
-          <Heart className={`w-4 h-4 ${inWish ? 'fill-current' : ''}`} />
+          <Heart className={`w-3.5 h-3.5 ${inWish ? 'fill-current' : ''}`} />
         </button>
 
         <button
-          onClick={() => addToCompare(product)}
-          className={`p-2 rounded-xl backdrop-blur-md border shadow-md transition-all hover:scale-110 ${
+          onClick={(e) => { e.stopPropagation(); addToCompare(product); }}
+          className={`p-2 rounded-xl backdrop-blur-md border shadow-sm transition-all hover:scale-110 active:scale-95 ${
             inCompare
-              ? 'bg-blue-600 text-white border-blue-500 shadow-blue-500/30'
-              : 'bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:text-blue-600 border-slate-200 dark:border-slate-700'
+              ? 'bg-blue-600 text-white border-blue-500'
+              : 'bg-white text-slate-700 hover:text-blue-600 border-slate-200 shadow-sm'
           }`}
           title="Compare Specs"
         >
-          <GitCompare className="w-4 h-4" />
+          <GitCompare className="w-3.5 h-3.5" />
         </button>
 
         <button
-          onClick={() => setQuickViewProduct(product)}
-          className="p-2 rounded-xl bg-white/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:text-orange-500 border border-slate-200 dark:border-slate-700 backdrop-blur-md shadow-md transition-all hover:scale-110"
+          onClick={(e) => { e.stopPropagation(); setQuickViewProduct(product); }}
+          className="p-2 rounded-xl bg-white text-slate-700 hover:text-blue-600 border border-slate-200 shadow-sm transition-all hover:scale-110 active:scale-95"
           title="Quick View"
         >
-          <Eye className="w-4 h-4" />
+          <Eye className="w-3.5 h-3.5" />
         </button>
       </div>
 
-      {/* Image Container */}
+      {/* Image Container - 3D Depth Layer */}
       <div
         onClick={() => openProductDetail(product.id)}
-        className="w-full aspect-[4/3] rounded-xl overflow-hidden cursor-pointer mb-3 bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-2 relative"
+        className="w-full aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-slate-50 border border-slate-100 flex items-center justify-center p-3 relative group/img"
+        style={{
+          transform: tilt.isHovered ? 'translateZ(25px)' : 'translateZ(0px)',
+          transition: 'transform 0.25s ease',
+        }}
       >
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500 ease-out"
+          className="w-full h-full object-contain transform group-hover/img:scale-110 transition-transform duration-500 ease-out"
           loading="lazy"
         />
         {/* Quick view overlay */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center rounded-xl">
-          <button
-            onClick={(e) => { e.stopPropagation(); setQuickViewProduct(product); }}
-            className="opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 frosted-badge px-3 py-1.5 rounded-full text-xs font-bold text-white flex items-center gap-1.5"
-          >
-            <Eye className="w-3.5 h-3.5" />
+        <div className="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center rounded-xl pointer-events-none">
+          <span className="bg-white text-slate-900 text-[11px] font-semibold px-3 py-1 rounded-full shadow-md flex items-center gap-1.5 border border-slate-200">
+            <Eye className="w-3 h-3 text-blue-600" />
             Quick View
-          </button>
+          </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="space-y-2 flex-1">
-        {/* Brand & Stock */}
-        <div className="flex items-center justify-between text-[11px]">
-          <span className="font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
-            {product.brand}
-          </span>
-          <span className={`font-semibold px-2 py-0.5 rounded-full text-[10px] ${
-            product.stockStatus === 'In Stock'
-              ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300'
-              : 'bg-amber-100 text-amber-700 dark:bg-amber-950/80 dark:text-amber-300'
-          }`}>
-            {product.stockStatus === 'In Stock' ? '● ' : '○ '}
-            {product.stockStatus}
-          </span>
-        </div>
-
-        {/* Product Title */}
-        <h3
-          onClick={() => openProductDetail(product.id)}
-          className="font-bold text-xs md:text-sm text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2 cursor-pointer transition-colors leading-snug"
-        >
-          {product.name}
-        </h3>
-
-        {/* Short Specs */}
-        <ul className="text-[11px] text-slate-500 dark:text-slate-400 space-y-0.5">
-          {product.shortSpecs.slice(0, 2).map((spec, idx) => (
-            <li key={idx} className="truncate flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500/50 flex-shrink-0" />
-              {spec}
-            </li>
-          ))}
-        </ul>
-
-        {/* Rating */}
-        <div className="flex items-center gap-1.5 pt-0.5">
-          <div className="flex text-amber-400">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-current' : 'text-slate-300 dark:text-slate-700'}`}
-              />
-            ))}
-          </div>
-          <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">{product.rating}</span>
-          <span className="text-[10px] text-slate-400">({product.reviewCount})</span>
-        </div>
-
-        {/* Pricing */}
-        <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-          <div className="flex items-baseline space-x-2">
-            <span className="font-extrabold text-base md:text-lg text-slate-900 dark:text-white">
-              ৳{product.discountPrice.toLocaleString()}
+      <div
+        className="space-y-2 flex-1 flex flex-col justify-between"
+        style={{
+          transform: tilt.isHovered ? 'translateZ(15px)' : 'translateZ(0px)',
+          transition: 'transform 0.25s ease',
+        }}
+      >
+        <div>
+          {/* Brand & Stock */}
+          <div className="flex items-center justify-between text-[11px] mb-1">
+            <span className="font-bold text-blue-600 uppercase tracking-wider text-[10px]">
+              {product.brand}
             </span>
-            {product.discountPrice < product.regularPrice && (
-              <span className="text-xs text-slate-400 line-through">
-                ৳{product.regularPrice.toLocaleString()}
-              </span>
-            )}
+            <span className={`font-semibold px-2 py-0.5 rounded-full text-[10px] ${
+              product.stockStatus === 'In Stock'
+                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                : 'bg-amber-50 text-amber-800 border border-amber-200'
+            }`}>
+              {product.stockStatus === 'In Stock' ? '● ' : '○ '}
+              {product.stockStatus}
+            </span>
           </div>
-          {product.emiAvailable && product.emiStartingBDT && (
-            <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
-              EMI ৳{product.emiStartingBDT.toLocaleString()}/mo
-            </p>
-          )}
+
+          {/* Product Title */}
+          <h3
+            onClick={() => openProductDetail(product.id)}
+            className="font-bold text-xs sm:text-sm text-slate-950 hover:text-blue-600 line-clamp-2 transition-colors leading-snug"
+          >
+            {product.name}
+          </h3>
+
+          {/* Short Specs */}
+          <ul className="text-[11px] text-slate-700 font-medium space-y-0.5 mt-1.5">
+            {product.shortSpecs.slice(0, 2).map((spec, idx) => (
+              <li key={idx} className="truncate flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                <span className="truncate">{spec}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          {/* Rating */}
+          <div className="flex items-center gap-1.5 pt-2">
+            <div className="flex text-amber-500">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-current' : 'text-slate-300'}`}
+                />
+              ))}
+            </div>
+            <span className="text-[11px] font-bold text-slate-900">{product.rating}</span>
+            <span className="text-[10px] text-slate-600 font-semibold">({product.reviewCount})</span>
+          </div>
+
+          {/* Pricing - Regular/Current price ONLY, no discounts */}
+          <div className="pt-2 mt-2 border-t border-slate-200 flex items-center justify-between">
+            <div>
+              <span className="font-black text-base md:text-lg text-slate-950 tracking-tight">
+                ৳{product.discountPrice.toLocaleString()}
+              </span>
+              {product.emiAvailable && product.emiStartingBDT && (
+                <p className="text-[10px] text-slate-600 font-bold">
+                  EMI ৳{product.emiStartingBDT.toLocaleString()}/mo
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Add to Cart Button */}
+      {/* Add to Cart Button - 3D Pop Out */}
       <button
-        onClick={handleAddToCart}
-        className={`mt-3 w-full font-bold text-xs py-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-sm overflow-hidden relative ${
+        onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+        style={{
+          transform: tilt.isHovered ? 'translateZ(20px)' : 'translateZ(0px)',
+          transition: 'transform 0.25s ease, background-color 0.2s ease',
+        }}
+        className={`mt-3 w-full font-bold text-xs py-2.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-xs active:scale-[0.98] ${
           addedPulse
-            ? 'bg-emerald-500 text-white scale-95'
-            : 'bg-slate-900 dark:bg-blue-600 hover:bg-orange-500 dark:hover:bg-orange-500 text-white'
+            ? 'bg-emerald-600 text-white scale-[0.98]'
+            : 'bg-blue-600 hover:bg-blue-700 text-white'
         }`}
-        style={{ transform: addedPulse ? 'scale(0.97)' : undefined }}
       >
         {addedPulse ? (
           <>
-            <Zap className="w-4 h-4" />
+            <Zap className="w-3.5 h-3.5 fill-current" />
             <span>Added!</span>
           </>
         ) : (
           <>
-            <ShoppingCart className="w-4 h-4 text-orange-400 group-hover:text-white transition-colors" />
+            <ShoppingCart className="w-3.5 h-3.5" />
             <span>{language === 'EN' ? 'Add to Cart' : 'কার্টে যোগ করুন'}</span>
           </>
         )}
-        {/* Ripple shimmer */}
-        <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity rounded-xl pointer-events-none" />
       </button>
     </div>
   );

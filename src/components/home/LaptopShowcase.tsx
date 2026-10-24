@@ -22,10 +22,7 @@ export const LaptopShowcase: React.FC = () => {
   const { containerRef, inView } = useStaggerReveal<HTMLDivElement>(3);
 
   return (
-    <section className="py-8 bg-slate-50 dark:bg-slate-900/40 rounded-3xl p-6 md:p-8 border border-slate-200/80 dark:border-slate-800 my-6 relative overflow-hidden">
-      {/* Subtle background orbs */}
-      <div className="floating-orb w-64 h-64 bg-blue-500/5 dark:bg-blue-500/10 -top-16 -right-16" />
-      <div className="floating-orb w-48 h-48 bg-indigo-500/5 dark:bg-indigo-500/10 -bottom-12 -left-12" style={{ animationDelay: '3s' }} />
+    <section className="bg-gradient-to-br from-sky-50/70 via-white to-indigo-50/50 rounded-3xl p-5 md:p-6 border border-blue-200/80 relative overflow-hidden shadow-[0_4px_20px_rgba(37,99,235,0.05)]">
 
       {/* Title */}
       <div
@@ -36,16 +33,16 @@ export const LaptopShowcase: React.FC = () => {
       >
         <div className="flex items-center gap-3">
           <div
-            className="p-3 rounded-2xl bg-blue-600/10 text-blue-600 dark:text-blue-400"
+            className="p-3 rounded-2xl bg-blue-600/10 text-blue-600"
             style={{ animation: headerInView ? 'iconSpinPop 0.6s 0.2s cubic-bezier(0.34,1.56,0.64,1) both' : 'none' }}
           >
             <Laptop className="w-6 h-6" />
           </div>
           <div>
-            <h2 className={`text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white animated-underline ${headerInView ? 'in-view' : ''}`}>
+            <h2 className={`text-xl md:text-2xl font-black tracking-tight text-slate-950 animated-underline ${headerInView ? 'in-view' : ''}`}>
               {language === 'EN' ? 'Laptop Collection 2024' : 'ল্যাপটপ কালেকশন'}
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-800 font-semibold mt-0.5">
               ASUS ROG, Apple MacBook, Dell XPS, HP Spectre &amp; Lenovo Legion
             </p>
           </div>
@@ -57,10 +54,10 @@ export const LaptopShowcase: React.FC = () => {
             <button
               key={seg}
               onClick={() => setSegment(seg)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap hover:-translate-y-0.5 ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap hover:-translate-y-0.5 border ${
                 segment === seg
-                  ? 'bg-blue-600 text-white shadow shadow-blue-500/30'
-                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                  : 'bg-white text-slate-900 border-blue-200 hover:bg-blue-50 shadow-xs'
               }`}
               style={{ transitionDelay: `${i * 0.04}s` }}
             >
@@ -72,14 +69,14 @@ export const LaptopShowcase: React.FC = () => {
 
       <div
         ref={containerRef}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-7 gap-y-7"
         key={segment}
       >
-        {displayedLaptops.slice(0, 3).map((laptop, idx) => (
+        {displayedLaptops.slice(0, 4).map((laptop, idx) => (
           <div
             key={laptop.id}
             className={`stagger-item ${inView ? 'in-view' : ''}`}
-            style={{ transitionDelay: `${idx * 0.1}s` }}
+            style={{ transitionDelay: `${idx * 0.08}s` }}
           >
             <ProductCard product={laptop} />
           </div>

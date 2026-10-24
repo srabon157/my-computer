@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS, MOCK_ORDERS } from '../../data/mockData';
 import type { Product } from '../../types';
@@ -96,49 +96,49 @@ export const AdminDashboard: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center space-x-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center space-x-4">
           <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-500">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
             <span className="text-xs text-slate-400 font-semibold block">Total Revenue</span>
-            <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+            <span className="text-xl font-extrabold text-slate-900">
               ৳{totalRevenue.toLocaleString()}
             </span>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center space-x-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center space-x-4">
           <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500">
             <ShoppingCart className="w-6 h-6" />
           </div>
           <div>
             <span className="text-xs text-slate-400 font-semibold block">Total Orders</span>
-            <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+            <span className="text-xl font-extrabold text-slate-900">
               {MOCK_ORDERS.length} Orders
             </span>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center space-x-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center space-x-4">
           <div className="p-3 rounded-xl bg-purple-500/10 text-purple-500">
             <Package className="w-6 h-6" />
           </div>
           <div>
             <span className="text-xs text-slate-400 font-semibold block">Active Products</span>
-            <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+            <span className="text-xl font-extrabold text-slate-900">
               {productList.length} Items
             </span>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center space-x-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center space-x-4">
           <div className="p-3 rounded-xl bg-orange-500/10 text-orange-500">
             <Users className="w-6 h-6" />
           </div>
           <div>
             <span className="text-xs text-slate-400 font-semibold block">Registered Users</span>
-            <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+            <span className="text-xl font-extrabold text-slate-900">
               1,420 Users
             </span>
           </div>
@@ -146,8 +146,8 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-md p-6">
-        <div className="flex space-x-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-md p-6">
+        <div className="flex space-x-3 border-b border-slate-200 pb-4">
           <button
             onClick={() => setActiveTab('overview')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
@@ -170,8 +170,8 @@ export const AdminDashboard: React.FC = () => {
         {activeTab === 'overview' && (
           <div className="py-6 space-y-4">
             <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
-                <thead className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold uppercase">
+              <table className="w-full text-xs text-left border border-slate-200 rounded-2xl overflow-hidden">
+                <thead className="bg-slate-100 text-slate-900 font-bold uppercase">
                   <tr>
                     <th className="p-3">Product Name</th>
                     <th className="p-3">Brand</th>
@@ -180,10 +180,10 @@ export const AdminDashboard: React.FC = () => {
                     <th className="p-3 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody className="divide-y divide-slate-100">
                   {productList.map(p => (
-                    <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                      <td className="p-3 font-semibold text-slate-900 dark:text-white max-w-xs truncate">{p.name}</td>
+                    <tr key={p.id} className="hover:bg-slate-50">
+                      <td className="p-3 font-semibold text-slate-900 max-w-xs truncate">{p.name}</td>
                       <td className="p-3 font-bold text-blue-600">{p.brand}</td>
                       <td className="p-3 font-extrabold text-orange-500">৳{p.discountPrice.toLocaleString()}</td>
                       <td className="p-3">
@@ -213,9 +213,9 @@ export const AdminDashboard: React.FC = () => {
           <div className="py-6 space-y-4">
             <div className="space-y-4">
               {MOCK_ORDERS.map(o => (
-                <div key={o.id} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div key={o.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                   <div>
-                    <h4 className="font-bold text-xs text-slate-900 dark:text-white">{o.id} • {o.customerName} ({o.customerPhone})</h4>
+                    <h4 className="font-bold text-xs text-slate-900">{o.id} • {o.customerName} ({o.customerPhone})</h4>
                     <p className="text-[11px] text-slate-500">{o.shippingAddress}, {o.district}</p>
                     <span className="font-extrabold text-xs text-orange-500">Total: ৳{o.total.toLocaleString()} ({o.paymentMethod})</span>
                   </div>
@@ -233,9 +233,9 @@ export const AdminDashboard: React.FC = () => {
       {/* Add Product Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-              <h3 className="font-bold text-base text-slate-900 dark:text-white">Add New Tech Product</h3>
+          <div className="bg-white w-full max-w-lg rounded-3xl p-6 border border-slate-200 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <h3 className="font-bold text-base text-slate-900">Add New Tech Product</h3>
               <button onClick={() => setShowAddModal(false)} className="text-slate-400 hover:text-white font-bold">✕</button>
             </div>
 
@@ -248,7 +248,7 @@ export const AdminDashboard: React.FC = () => {
                   value={newProdName}
                   onChange={e => setNewProdName(e.target.value)}
                   placeholder="e.g. ASUS ROG Swift 360Hz Gaming Monitor"
-                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"
+                  className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300"
                 />
               </div>
 
@@ -261,7 +261,7 @@ export const AdminDashboard: React.FC = () => {
                     value={newProdPrice}
                     onChange={e => setNewProdPrice(e.target.value)}
                     placeholder="75000"
-                    className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"
+                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300"
                   />
                 </div>
 
@@ -270,7 +270,7 @@ export const AdminDashboard: React.FC = () => {
                   <select
                     value={newProdBrand}
                     onChange={e => setNewProdBrand(e.target.value)}
-                    className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"
+                    className="w-full p-3 rounded-xl bg-slate-50 border border-slate-300"
                   >
                     <option value="Asus">Asus</option>
                     <option value="Apple">Apple</option>

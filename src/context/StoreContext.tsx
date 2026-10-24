@@ -15,7 +15,7 @@ interface StoreContextType {
   selectedProductId: string | null;
   setSelectedProductId: (id: string | null) => void;
   openProductDetail: (id: string) => void;
-  
+
   // Theme & Language
   theme: 'light' | 'dark';
   toggleTheme: () => void;
@@ -117,7 +117,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const [cart, setCart] = useState<CartItem[]>([]);
   const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
-  
+
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [compareList, setCompareList] = useState<Product[]>([]);
 
@@ -142,17 +142,14 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setToasts(prev => prev.filter(t => t.id !== id));
   };
 
-  // Theme Manager
+  // Theme Manager - White theme default
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.remove('dark');
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    setTheme(prev => (prev === 'light' ? 'light' : 'light'));
+    document.documentElement.classList.remove('dark');
   };
 
   const toggleLanguage = () => {
@@ -220,11 +217,11 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return { success: false, message: language === 'EN' ? 'Invalid Coupon Code' : 'অকার্যকর কুপন কোড' };
     }
     if (cartSubtotal < coupon.minSpendBDT) {
-      return { 
-        success: false, 
-        message: language === 'EN' 
-          ? `Minimum spend of ৳${coupon.minSpendBDT.toLocaleString()} required` 
-          : `ন্যূনতম ৳${coupon.minSpendBDT.toLocaleString()} খরচ করতে হবে` 
+      return {
+        success: false,
+        message: language === 'EN'
+          ? `Minimum spend of ৳${coupon.minSpendBDT.toLocaleString()} required`
+          : `ন্যূনতম ৳${coupon.minSpendBDT.toLocaleString()} খরচ করতে হবে`
       };
     }
     setAppliedCoupon(coupon);
@@ -356,10 +353,12 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         (cat === 'gpon-onu' && product.category === 'onu-device' && product.subcategory === 'gpon-onu') ||
         (cat === 'epon-onu' && product.category === 'onu-device' && product.subcategory === 'epon-onu') ||
         (cat === 'xgs-pon-onu' && product.category === 'onu-device' && product.subcategory === 'xgs-pon-onu') ||
+        (cat === 'ezviz-camera' && (product.subcategory === 'ezviz-camera' || product.brand === 'EZVIZ')) ||
+        (cat === 'cc-camera' && (product.category === 'security' || product.subcategory === 'ezviz-camera' || product.subcategory === 'cc-camera' || product.subcategory === 'portable-wifi-camera' || product.subcategory === 'ptz-camera')) ||
         (cat === 'wifi-onu' && product.category === 'onu-device' && product.subcategory === 'wifi-onu');
       if (!isMatch) return false;
     }
-    
+
     // Brand filter
     if (filters.brand.length > 0 && !filters.brand.includes(product.brand)) return false;
 

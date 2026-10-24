@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS } from '../../data/mockData';
 import { Logo } from '../common/Logo';
@@ -48,47 +48,47 @@ export const AdminPage: React.FC = () => {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-2">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-2">
           <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
             <span>Total Sales (Monthly)</span>
             <DollarSign className="w-5 h-5 text-emerald-500" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900 dark:text-white">৳ 1,48,50,000</p>
+          <p className="text-2xl font-extrabold text-slate-900">৳ 1,48,50,000</p>
           <span className="text-[10px] font-bold text-emerald-500">+14.2% from last month</span>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-2">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-2">
           <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
             <span>Active Products</span>
             <Package className="w-5 h-5 text-blue-500" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900 dark:text-white">{PRODUCTS.length}</p>
+          <p className="text-2xl font-extrabold text-slate-900">{PRODUCTS.length}</p>
           <span className="text-[10px] font-bold text-blue-500">In stock & listed</span>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-2">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-2">
           <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
             <span>Orders Processed</span>
             <ShoppingBag className="w-5 h-5 text-orange-500" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900 dark:text-white">842</p>
+          <p className="text-2xl font-extrabold text-slate-900">842</p>
           <span className="text-[10px] font-bold text-orange-500">98% fulfillment rate</span>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-2">
+        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-2">
           <div className="flex items-center justify-between text-slate-500 text-xs font-semibold">
             <span>Registered Users</span>
             <Users className="w-5 h-5 text-purple-500" />
           </div>
-          <p className="text-2xl font-extrabold text-slate-900 dark:text-white">12,450</p>
+          <p className="text-2xl font-extrabold text-slate-900">12,450</p>
           <span className="text-[10px] font-bold text-purple-500">Active customer accounts</span>
         </div>
       </div>
 
       {/* Inventory Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md overflow-hidden p-6 space-y-4">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-md overflow-hidden p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-extrabold text-base text-slate-900 dark:text-white">Product Inventory Table</h3>
+          <h3 className="font-extrabold text-base text-slate-900">Product Inventory Table</h3>
           <button
             onClick={() => addToast('Simulated Action', 'Add Product modal triggered in admin mode', 'info')}
             className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 shadow"
@@ -100,25 +100,23 @@ export const AdminPage: React.FC = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 font-bold border-y border-slate-200 dark:border-slate-800">
+            <thead className="bg-slate-50 text-slate-600 font-bold border-y border-slate-200">
               <tr>
                 <th className="p-3">Product Name</th>
                 <th className="p-3">Category</th>
-                <th className="p-3">Regular Price</th>
-                <th className="p-3">Discount Price</th>
+                <th className="p-3">Price (BDT)</th>
                 <th className="p-3">Stock Status</th>
                 <th className="p-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-slate-100">
               {PRODUCTS.map(p => (
-                <tr key={p.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40">
-                  <td className="p-3 font-semibold text-slate-900 dark:text-white max-w-xs truncate">{p.name}</td>
+                <tr key={p.id} className="hover:bg-slate-50/50">
+                  <td className="p-3 font-semibold text-slate-900 max-w-xs truncate">{p.name}</td>
                   <td className="p-3 text-slate-500 uppercase">{p.category}</td>
-                  <td className="p-3 text-slate-400 line-through">৳{p.regularPrice.toLocaleString()}</td>
-                  <td className="p-3 font-bold text-emerald-600 dark:text-emerald-400">৳{p.discountPrice.toLocaleString()}</td>
+                  <td className="p-3 font-bold text-slate-900">৳{p.discountPrice.toLocaleString()}</td>
                   <td className="p-3">
-                    <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold text-[10px]">
+                    <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
                       {p.stockStatus} ({p.stockCount})
                     </span>
                   </td>

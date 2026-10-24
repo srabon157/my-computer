@@ -14,67 +14,68 @@ export const Logo: React.FC<LogoProps> = ({
   size = 'md',
   iconOnly = false
 }) => {
-  const sizeMap = {
-    sm: 'h-8 sm:h-9',
-    md: 'h-10 sm:h-11 md:h-12',
-    lg: 'h-12 sm:h-14 md:h-16',
-    xl: 'h-16 sm:h-20'
+  // Logo image is 3:2 landscape — height controls scale, maxWidth prevents overflow.
+  // Large maxWidth values ensure the brand text ("MY COMPUTER") is fully visible.
+  const sizeMap: Record<string, { hClass: string; maxW: string }> = {
+    sm: { hClass: 'h-10',  maxW: '180px' },  // mobile header
+    md: { hClass: 'h-12',  maxW: '220px' },  // default / tablet
+    lg: { hClass: 'h-14',  maxW: '270px' },  // desktop header
+    xl: { hClass: 'h-18',  maxW: '340px' },  // footer / about page
   };
 
-  const iconSizeMap = {
-    sm: 'h-8 w-8',
-    md: 'h-10 w-10',
-    lg: 'h-12 w-12',
-    xl: 'h-16 w-16'
+  const iconSizeMap: Record<string, string> = {
+    sm: 'h-10 w-10',
+    md: 'h-12 w-12',
+    lg: 'h-14 w-14',
+    xl: 'h-18 w-18',
   };
 
-  const heightClass = iconOnly ? iconSizeMap[size] : sizeMap[size];
+  // 'multiply' blend mode makes white JPG pixels transparent on light backgrounds.
+  // 'isolation: isolate' on the wrapper scopes the blend to this element only.
+  const multiplyStyle: React.CSSProperties = { mixBlendMode: 'multiply' };
 
   if (iconOnly) {
     return (
-      <div className={`inline-flex items-center justify-center select-none flex-shrink-0 ${className}`}>
+      <div
+        className={`inline-flex items-center justify-center select-none flex-shrink-0 ${className}`}
+        style={{ isolation: 'isolate' }}
+      >
         <img
           src="/logo-icon.png"
           alt="My Computer"
-          className={`${heightClass} w-auto object-contain drop-shadow-sm transition-transform duration-200 hover:scale-105`}
+          className={`${iconSizeMap[size]} object-contain transition-transform duration-200 hover:scale-105`}
+          style={multiplyStyle}
         />
       </div>
     );
   }
 
-  // Variant handling:
-  // - 'dark': renders dark version (white text for dark backgrounds)
-  // - 'light': renders light version (dark text for light backgrounds)
-  // - 'auto': automatically switches between light/dark based on current theme class
+  const { hClass, maxW } = sizeMap[size];
+
+  // Scale 1.25x inside an overflow-hidden wrapper trims away the baked-in white border
+  // padding around the image, making the actual logo and brand name significantly wider & clearer
+  const imgClass = `${hClass} w-auto object-contain scale-[1.28] transition-transform duration-200 hover:scale-[1.32]`;
+
   return (
-    <div className={`inline-flex items-center select-none flex-shrink-0 ${className}`}>
+    <div
+      className={`inline-flex items-center justify-center overflow-hidden select-none flex-shrink-0 ${className}`}
+      style={{ isolation: 'isolate', maxHeight: '100%' }}
+    >
       {variant === 'dark' ? (
         <img
           src="/logo-dark.png"
           alt="My Computer - Laptop, Desktop, Accessories"
-          className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02]`}
+          className={imgClass}
+          style={{ maxWidth: maxW }}
         />
-      ) : variant === 'light' ? (
+      ) : (
         <img
           src="/logo.png"
           alt="My Computer - Laptop, Desktop, Accessories"
-          className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02]`}
+          className={imgClass}
+          style={{ ...multiplyStyle, maxWidth: maxW }}
         />
-      ) : (
-        <>
-          <img
-            src="/logo.png"
-            alt="My Computer - Laptop, Desktop, Accessories"
-            className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02] dark:hidden block`}
-          />
-          <img
-            src="/logo-dark.png"
-            alt="My Computer - Laptop, Desktop, Accessories"
-            className={`${heightClass} w-auto object-contain max-w-full drop-shadow-sm transition-transform duration-200 hover:scale-[1.02] hidden dark:block`}
-          />
-        </>
       )}
     </div>
   );
 };
-

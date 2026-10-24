@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { PRODUCTS } from '../../data/mockData';
 import type { Product } from '../../types';
@@ -93,12 +93,12 @@ export const PCBuilderPage: React.FC = () => {
 
       {/* Compatibility Banner */}
       {pcBuildCompatibilityIssue ? (
-        <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-300 flex items-center gap-3">
+        <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-700 flex items-center gap-3">
           <AlertTriangle className="w-6 h-6 text-red-500 flex-shrink-0" />
           <div className="text-xs font-semibold">{pcBuildCompatibilityIssue}</div>
         </div>
       ) : (
-        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 flex items-center gap-3">
+        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 flex items-center gap-3">
           <CheckCircle2 className="w-6 h-6 text-emerald-500 flex-shrink-0" />
           <div className="text-xs font-semibold">
             All selected components are 100% compatible! Complete your build and add all to cart.
@@ -107,9 +107,9 @@ export const PCBuilderPage: React.FC = () => {
       )}
 
       {/* Slots Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-md overflow-hidden">
-        <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <h3 className="font-extrabold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
+      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden">
+        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <h3 className="font-extrabold text-sm text-slate-900 uppercase tracking-wider">
             PC Component Slots
           </h3>
 
@@ -124,7 +124,7 @@ export const PCBuilderPage: React.FC = () => {
 
             <button
               onClick={handlePrint}
-              className="text-xs text-slate-700 dark:text-slate-200 hover:text-blue-600 flex items-center gap-1 font-semibold px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors"
+              className="text-xs text-slate-700 hover:text-blue-600 flex items-center gap-1 font-semibold px-3 py-1.5 rounded-lg border border-slate-300 bg-white transition-colors"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print Quotation</span>
@@ -141,20 +141,20 @@ export const PCBuilderPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="divide-y divide-slate-100">
           {pcBuildComponents.map(slot => {
             const hasProduct = slot.product !== null;
 
             return (
-              <div key={slot.slotId} className="p-4 md:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition-colors">
+              <div key={slot.slotId} className="p-4 md:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/60 transition-colors">
                 
                 {/* Slot Name & Icon */}
                 <div className="flex items-center space-x-4 min-w-[220px]">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center flex-shrink-0">
                     {slotIcons[slot.slotId] || <Cpu className="w-6 h-6 text-slate-500" />}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-slate-900 dark:text-white">
+                    <h4 className="font-bold text-sm text-slate-900">
                       {language === 'EN' ? slot.slotName : slot.slotNameBn}
                     </h4>
                     <span className="text-[11px] text-slate-400 font-medium uppercase">
@@ -166,17 +166,17 @@ export const PCBuilderPage: React.FC = () => {
                 {/* Product Detail if selected */}
                 <div className="flex-1">
                   {hasProduct ? (
-                    <div className="flex items-center space-x-4 bg-slate-100/70 dark:bg-slate-800/60 p-3 rounded-2xl border border-slate-200/60 dark:border-slate-700/60">
+                    <div className="flex items-center space-x-4 bg-slate-100/70 p-3 rounded-2xl border border-slate-200/60">
                       <img
                         src={slot.product!.images[0]}
                         alt={slot.product!.name}
-                        className="w-12 h-12 object-contain rounded-xl bg-white dark:bg-slate-900 p-1"
+                        className="w-12 h-12 object-contain rounded-xl bg-white p-1"
                       />
                       <div className="flex-1">
-                        <h5 className="font-bold text-xs md:text-sm text-slate-900 dark:text-white line-clamp-1">
+                        <h5 className="font-bold text-xs md:text-sm text-slate-900 line-clamp-1">
                           {slot.product!.name}
                         </h5>
-                        <div className="flex items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                        <div className="flex items-center gap-3 text-[11px] text-slate-500 mt-0.5">
                           <span>Brand: <strong>{slot.product!.brand}</strong></span>
                           {slot.product!.socketType && <span>Socket: <strong className="text-blue-500">{slot.product!.socketType}</strong></span>}
                           {slot.product!.wattage && <span>Draw: <strong className="text-amber-500">{slot.product!.wattage}W</strong></span>}
@@ -201,7 +201,7 @@ export const PCBuilderPage: React.FC = () => {
                     <>
                       <button
                         onClick={() => setActiveSlot(slot.slotId)}
-                        className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/50"
+                        className="text-xs font-bold text-blue-600 hover:underline px-3 py-2 rounded-xl bg-blue-50"
                       >
                         Change
                       </button>
@@ -232,7 +232,7 @@ export const PCBuilderPage: React.FC = () => {
       {/* Modal Selector */}
       {activeSlot && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+          <div className="bg-white w-full max-w-4xl rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
             <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
               <h3 className="font-bold text-base">
                 Select {activeSlot.toUpperCase()} Component
@@ -258,11 +258,11 @@ export const PCBuilderPage: React.FC = () => {
                       addPCComponent(activeSlot, p);
                       setActiveSlot(null);
                     }}
-                    className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-blue-500 cursor-pointer flex items-center justify-between gap-4 transition-all hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                    className="p-4 rounded-2xl border border-slate-200 hover:border-blue-500 cursor-pointer flex items-center justify-between gap-4 transition-all hover:bg-slate-50"
                   >
-                    <img src={p.images[0]} alt={p.name} className="w-14 h-14 object-contain rounded-xl bg-slate-100 dark:bg-slate-950 p-1" />
+                    <img src={p.images[0]} alt={p.name} className="w-14 h-14 object-contain rounded-xl bg-slate-100 p-1" />
                     <div className="flex-1">
-                      <h4 className="font-bold text-xs md:text-sm text-slate-900 dark:text-white line-clamp-1">{p.name}</h4>
+                      <h4 className="font-bold text-xs md:text-sm text-slate-900 line-clamp-1">{p.name}</h4>
                       <p className="text-[11px] text-slate-400 mt-1">{p.shortSpecs.join(' • ')}</p>
                     </div>
                     <div className="text-right">

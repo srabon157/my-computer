@@ -22,12 +22,12 @@ export const FilterSidebar: React.FC = () => {
   };
 
   return (
-    <aside className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 space-y-6 shadow-sm">
+    <aside className="bg-white rounded-3xl p-6 border border-slate-200 space-y-6 shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+      <div className="flex items-center justify-between border-b border-slate-200 pb-4">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-          <h3 className="font-extrabold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
+          <SlidersHorizontal className="w-4 h-4 text-blue-600" />
+          <h3 className="font-extrabold text-sm text-slate-950 uppercase tracking-wider">
             {language === 'EN' ? 'Filter Products' : 'ফিল্টার অপশন'}
           </h3>
         </div>
@@ -43,7 +43,7 @@ export const FilterSidebar: React.FC = () => {
 
       {/* Category Filter */}
       <div className="space-y-3">
-        <h4 className="font-bold text-xs text-slate-900 dark:text-white uppercase tracking-wider text-blue-600 dark:text-blue-400">
+        <h4 className="font-bold text-xs text-blue-600 uppercase tracking-wider">
           Category
         </h4>
         <div className="space-y-1 max-h-52 overflow-y-auto pr-1 no-scrollbar text-xs">
@@ -52,7 +52,7 @@ export const FilterSidebar: React.FC = () => {
             className={`w-full text-left px-3 py-2 rounded-xl transition-all font-semibold flex items-center justify-between ${
               filters.category === null
                 ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                : 'text-slate-800 hover:bg-slate-100'
             }`}
           >
             <span>All Categories</span>
@@ -64,7 +64,7 @@ export const FilterSidebar: React.FC = () => {
               className={`w-full text-left px-3 py-2 rounded-xl transition-all font-semibold flex items-center justify-between ${
                 filters.category === cat.id
                   ? 'bg-blue-600 text-white shadow'
-                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  : 'text-slate-800 hover:bg-slate-100'
               }`}
             >
               <span>{language === 'EN' ? cat.name : cat.nameBn}</span>
@@ -75,8 +75,8 @@ export const FilterSidebar: React.FC = () => {
       </div>
 
       {/* Brand Checkboxes */}
-      <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-        <h4 className="font-bold text-xs text-slate-900 dark:text-white uppercase tracking-wider text-orange-500">
+      <div className="space-y-3 pt-4 border-t border-slate-100">
+        <h4 className="font-bold text-xs text-orange-500 uppercase tracking-wider">
           Brand
         </h4>
         <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1 no-scrollbar text-xs">
@@ -85,13 +85,13 @@ export const FilterSidebar: React.FC = () => {
             return (
               <label
                 key={brand.name}
-                className="flex items-center space-x-2.5 cursor-pointer text-slate-700 dark:text-slate-300 hover:text-blue-600 select-none py-1"
+                className="flex items-center space-x-2.5 cursor-pointer text-slate-800 hover:text-blue-600 select-none py-1"
               >
                 <input
                   type="checkbox"
                   checked={isChecked}
                   onChange={() => handleBrandToggle(brand.name)}
-                  className="rounded text-blue-600 focus:ring-blue-500 w-4 h-4 bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700"
+                  className="rounded text-blue-600 focus:ring-blue-500 w-4 h-4 border-slate-300"
                 />
                 <span className="font-medium">{brand.name}</span>
               </label>
@@ -101,9 +101,9 @@ export const FilterSidebar: React.FC = () => {
       </div>
 
       {/* Price Range Slider */}
-      <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+      <div className="space-y-3 pt-4 border-t border-slate-100">
         <div className="flex items-center justify-between text-xs">
-          <h4 className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-blue-600 dark:text-blue-400">
+          <h4 className="font-bold text-blue-600 uppercase tracking-wider">
             Max Price (BDT)
           </h4>
           <span className="font-extrabold text-orange-500">
@@ -128,9 +128,9 @@ export const FilterSidebar: React.FC = () => {
       </div>
 
       {/* Additional Toggles */}
-      <div className="space-y-2 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs">
+      <div className="space-y-2 pt-4 border-t border-slate-100 text-xs">
         <label className="flex items-center justify-between cursor-pointer py-1">
-          <span className="font-bold text-slate-700 dark:text-slate-300">In Stock Only</span>
+          <span className="font-bold text-slate-800">In Stock Only</span>
           <input
             type="checkbox"
             checked={filters.stockOnly}
@@ -140,7 +140,7 @@ export const FilterSidebar: React.FC = () => {
         </label>
 
         <label className="flex items-center justify-between cursor-pointer py-1">
-          <span className="font-bold text-slate-700 dark:text-slate-300">Gaming Gear Only</span>
+          <span className="font-bold text-slate-800">Gaming Gear Only</span>
           <input
             type="checkbox"
             checked={filters.gamingOnly}
@@ -150,7 +150,7 @@ export const FilterSidebar: React.FC = () => {
         </label>
 
         <label className="flex items-center justify-between cursor-pointer py-1">
-          <span className="font-bold text-slate-700 dark:text-slate-300">0% EMI Available</span>
+          <span className="font-bold text-slate-800">0% EMI Available</span>
           <input
             type="checkbox"
             checked={filters.emiOnly}

@@ -12,6 +12,7 @@ import { FeaturedProducts } from './components/home/FeaturedProducts';
 import { LaptopShowcase } from './components/home/LaptopShowcase';
 import { GamingZone } from './components/home/GamingZone';
 import { SmartHome } from './components/home/SmartHome';
+import { EzvizCameraShowcase } from './components/home/EzvizCameraShowcase';
 
 // View Pages
 import { ShopPage } from './components/shop/ShopPage';
@@ -39,7 +40,6 @@ const MainContent: React.FC = () => {
   const { currentView } = useStore();
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Page transition key — increments on every view change to re-trigger animation
   const [pageKey, setPageKey] = useState(0);
   const prevView = useRef(currentView);
 
@@ -47,7 +47,6 @@ const MainContent: React.FC = () => {
     if (currentView !== prevView.current) {
       prevView.current = currentView;
       setPageKey(k => k + 1);
-      // Scroll to top smoothly on view change
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [currentView]);
@@ -56,10 +55,11 @@ const MainContent: React.FC = () => {
     switch (currentView) {
       case 'home':
         return (
-          <div className="space-y-8">
+          <div className="w-full flex flex-col gap-10 sm:gap-14 lg:gap-16">
             <HeroSlider />
             <CategoryGrid />
             <FlashSale />
+            <EzvizCameraShowcase />
             <FeaturedProducts />
             <LaptopShowcase />
             <GamingZone />
@@ -96,7 +96,7 @@ const MainContent: React.FC = () => {
         return <AdminPage />;
       default:
         return (
-          <div className="space-y-8">
+          <div className="flex flex-col gap-5 sm:gap-7">
             <HeroSlider />
             <CategoryGrid />
             <FlashSale />
@@ -107,12 +107,12 @@ const MainContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans">
+    <div className="min-h-screen flex flex-col bg-white text-slate-950 font-sans">
       <Header onOpenCart={() => setIsCartOpen(true)} />
-      
+
       <main
         key={pageKey}
-        className="grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 md:pb-6 page-enter"
+        className="grow w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pt-6 sm:pt-8 pb-24 md:pb-16 page-enter"
       >
         {renderView()}
       </main>

@@ -66,7 +66,7 @@ export const LiveChatWidget: React.FC = () => {
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white animate-pulse"></span>
         </button>
       ) : (
-        <div className="bg-white dark:bg-slate-900 w-80 sm:w-96 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col h-[480px] animate-fadeIn">
+        <div className="bg-white w-80 sm:w-96 rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col h-[480px] animate-fadeIn">
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-slate-900 to-blue-950 text-white flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -87,7 +87,7 @@ export const LiveChatWidget: React.FC = () => {
           </div>
 
           {/* Messages Body */}
-          <div className="p-4 overflow-y-auto flex-1 space-y-3 bg-slate-50 dark:bg-slate-950/60 text-xs">
+          <div className="p-4 overflow-y-auto flex-1 space-y-3 bg-slate-50 text-xs">
             {messages.map((m, i) => (
               <div
                 key={i}
@@ -97,7 +97,7 @@ export const LiveChatWidget: React.FC = () => {
                   className={`p-3 rounded-2xl max-w-[85%] leading-relaxed ${
                     m.sender === 'user'
                       ? 'bg-blue-600 text-white rounded-br-none'
-                      : 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-bl-none shadow-sm'
+                      : 'bg-white text-slate-950 border border-slate-200 rounded-bl-none shadow-sm'
                   }`}
                 >
                   {m.text}
@@ -108,13 +108,13 @@ export const LiveChatWidget: React.FC = () => {
           </div>
 
           {/* Input Bar */}
-          <form onSubmit={handleSend} className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex gap-2">
+          <form onSubmit={handleSend} className="p-3 bg-white border-t border-slate-200 flex gap-2">
             <input
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
               placeholder="Ask about laptops, EMI, stock..."
-              className="flex-1 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-medium focus:outline-none"
+              className="flex-1 px-3 py-2 rounded-xl bg-slate-100 text-slate-950 text-xs font-medium focus:outline-none"
             />
             <button
               type="submit"

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { STORE_LOCATIONS } from '../../data/mockData';
 import { MapPin, Phone, Clock, Navigation } from 'lucide-react';
@@ -26,19 +26,19 @@ export const StoreLocatorPage: React.FC = () => {
         {STORE_LOCATIONS.map(store => (
           <div
             key={store.id}
-            className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-md space-y-4 flex flex-col justify-between"
+            className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-md space-y-4 flex flex-col justify-between"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">{store.city}</span>
+                <span className="font-extrabold text-blue-600 uppercase tracking-wider">{store.city}</span>
                 <span className="px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">Open 10 AM - 8 PM</span>
               </div>
 
-              <h3 className="font-extrabold text-base text-slate-900 dark:text-white">
+              <h3 className="font-extrabold text-base text-slate-900">
                 {store.name}
               </h3>
 
-              <div className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+              <div className="space-y-2 text-xs text-slate-600">
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
                   <span>{store.address}</span>
@@ -62,7 +62,7 @@ export const StoreLocatorPage: React.FC = () => {
               href={`https://maps.google.com/?q=${encodeURIComponent(store.name + ' ' + store.address)}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 w-full bg-slate-100 dark:bg-slate-800 hover:bg-orange-500 hover:text-white text-slate-800 dark:text-slate-200 font-bold text-xs py-3 rounded-xl transition-all flex items-center justify-center gap-2 border border-slate-200 dark:border-slate-700"
+              className="mt-4 w-full bg-slate-100 hover:bg-orange-500 hover:text-white text-slate-800 font-bold text-xs py-3 rounded-xl transition-all flex items-center justify-center gap-2 border border-slate-200"
             >
               <Navigation className="w-4 h-4" />
               <span>Get Google Maps Directions</span>

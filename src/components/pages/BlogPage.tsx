@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { BLOG_POSTS } from '../../data/mockData';
 import type { BlogPost } from '../../types';
@@ -29,10 +29,10 @@ export const BlogPage: React.FC = () => {
       {/* Main Blog Post Modal / Reader */}
       {selectedPost && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-6 relative">
+          <div className="bg-white max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 border border-slate-200 shadow-2xl space-y-6 relative">
             <button
               onClick={() => setSelectedPost(null)}
-              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white"
+              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 text-slate-500 hover:text-slate-900"
             >
               ✕
             </button>
@@ -44,17 +44,17 @@ export const BlogPage: React.FC = () => {
             />
 
             <div className="space-y-3">
-              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 font-bold text-xs">
+              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 font-bold text-xs">
                 {selectedPost.category}
               </span>
-              <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white">
+              <h2 className="text-xl md:text-2xl font-extrabold text-slate-900">
                 {selectedPost.title}
               </h2>
 
-              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 border-y border-slate-200 dark:border-slate-800 py-3">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 border-y border-slate-200 py-3">
                 <span className="flex items-center gap-1.5">
                   <User className="w-4 h-4 text-blue-500" />
-                  <strong className="text-slate-700 dark:text-slate-300">{selectedPost.author}</strong> ({selectedPost.authorRole})
+                  <strong className="text-slate-700">{selectedPost.author}</strong> ({selectedPost.authorRole})
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4 text-orange-500" />
@@ -67,8 +67,8 @@ export const BlogPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="prose dark:prose-invert max-w-none text-sm text-slate-700 dark:text-slate-300 leading-relaxed space-y-4">
-              <p className="font-semibold text-base text-slate-900 dark:text-slate-100">
+            <div className="prose max-w-none text-sm text-slate-700 leading-relaxed space-y-4">
+              <p className="font-semibold text-base text-slate-900">
                 {selectedPost.excerpt}
               </p>
               <p>{selectedPost.content}</p>
@@ -77,9 +77,9 @@ export const BlogPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-200 dark:border-slate-800">
+            <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-200">
               {selectedPost.tags.map(tag => (
-                <span key={tag} className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-semibold flex items-center gap-1">
+                <span key={tag} className="px-3 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-semibold flex items-center gap-1">
                   <Tag className="w-3 h-3" />
                   {tag}
                 </span>
@@ -94,10 +94,10 @@ export const BlogPage: React.FC = () => {
         {BLOG_POSTS.map(post => (
           <article
             key={post.id}
-            className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group"
+            className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
-              <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-950">
+              <div className="relative h-48 overflow-hidden bg-slate-100">
                 <img
                   src={post.image}
                   alt={post.title}
@@ -109,7 +109,7 @@ export const BlogPage: React.FC = () => {
               </div>
 
               <div className="p-6 space-y-3">
-                <div className="flex items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
+                <div className="flex items-center gap-3 text-[11px] text-slate-500">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5 text-orange-500" />
                     {post.date}
@@ -121,11 +121,11 @@ export const BlogPage: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="font-extrabold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2 transition-colors">
+                <h3 className="font-extrabold text-base text-slate-900 group-hover:text-blue-600 line-clamp-2 transition-colors">
                   {post.title}
                 </h3>
 
-                <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+                <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
                   {post.excerpt}
                 </p>
               </div>
@@ -134,7 +134,7 @@ export const BlogPage: React.FC = () => {
             <div className="p-6 pt-0">
               <button
                 onClick={() => setSelectedPost(post)}
-                className="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white text-slate-800 dark:text-slate-200 font-bold text-xs transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold text-xs transition-all flex items-center justify-center gap-2"
               >
                 <span>Read Full Article</span>
                 <ArrowRight className="w-4 h-4" />

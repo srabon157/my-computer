@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { Star, CheckCircle, Quote } from 'lucide-react';
 
@@ -35,10 +35,10 @@ export const ReviewsSlider: React.FC = () => {
   return (
     <section className="py-12">
       <div className="text-center max-w-2xl mx-auto mb-10">
-        <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
           {language === 'EN' ? 'Customer Testimonials' : 'গ্রাহকদের মতামত'}
         </h2>
-        <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-2">
+        <p className="text-xs md:text-sm text-slate-500 mt-2">
           Read genuine feedback from 50,000+ satisfied tech buyers across Bangladesh
         </p>
       </div>
@@ -47,9 +47,9 @@ export const ReviewsSlider: React.FC = () => {
         {testimonials.map((t, idx) => (
           <div
             key={idx}
-            className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-md flex flex-col justify-between relative overflow-hidden"
+            className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md flex flex-col justify-between relative overflow-hidden"
           >
-            <Quote className="absolute top-4 right-4 w-10 h-10 text-slate-100 dark:text-slate-800 pointer-events-none" />
+            <Quote className="absolute top-4 right-4 w-10 h-10 text-slate-100 pointer-events-none" />
 
             <div className="space-y-3 relative z-10">
               <div className="flex text-amber-400">
@@ -57,20 +57,20 @@ export const ReviewsSlider: React.FC = () => {
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 italic leading-relaxed">
+              <p className="text-xs text-slate-600 italic leading-relaxed">
                 "{t.comment}"
               </p>
             </div>
 
-            <div className="flex items-center space-x-3 pt-6 border-t border-slate-100 dark:border-slate-800 mt-6 relative z-10">
+            <div className="flex items-center space-x-3 pt-6 border-t border-slate-100 mt-6 relative z-10">
               <img
                 src={t.avatar}
                 alt={t.name}
-                className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700"
+                className="w-10 h-10 rounded-full object-cover border border-slate-200"
               />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h4 className="font-bold text-xs text-slate-900 dark:text-white">{t.name}</h4>
+                  <h4 className="font-bold text-xs text-slate-900">{t.name}</h4>
                   {t.verified && <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />}
                 </div>
                 <p className="text-[10px] text-slate-400">{t.role}</p>
