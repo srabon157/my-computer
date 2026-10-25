@@ -365,6 +365,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
                                     setHoveredSubCategory(sub.id);
                                     return;
                                   }
+                                  if (sub.id === 'lg-monitors') {
+                                    setCurrentView('lg-monitors');
+                                    setHoveredCategory(null);
+                                    setHoveredSubCategory(null);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    return;
+                                  }
                                   if (isShowAll) {
                                     setFilters(prev => ({ ...prev, category: category.id, brand: [] }));
                                   } else {
@@ -592,6 +599,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
                               <div className="flex items-center justify-between px-2.5 py-1.5 hover:bg-slate-50 transition-colors">
                                 <button
                                   onClick={() => {
+                                    if (sub.id === 'lg-monitors') {
+                                      setCurrentView('lg-monitors');
+                                      setMobileMenuOpen(false);
+                                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                                      return;
+                                    }
                                     if (sub.isShowAll) {
                                       setFilters(p => ({ ...p, category: category.id, brand: [] }));
                                     } else {

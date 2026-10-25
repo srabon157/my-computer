@@ -284,4 +284,5 @@ export type ViewMode =
   | 'blog'
   | 'offers'
   | 'about'
-  | 'contact';
+  | 'contact'
+  | 'lg-monitors';
