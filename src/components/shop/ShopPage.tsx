@@ -28,9 +28,9 @@ export const ShopPage: React.FC = () => {
         </div>
       </div>
 
-      {/* If category is Monitor: Show full MonitorSectionView with Brands & LG cards */}
+      {/* If category is Monitor: Show full MonitorSectionView with Brands & cards */}
       {filters.category === 'monitor' ? (
-        <MonitorSectionView initialBrand={filters.brand.includes('LG') ? 'LG' : 'LG'} />
+        <MonitorSectionView initialBrand={filters.brand.length > 0 ? filters.brand[0] : 'LG'} />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           

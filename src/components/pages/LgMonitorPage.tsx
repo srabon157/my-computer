@@ -3,28 +3,21 @@ import { useStore } from '../../context/StoreContext';
 import { LG_MONITORS, type LgMonitor } from '../home/LgMonitorShowcase';
 import type { Product } from '../../types';
 import {
-  Monitor,
   ShoppingCart,
   Zap,
   CheckCircle2,
   Tv,
   Gamepad2,
   Sparkles,
-  Layers,
-  Cable,
   ArrowLeft,
-  Filter,
-  Check,
-  ChevronRight,
   ShieldCheck,
   Truck,
   RotateCcw,
-  SlidersHorizontal,
   Search
 } from 'lucide-react';
 
 export const LgMonitorPage: React.FC = () => {
-  const { setCurrentView, addToCart, language, addToast } = useStore();
+  const { setCurrentView, addToCart } = useStore();
   const [activeTab, setActiveTab] = useState<'all' | 'fhd' | 'qhd' | '4k' | 'gaming' | 'smart_ultrawide'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMonitor, setSelectedMonitor] = useState<LgMonitor | null>(null);
@@ -51,32 +44,28 @@ export const LgMonitorPage: React.FC = () => {
   const convertToStoreProduct = (m: LgMonitor): Product => ({
     id: `lg-mon-${m.model.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
     name: `LG ${m.model} ${m.size} ${m.resolutionTag} ${m.panelType} Monitor`,
-    nameBn: `এলজি ${m.model} ${m.size} মনিটর`,
+    slug: `lg-${m.model.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
     category: 'monitor',
-    subCategory: m.category === 'gaming' ? 'gaming-monitor' : m.category === '4k' ? '4k-monitor' : 'fhd-monitor',
+    categoryName: 'Monitor',
+    subcategory: m.category === 'gaming' ? 'gaming-monitor' : m.category === '4k' ? '4k-monitor' : 'fhd-monitor',
     brand: 'LG',
-    price: m.mrpPrice > 0 ? m.mrpPrice : 25000,
     regularPrice: m.mrpPrice > 0 ? Math.round(m.mrpPrice * 1.08) : 28000,
-    stock: 15,
+    discountPrice: m.mrpPrice > 0 ? m.mrpPrice : 25000,
+    discountPercentage: 0,
+    stockStatus: 'In Stock',
+    stockCount: 15,
     rating: 4.8,
-    reviewsCount: 34,
+    reviewCount: 28,
     images: [m.image],
-    specs: {
-      'Model': m.model,
-      'Size': m.size,
-      'Resolution': m.resolution,
-      'Panel Type': m.panelType,
-      'Refresh Rate': m.refreshRate,
-      'Ports': m.ports,
-      ...(m.responseTime ? { 'Response Time': m.responseTime } : {}),
-      ...(m.usbC ? { 'USB-C': m.usbC } : {}),
-      ...(m.hdr ? { 'HDR': m.hdr } : {})
-    },
-    keyFeatures: m.features,
-    isFeatured: true,
-    isOfficial: true,
-    warranty: '3 Years Official Warranty'
-  });
+    shortSpecs: m.features,
+    specifications: {},
+    warranty: '3 Years Official LG Warranty',
+    emiAvailable: m.mrpPrice >= 30000,
+    reviews: [],
+    questions: [],
+    createdDate: '2026-07-09'
+  } as unknown as Product);
+
 
   const handleAddToCart = (m: LgMonitor) => {
     const product = convertToStoreProduct(m);
@@ -198,15 +187,9 @@ export const LgMonitorPage: React.FC = () => {
           <div className="pt-3 border-t border-slate-100 mt-auto">
             <div className="flex items-baseline justify-between mb-3">
               <div>
-                <span className="text-[10px] font-black uppercase text-red-600 tracking-wider block">
-                  Official MRP Rate
-                </span>
                 {monitor.mrpPrice > 0 ? (
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-black text-slate-900 tracking-tight">
-                      ৳{monitor.mrpPrice.toLocaleString()}
-                    </span>
-                    <span className="text-[11px] font-bold text-slate-600">MRP</span>
+                  <div className="text-xl font-black text-slate-900 tracking-tight">
+                    ৳{monitor.mrpPrice.toLocaleString()}
                   </div>
                 ) : (
                   <span className="text-sm font-bold text-orange-600">
@@ -289,7 +272,7 @@ export const LgMonitorPage: React.FC = () => {
               LG Electronics Official Monitor Collection (2026 Price List)
             </div>
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
-              LG Monitors <span className="text-red-500">Official MRP Store</span>
+              LG Monitors <span className="text-red-500">Official Brand Store</span>
             </h1>
             <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed mb-6">
               এখানে LG ব্র্যান্ডের সকল অরিজিনাল মনিটরের সম্পূর্ণ প্রাইস লিস্ট ও স্পেসিফিকেশন দেওয়া হলো। FHD, 2K QHD, 4K UHD OLED এবং UltraGear গেমিং সিরিজের যে কোনো মনিটর সরাসরি দেখে প্রিভিউ করুন এবং অর্ডার করুন।
@@ -435,7 +418,7 @@ export const LgMonitorPage: React.FC = () => {
                 </div>
               </div>
               <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                Official MRP: ৳15,700 – ৳30,500
+                ৳15,700 – ৳30,500
               </span>
             </div>
 
@@ -474,7 +457,7 @@ export const LgMonitorPage: React.FC = () => {
                 </div>
               </div>
               <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                Official MRP: ৳30,500 – ৳39,500
+                ৳30,500 – ৳39,500
               </span>
             </div>
 
@@ -513,7 +496,7 @@ export const LgMonitorPage: React.FC = () => {
                 </div>
               </div>
               <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                Official MRP: ৳46,500 – ৳470,000
+                ৳46,500 – ৳470,000
               </span>
             </div>
 
@@ -552,7 +535,7 @@ export const LgMonitorPage: React.FC = () => {
                 </div>
               </div>
               <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                Official MRP: ৳23,000 – ৳155,000
+                ৳23,000 – ৳155,000
               </span>
             </div>
 
@@ -591,7 +574,7 @@ export const LgMonitorPage: React.FC = () => {
                 </div>
               </div>
               <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                Official MRP: ৳32,000 – ৳75,000
+                ৳32,000 – ৳75,000
               </span>
             </div>
 
@@ -659,7 +642,6 @@ export const LgMonitorPage: React.FC = () => {
                     <span className="text-2xl font-black text-slate-900">
                       {selectedMonitor.mrpPrice > 0 ? `৳${selectedMonitor.mrpPrice.toLocaleString()}` : 'Call for Price'}
                     </span>
-                    <span className="text-xs text-red-600 font-extrabold uppercase">Official MRP</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">

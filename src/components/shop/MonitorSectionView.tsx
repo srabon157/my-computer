@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { LG_MONITORS, type LgMonitor } from '../home/LgMonitorShowcase';
+import { ASUS_MONITORS } from '../../data/asusMonitorsData';
 import type { Product } from '../../types';
 import {
   Monitor,
@@ -9,14 +10,7 @@ import {
   CheckCircle2,
   Tv,
   Gamepad2,
-  Sparkles,
-  Layers,
-  Cable,
-  Check,
-  Search,
-  ShieldCheck,
-  Truck,
-  RotateCcw
+  Search
 } from 'lucide-react';
 
 interface MonitorSectionViewProps {
@@ -33,7 +27,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
   const brands = [
     { id: 'LG', name: 'LG', count: 29, isOfficial: true, color: 'text-red-600 border-red-500 bg-red-50/50' },
     { id: 'Samsung', name: 'Samsung', count: 18, isOfficial: false, color: 'text-blue-600 border-blue-200 bg-blue-50/30' },
-    { id: 'Asus', name: 'Asus', count: 15, isOfficial: false, color: 'text-slate-800 border-slate-200 bg-slate-50' },
+    { id: 'Asus', name: 'Asus', count: ASUS_MONITORS.length, isOfficial: true, color: 'text-blue-600 border-blue-500 bg-blue-50/50' },
     { id: 'Dell', name: 'Dell', count: 12, isOfficial: false, color: 'text-blue-700 border-blue-200 bg-blue-50/30' },
     { id: 'MSI', name: 'MSI', count: 10, isOfficial: false, color: 'text-red-700 border-red-200 bg-red-50/30' },
     { id: 'Acer', name: 'Acer', count: 8, isOfficial: false, color: 'text-emerald-700 border-emerald-200 bg-emerald-50/30' },
@@ -62,32 +56,27 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
   const convertToStoreProduct = (m: LgMonitor): Product => ({
     id: `lg-mon-${m.model.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
     name: `LG ${m.model} ${m.size} ${m.resolutionTag} ${m.panelType} Monitor`,
-    nameBn: `এলজি ${m.model} ${m.size} মনিটর`,
+    slug: `lg-${m.model.toLowerCase().replace(/[^a-z0-9]/g, '-')}`,
     category: 'monitor',
-    subCategory: m.category === 'gaming' ? 'gaming-monitor' : m.category === '4k' ? '4k-monitor' : 'fhd-monitor',
+    categoryName: 'Monitor',
+    subcategory: m.category === 'gaming' ? 'gaming-monitor' : m.category === '4k' ? '4k-monitor' : 'fhd-monitor',
     brand: 'LG',
-    price: m.mrpPrice > 0 ? m.mrpPrice : 25000,
     regularPrice: m.mrpPrice > 0 ? Math.round(m.mrpPrice * 1.08) : 28000,
-    stock: 15,
+    discountPrice: m.mrpPrice > 0 ? m.mrpPrice : 25000,
+    discountPercentage: 0,
+    stockStatus: 'In Stock',
+    stockCount: 15,
     rating: 4.8,
-    reviewsCount: 28,
+    reviewCount: 28,
     images: [m.image],
-    specs: {
-      'Model': m.model,
-      'Size': m.size,
-      'Resolution': m.resolution,
-      'Panel Type': m.panelType,
-      'Refresh Rate': m.refreshRate,
-      'Ports': m.ports,
-      ...(m.responseTime ? { 'Response Time': m.responseTime } : {}),
-      ...(m.usbC ? { 'USB-C': m.usbC } : {}),
-      ...(m.hdr ? { 'HDR': m.hdr } : {})
-    },
-    keyFeatures: m.features,
-    isFeatured: true,
-    isOfficial: true,
-    warranty: '3 Years Official LG Warranty'
-  });
+    shortSpecs: m.features,
+    specifications: {},
+    warranty: '3 Years Official LG Warranty',
+    emiAvailable: m.mrpPrice >= 30000,
+    reviews: [],
+    questions: [],
+    createdDate: '2026-07-09'
+  } as unknown as Product);
 
   const handleAddToCart = (m: LgMonitor) => {
     const product = convertToStoreProduct(m);
@@ -103,11 +92,14 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
 
   // Card component
   const MonitorCard: React.FC<{ monitor: LgMonitor }> = ({ monitor }) => (
-    <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-red-400 transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-1">
+    <div 
+      onClick={() => setPreviewMonitor(monitor)}
+      className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(239,68,68,0.12)] hover:border-red-400 transition-all duration-300 flex flex-col justify-between overflow-hidden group cursor-pointer hover:-translate-y-1 relative"
+    >
       {/* Top Badges */}
-      <div className="p-3.5 pb-0 flex items-center justify-between gap-2 z-10">
+      <div className="p-4 pb-2 flex items-center justify-between gap-2 z-10">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-black tracking-wide uppercase ${
+          <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-extrabold tracking-wider uppercase ${
             monitor.resolutionTag === 'FHD'
               ? 'bg-blue-100 text-blue-700 border border-blue-200'
               : monitor.resolutionTag === 'QHD'
@@ -119,25 +111,24 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
             {monitor.resolutionTag}
           </span>
           {monitor.isOled && (
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-slate-950 text-amber-400 border border-amber-400/40">
+            <span className="px-2 py-0.5 rounded-md text-[9.5px] font-black bg-slate-950 text-amber-400 border border-amber-400/40">
               OLED
             </span>
           )}
           {monitor.badge && (
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-600 border border-red-200">
+            <span className="px-2 py-0.5 rounded-md text-[9.5px] font-bold bg-red-50 text-red-600 border border-red-200">
               {monitor.badge}
             </span>
           )}
         </div>
-        <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+        <span className="text-[11px] font-black text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200/80">
           {monitor.size}
         </span>
       </div>
 
       {/* Image with quick view preview */}
       <div 
-        onClick={() => setPreviewMonitor(monitor)}
-        className="relative h-48 sm:h-52 w-full p-4 flex items-center justify-center bg-gradient-to-b from-slate-50/60 to-white cursor-pointer overflow-hidden"
+        className="relative h-48 sm:h-52 w-full px-5 py-4 flex items-center justify-center bg-gradient-to-b from-slate-50/70 via-slate-50/30 to-white overflow-hidden group/img"
       >
         <img
           src={monitor.image}
@@ -145,11 +136,11 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
           onError={(e) => {
             (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=600&auto=format&fit=crop';
           }}
-          className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+          className="max-h-full max-w-full object-contain filter drop-shadow-md group-hover:scale-108 transition-transform duration-500 ease-out"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-          <span className="bg-white/95 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+        <div className="absolute inset-0 bg-slate-900/10 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="bg-white/95 text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5 border border-slate-200">
             প্রিভিউ দেখুন
           </span>
         </div>
@@ -158,36 +149,23 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
       {/* Details */}
       <div className="p-4 pt-2 flex-1 flex flex-col justify-between">
         <div>
-          <div className="flex items-start justify-between gap-1 mb-1">
-            <div>
-              <span className="text-[10px] font-extrabold text-red-600 uppercase tracking-wider">LG Official</span>
-              <h3 className="text-base font-black text-slate-900 group-hover:text-red-600 transition-colors leading-tight">
-                LG {monitor.model}
-              </h3>
-            </div>
-            <span className="text-xs font-bold text-slate-400">#{monitor.sl}</span>
+          <div className="mb-2">
+            <span className="text-[10px] font-extrabold text-red-600 uppercase tracking-widest block mb-0.5">
+              LG Official
+            </span>
+            <h3 className="text-sm font-extrabold text-slate-900 group-hover:text-red-600 transition-colors leading-snug line-clamp-2">
+              LG {monitor.model}
+            </h3>
           </div>
 
-          <p className="text-xs text-slate-600 font-semibold mb-2 line-clamp-1">
-            {monitor.resolution}
-          </p>
-
           <div className="grid grid-cols-2 gap-1.5 mb-3 text-[11px]">
-            <div className="bg-slate-50 rounded-lg p-1.5 border border-slate-100">
-              <span className="text-slate-600 block text-[10px]">Panel</span>
-              <span className="font-bold text-slate-800">{monitor.panelType}</span>
+            <div className="bg-slate-50/80 rounded-lg p-2 border border-slate-200/60">
+              <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">প্যানেল</span>
+              <span className="font-bold text-slate-800 truncate block text-[11px]">{monitor.panelType}</span>
             </div>
-            <div className="bg-slate-50 rounded-lg p-1.5 border border-slate-100">
-              <span className="text-slate-600 block text-[10px]">Refresh</span>
-              <span className="font-bold text-slate-800">{monitor.refreshRate}</span>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-1.5 border border-slate-100">
-              <span className="text-slate-600 block text-[10px]">Color</span>
-              <span className="font-bold text-slate-800 truncate block">{monitor.colorGamut}</span>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-1.5 border border-slate-100">
-              <span className="text-slate-600 block text-[10px]">Ports</span>
-              <span className="font-bold text-slate-800 truncate block">{monitor.ports}</span>
+            <div className="bg-slate-50/80 rounded-lg p-2 border border-slate-200/60">
+              <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">রিফ্রেশ রেট</span>
+              <span className="font-bold text-slate-800 text-[11px]">{monitor.refreshRate}</span>
             </div>
           </div>
 
@@ -195,7 +173,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
             {monitor.features.slice(0, 2).map((feat, idx) => (
               <li key={idx} className="text-[11.5px] text-slate-600 flex items-start gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                <span className="line-clamp-1">{feat}</span>
+                <span className="line-clamp-1 leading-snug">{feat}</span>
               </li>
             ))}
           </ul>
@@ -203,25 +181,19 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
 
         {/* Pricing & Order Actions */}
         <div className="pt-3 border-t border-slate-100 mt-auto">
-          <div className="flex items-baseline justify-between mb-3">
+          <div className="flex items-center justify-between mb-3">
             <div>
-              <span className="text-[10px] font-black uppercase text-red-600 tracking-wider block">
-                Official MRP Rate
-              </span>
               {monitor.mrpPrice > 0 ? (
-                <div className="flex items-baseline gap-1.5">
-                  <span className="text-xl font-black text-slate-900 tracking-tight">
-                    ৳{monitor.mrpPrice.toLocaleString()}
-                  </span>
-                  <span className="text-[11px] font-bold text-slate-600">MRP</span>
+                <div className="text-xl font-black text-slate-950 tracking-tight leading-none">
+                  ৳{monitor.mrpPrice.toLocaleString()}
                 </div>
               ) : (
-                <span className="text-sm font-bold text-orange-600">
+                <span className="text-xs font-black text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
                   Call for Price
                 </span>
               )}
             </div>
-            <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
               In Stock
             </span>
           </div>
@@ -229,17 +201,17 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
           {/* Action buttons */}
           <div className="grid grid-cols-2 gap-2">
             <button
-              onClick={() => handleAddToCart(monitor)}
-              className="w-full py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 border border-slate-200"
+              onClick={(e) => { e.stopPropagation(); handleAddToCart(monitor); }}
+              className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 border border-slate-200"
             >
-              <ShoppingCart className="w-3.5 h-3.5" />
+              <ShoppingCart className="w-3.5 h-3.5 text-slate-600" />
               <span>কার্ট</span>
             </button>
             <button
-              onClick={() => handleOrderNow(monitor)}
-              className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 transition-all shadow-md shadow-red-500/20 active:scale-95"
+              onClick={(e) => { e.stopPropagation(); handleOrderNow(monitor); }}
+              className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-xs flex items-center justify-center gap-1 transition-all shadow-sm active:scale-95 shadow-red-500/20"
             >
-              <Zap className="w-3.5 h-3.5 text-amber-300" />
+              <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
               <span>অর্ডার করুন</span>
             </button>
           </div>
@@ -259,7 +231,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
               <span>মনিটর ব্র্যান্ড নির্বাচন করুন (Select Monitor Brand)</span>
             </h2>
             <p className="text-xs text-slate-600 font-medium">
-              আপনার পছন্দের ব্র্যান্ডে ক্লিক করে সকল মডেলের এমআরপি রেট ও স্পেসিফিকেশন দেখুন
+              আপনার পছন্দের ব্র্যান্ডে ক্লিক করে সকল মডেলের প্রাইস ও স্পেসিফিকেশন দেখুন
             </p>
           </div>
 
@@ -282,7 +254,14 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
             return (
               <button
                 key={b.id}
-                onClick={() => setSelectedBrand(b.id)}
+                onClick={() => {
+                  if (b.id === 'Asus') {
+                    setCurrentView('asus-monitors');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                  }
+                  setSelectedBrand(b.id);
+                }}
                 className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border transition-all flex-shrink-0 cursor-pointer ${
                   isSelected
                     ? b.id === 'LG'
@@ -432,7 +411,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
                   </div>
                 </div>
                 <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                  Official MRP: ৳15,700 – ৳30,500
+                  ৳15,700 – ৳30,500
                 </span>
               </div>
 
@@ -467,7 +446,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
                   </div>
                 </div>
                 <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                  Official MRP: ৳30,500 – ৳39,500
+                  ৳30,500 – ৳39,500
                 </span>
               </div>
 
@@ -502,7 +481,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
                   </div>
                 </div>
                 <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                  Official MRP: ৳46,500 – ৳470,000
+                  ৳46,500 – ৳470,000
                 </span>
               </div>
 
@@ -537,7 +516,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
                   </div>
                 </div>
                 <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                  Official MRP: ৳23,000 – ৳155,000
+                  ৳23,000 – ৳155,000
                 </span>
               </div>
 
@@ -572,7 +551,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
                   </div>
                 </div>
                 <span className="text-xs font-bold bg-white/10 text-white px-3 py-1.5 rounded-xl border border-white/20">
-                  Official MRP: ৳32,000 – ৳75,000
+                  ৳32,000 – ৳75,000
                 </span>
               </div>
 
@@ -592,7 +571,7 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
           </div>
           <h3 className="text-lg font-black text-slate-900 mb-1">{selectedBrand} Monitor Catalog</h3>
           <p className="text-xs text-slate-600 max-w-md mx-auto mb-4">
-            এখানে {selectedBrand} এর নিয়মিত মনিটর সমূহ ব্রাউজ করতে পারবেন। সম্পূর্ণ অফিশিয়াল MRP ও FHD/2K/4K আলাদা সেকশন দেখতে LG ব্র্যান্ড নির্বাচন করুন।
+            এখানে {selectedBrand} এর নিয়মিত মনিটর সমূহ ব্রাউজ করতে পারবেন। সম্পূর্ণ অফিশিয়াল কালেকশন ও স্পেসিফিকেশন আলাদা সেকশন দেখতে LG ব্র্যান্ড নির্বাচন করুন।
           </p>
           <button
             onClick={() => setSelectedBrand('LG')}
@@ -653,7 +632,6 @@ export const MonitorSectionView: React.FC<MonitorSectionViewProps> = ({ initialB
                     <span className="text-2xl font-black text-slate-900">
                       {previewMonitor.mrpPrice > 0 ? `৳${previewMonitor.mrpPrice.toLocaleString()}` : 'Call for Price'}
                     </span>
-                    <span className="text-xs text-red-600 font-extrabold uppercase">Official MRP</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">

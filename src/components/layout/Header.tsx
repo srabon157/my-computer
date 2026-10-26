@@ -372,6 +372,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                     return;
                                   }
+                                  if (sub.id === 'asus-monitors') {
+                                    setCurrentView('asus-monitors');
+                                    setHoveredCategory(null);
+                                    setHoveredSubCategory(null);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    return;
+                                  }
+                                  if (sub.id === 'samsung-monitors') {
+                                    setFilters(prev => ({ ...prev, category: 'monitor', brand: ['Samsung'] }));
+                                    setCurrentView('shop');
+                                    setHoveredCategory(null);
+                                    setHoveredSubCategory(null);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    return;
+                                  }
                                   if (isShowAll) {
                                     setFilters(prev => ({ ...prev, category: category.id, brand: [] }));
                                   } else {
@@ -601,6 +616,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCart }) => {
                                   onClick={() => {
                                     if (sub.id === 'lg-monitors') {
                                       setCurrentView('lg-monitors');
+                                      setMobileMenuOpen(false);
+                                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                                      return;
+                                    }
+                                    if (sub.id === 'asus-monitors') {
+                                      setCurrentView('asus-monitors');
+                                      setMobileMenuOpen(false);
+                                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                                      return;
+                                    }
+                                    if (sub.id === 'samsung-monitors') {
+                                      setFilters(p => ({ ...p, category: 'monitor', brand: ['Samsung'] }));
+                                      setCurrentView('shop');
                                       setMobileMenuOpen(false);
                                       window.scrollTo({ top: 0, behavior: 'smooth' });
                                       return;

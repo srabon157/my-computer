@@ -5,9 +5,7 @@ import {
   Monitor,
   ShoppingCart,
   Zap,
-  Eye,
   ChevronRight,
-  Star,
   CheckCircle2,
   Search,
   Tv,
@@ -18,7 +16,7 @@ import {
 } from 'lucide-react';
 
 // ══════════════════════════════════════════════════════════════
-// LG Monitor Data — MRP Price List (09/07/2026)
+// LG Monitor Data — Price List (09/07/2026)
 // ══════════════════════════════════════════════════════════════
 
 export interface LgMonitor {
@@ -673,7 +671,6 @@ export const LgMonitorShowcase: React.FC = () => {
   const {
     addToCart,
     setCurrentView,
-    setFilters,
     language
   } = useStore();
 
@@ -831,8 +828,8 @@ export const LgMonitorShowcase: React.FC = () => {
 
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed font-medium">
               {language === 'EN'
-                ? 'Explore the complete LG Monitor lineup — from FHD office displays to 4K OLED UltraFine™, UltraGear™ Gaming 240Hz, and Smart Monitors with webOS. All prices are MRP (Maximum Retail Price) in BDT.'
-                : 'এফএইচডি অফিস ডিসপ্লে থেকে ৪কে ওএলইডি আল্ট্রাফাইন™, আল্ট্রাগিয়ার™ গেমিং ২৪০Hz ও স্মার্ট মনিটর — এলজির সম্পূর্ণ মনিটর লাইনআপ দেখুন। সকল দাম বাংলাদেশী টাকায় এমআরপি।'}
+                ? 'Explore the complete LG Monitor lineup — from FHD office displays to 4K OLED UltraFine™, UltraGear™ Gaming 240Hz, and Smart Monitors with webOS. Official pricing in BDT.'
+                : 'এফএইচডি অফিস ডিসপ্লে থেকে ৪কে ওএলইডি আল্ট্রাফাইন™, আল্ট্রাগিয়ার™ গেমিং ২৪০Hz ও স্মার্ট মনিটর — এলজির সম্পূর্ণ মনিটর লাইনআপ দেখুন। অফিসিয়াল মূল্য বাংলাদেশী টাকায়।'}
             </p>
 
             {/* Trust badges */}
@@ -844,7 +841,7 @@ export const LgMonitorShowcase: React.FC = () => {
                 <CheckCircle2 className="w-3.5 h-3.5" /> 2 Year Official Warranty
               </span>
               <span className="flex items-center gap-1.5 text-red-400 bg-red-500/10 px-2.5 py-1 rounded-lg border border-red-500/25 backdrop-blur-sm">
-                <CheckCircle2 className="w-3.5 h-3.5" /> MRP Price
+                <CheckCircle2 className="w-3.5 h-3.5" /> Official Price
               </span>
             </div>
           </div>
@@ -1054,7 +1051,6 @@ export const LgMonitorShowcase: React.FC = () => {
                     <>
                       <div className="flex items-baseline justify-between">
                         <div>
-                          <span className="text-[10px] text-slate-500 font-extrabold block uppercase tracking-wider">MRP Price</span>
                           <div className="text-lg sm:text-xl font-black text-slate-950 tracking-tight">
                             ৳{monitor.mrpPrice.toLocaleString('en-IN')}
                           </div>

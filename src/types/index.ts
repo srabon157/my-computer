@@ -285,4 +285,6 @@ export type ViewMode =
   | 'offers'
   | 'about'
   | 'contact'
-  | 'lg-monitors';
+  | 'lg-monitors'
+  | 'asus-monitors'
+  | 'samsung-monitors';

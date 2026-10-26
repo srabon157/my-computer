@@ -14,6 +14,7 @@ import { GamingZone } from './components/home/GamingZone';
 import { SmartHome } from './components/home/SmartHome';
 import { EzvizCameraShowcase } from './components/home/EzvizCameraShowcase';
 import { LgMonitorPage } from './components/pages/LgMonitorPage';
+import { AsusMonitorPage } from './components/pages/AsusMonitorPage';
 
 // View Pages
 import { ShopPage } from './components/shop/ShopPage';
@@ -69,6 +70,8 @@ const MainContent: React.FC = () => {
         );
       case 'lg-monitors':
         return <LgMonitorPage />;
+      case 'asus-monitors':
+        return <AsusMonitorPage />;
       case 'shop':
         return <ShopPage />;
       case 'product-detail':

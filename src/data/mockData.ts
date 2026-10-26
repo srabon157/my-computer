@@ -73,6 +73,8 @@ export const CATEGORIES: Category[] = [
     popular: true,
     subCategories: [
       { id: 'lg-monitors', name: 'LG', nameBn: 'LG' },
+      { id: 'samsung-monitors', name: 'Samsung', nameBn: 'স্যামসাং' },
+      { id: 'asus-monitors', name: 'Asus', nameBn: 'আসুস' },
       { id: 'gaming-monitor', name: 'Gaming Monitor (144Hz–360Hz Fast IPS)', nameBn: 'গেমিং মনিটর' },
       { id: '4k-monitor', name: '4K UHD & 2K QHD Display', nameBn: '৪কে মনিটর' },
       { id: 'curved-monitor', name: 'Curved Ultra-Wide Displays', nameBn: 'কার্ভড মনিটর' },
