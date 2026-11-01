@@ -71,6 +71,16 @@ interface StoreContextType {
   // Orders & Account
   orders: Order[];
   createOrder: (orderData: Partial<Order>) => Order;
+  placeOrder: (orderData: {
+    customerName: string;
+    customerPhone: string;
+    customerEmail?: string;
+    shippingAddress: string;
+    area?: string;
+    district: string;
+    additionalNote?: string;
+    paymentMethod?: string;
+  }) => Promise<{ success: boolean; orderId?: string; order?: Order; error?: string }>;
   activeTrackingId: string;
   setActiveTrackingId: (id: string) => void;
 
@@ -436,6 +446,114 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return newOrder;
   };
 
+  const placeOrder = async (orderData: {
+    customerName: string;
+    customerPhone: string;
+    customerEmail?: string;
+    shippingAddress: string;
+    area?: string;
+    district: string;
+    additionalNote?: string;
+    paymentMethod?: string;
+  }): Promise<{ success: boolean; orderId?: string; order?: Order; error?: string }> => {
+    try {
+      const itemsPayload = cart.map(item => ({
+        productId: item.product.id,
+        name: item.product.name,
+        image: item.product.images[0] || '',
+        quantity: item.quantity,
+        unitPrice: item.product.discountPrice,
+      }));
+
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: orderData.customerName,
+          phone: orderData.customerPhone,
+          customerPhone: orderData.customerPhone,
+          address: orderData.shippingAddress,
+          shippingAddress: orderData.shippingAddress,
+          customerEmail: orderData.customerEmail,
+          products: itemsPayload,
+          items: itemsPayload,
+          total: cartTotal + (orderData.district === 'Dhaka' ? 120 : 200),
+          area: orderData.area,
+          district: orderData.district,
+          additionalNote: orderData.additionalNote,
+          paymentMethod: orderData.paymentMethod || 'Cash on Delivery',
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        const errorMsg = data.message || data.error || 'Failed to place order';
+        addToast(language === 'EN' ? 'Order Failed' : 'অর্ডার ব্যর্থ হয়েছে', errorMsg, 'warning');
+        return { success: false, error: errorMsg };
+      }
+
+      const saved = data.order || {};
+      const newId = data.orderId || data.insertedId || saved.orderId; if (!newId) throw new Error('Server did not return a valid order ID');
+      const newOrder: Order = {
+        id: newId,
+        orderId: newId,
+        date: new Date().toISOString().split('T')[0],
+        customerName: orderData.customerName,
+        customerPhone: orderData.customerPhone,
+        customerEmail: orderData.customerEmail || '',
+        shippingAddress: orderData.shippingAddress,
+        area: orderData.area,
+        district: orderData.district,
+        note: orderData.additionalNote,
+        items: saved.items?.map((it: any) => ({
+          productId: it.productId,
+          productName: it.name,
+          image: it.image,
+          price: it.unitPrice,
+          quantity: it.quantity,
+        })) || cart.map(i => ({
+          productId: i.product.id,
+          productName: i.product.name,
+          image: i.product.images[0],
+          price: i.product.discountPrice,
+          quantity: i.quantity,
+        })),
+        subtotal: saved.subtotal || cartSubtotal,
+        discount: saved.discount || couponDiscountBDT,
+        shippingCost: saved.deliveryCharge || (orderData.district === 'Dhaka' ? 120 : 200),
+        deliveryCharge: saved.deliveryCharge || (orderData.district === 'Dhaka' ? 120 : 200),
+        total: saved.grandTotal || (cartTotal + (orderData.district === 'Dhaka' ? 120 : 200)),
+        grandTotal: saved.grandTotal,
+        paymentMethod: (saved.paymentMethod || orderData.paymentMethod || 'Cash on Delivery') as any,
+        paymentStatus: saved.paymentStatus || 'Pending',
+        orderStatus: saved.orderStatus || 'Pending',
+        trackingSteps: saved.trackingSteps || [
+          { title: 'Order Placed', date: 'Just Now', completed: true, current: true },
+          { title: 'Payment Verification', date: 'Pending', completed: false },
+          { title: 'Packing at Central Warehouse', date: 'Pending', completed: false },
+          { title: 'Handed to Courier', date: 'Pending', completed: false },
+          { title: 'Delivered', date: 'Pending', completed: false }
+        ],
+        createdAt: saved.createdAt,
+        updatedAt: saved.updatedAt,
+      };
+
+      setOrders(prev => [newOrder, ...prev]);
+      setActiveTrackingId(newId);
+      clearCart();
+      addToast(
+        language === 'EN' ? 'Order Confirmed!' : 'অর্ডার সফলভাবে গ্রহণ করা হয়েছে!',
+        (language === 'EN' ? 'Order ID: ' : 'অর্ডার আইডি: ') + newId
+      );
+      return { success: true, orderId: newId, order: newOrder };
+    } catch (networkError: any) {
+      console.error('[placeOrder error]:', networkError);
+      const errorMsg = language === 'EN' ? (networkError.message || 'Could not connect to server. Please try again.') : (networkError.message || 'সার্ভারে সংযোগ করা সম্ভব হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন।');
+      addToast(language === 'EN' ? 'Order Failed' : 'অর্ডার ব্যর্থ হয়েছে', errorMsg, 'warning');
+      return { success: false, error: errorMsg };
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -486,6 +604,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         filteredProducts,
         orders,
         createOrder,
+        placeOrder,
         activeTrackingId,
         setActiveTrackingId,
         toasts,

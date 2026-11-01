@@ -226,7 +226,14 @@ export interface Order {
   total: number;
   paymentMethod: 'bKash' | 'Nagad' | 'SSLCommerz' | 'Cash on Delivery';
   paymentStatus: 'Paid' | 'Pending';
-  orderStatus: 'Placed' | 'Processing' | 'Shipped' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
+  orderStatus: 'Pending' | 'Confirmed' | 'Placed' | 'Processing' | 'Shipped' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
+  area?: string;
+  note?: string;
+  orderId?: string;
+  deliveryCharge?: number;
+  grandTotal?: number;
+  createdAt?: string;
+  updatedAt?: string;
   trackingSteps: {
     title: string;
     date: string;
