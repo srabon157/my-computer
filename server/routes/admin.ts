@@ -54,10 +54,18 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
       return;
     }
 
-    const envAdminUser = (process.env.ADMIN_USERNAME || 'admin').toLowerCase().trim();
-    const envAdminEmail = (process.env.ADMIN_EMAIL || 'admin@mycomputer.com').toLowerCase().trim();
-    const envAdminPassword = process.env.ADMIN_PASSWORD || 'password123';
-    const legacyAdminPass = 'mycomputer2026';
+    // Load admin credentials securely.
+    const rawAdminEmail = (process.env.ADMIN_EMAIL || '').toLowerCase().trim();
+    const envAdminEmail = rawAdminEmail;
+    const envAdminUser = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || (envAdminEmail ? envAdminEmail.split('@')[0] : 'admin');
+    const envAdminPassword = process.env.ADMIN_PASSWORD || '';
+    const envAdminName = process.env.ADMIN_NAME || 'Super Administrator';
+    // Validate required env vars
+    if (!envAdminEmail || !envAdminPassword) {
+      console.warn('[Admin Login] Missing ADMIN_EMAIL or ADMIN_PASSWORD environment variables');
+      res.status(500).json({ success: false, error: 'Server configuration error: admin credentials not set.' });
+      return;
+    }
 
     await connectDB();
     if (isDbConnected()) {
@@ -125,33 +133,28 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
       }
     }
 
-    // 3. Environment variables authentication fallback
-    const isEnvMatch =
-      (identifier === envAdminUser || identifier === envAdminEmail || identifier === 'admin') &&
-      (password === envAdminPassword || password === legacyAdminPass);
-
+    // 3. Environment variables authentication fallback (used when DB is offline or admin not in DB)
+    const isEnvMatch = (identifier === envAdminUser || identifier === envAdminEmail) && password === envAdminPassword;
     if (isEnvMatch) {
       const token = generateToken({
         userId: 'admin_env',
         email: envAdminEmail,
         role: 'super_admin',
       });
-
-      res.json({
+      return res.json({
         success: true,
-        message: 'Admin login successful (Secure Environment Auth)',
+        message: 'Admin login successful (Environment Auth)',
         token,
         admin: {
           id: 'admin_env',
           username: envAdminUser,
-          name: process.env.ADMIN_NAME || 'Super Administrator',
+          name: envAdminName,
           email: envAdminEmail,
           role: 'super_admin',
         },
       });
-      return;
     }
-
+    // No match – generic auth failure
     res.status(401).json({ success: false, error: 'Invalid admin username or password.' });
   } catch (error: any) {
     console.error('[Admin Login Error]:', error);
