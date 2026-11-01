@@ -109,7 +109,7 @@ export const AdminDashboard: React.FC = () => {
   const { addToast, setCurrentView } = useStore();
 
   // Authentication state
-  const [token, setToken] = useState<string | null>(() => sessionStorage.getItem('mc_admin_token') || localStorage.getItem('mc_admin_token'));
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('mc_admin_token') || sessionStorage.getItem('mc_admin_token'));
   const [adminUser, setAdminUser] = useState<{ id?: string; email: string; name: string; username?: string; role?: string } | null>(null);
   const [loginIdentifier, setLoginIdentifier] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -249,7 +249,15 @@ export const AdminDashboard: React.FC = () => {
           password: loginPassword,
         }),
       });
-      const data = await res.json();
+      // Safely parse JSON, handling empty or invalid responses
+      const text = await res.text();
+      let data: any = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        setLoginError('Invalid server response');
+        return;
+      }
 
       if (!res.ok || !data.success) {
         setLoginError(data.error || 'Authentication failed. Please verify credentials.');

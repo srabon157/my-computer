@@ -1,5 +1,69 @@
 [
   {
+    "orderId": "MC-12805",
+    "customer": {
+      "name": "Sheikh Srabon",
+      "phone": "01873434639",
+      "email": "sheikhsrabon2004@gmail.com"
+    },
+    "delivery": {
+      "address": "lknadkn",
+      "area": "amxamkalx",
+      "district": "Dhaka",
+      "note": "lamsxkmaks"
+    },
+    "items": [
+      {
+        "productId": "prod-ezviz-001",
+        "name": "EZVIZ CS-CP1-LITE 2MP Smart Wi-Fi Pan & Tilt Indoor Security Camera",
+        "image": "/images/products/ezviz-c6n.webp",
+        "quantity": 1,
+        "unitPrice": 1950,
+        "subtotal": 1950
+      }
+    ],
+    "subtotal": 1950,
+    "deliveryCharge": 70,
+    "discount": 0,
+    "grandTotal": 2020,
+    "paymentMethod": "Cash on Delivery",
+    "paymentNumber": "01873434639",
+    "senderNumber": "",
+    "trxId": "",
+    "paymentStatus": "Pending",
+    "orderStatus": "Pending",
+    "trackingSteps": [
+      {
+        "title": "Order Placed",
+        "date": "2026-11-01",
+        "completed": true,
+        "current": true
+      },
+      {
+        "title": "Order Confirmed",
+        "date": "Pending",
+        "completed": false
+      },
+      {
+        "title": "Processing & Quality Check",
+        "date": "Pending",
+        "completed": false
+      },
+      {
+        "title": "Shipped via Courier",
+        "date": "Pending",
+        "completed": false
+      },
+      {
+        "title": "Delivered",
+        "date": "Pending",
+        "completed": false
+      }
+    ],
+    "createdAt": "2026-11-01T17:38:20.343Z",
+    "updatedAt": "2026-11-01T17:38:20.343Z"
+  },
+  {
     "orderId": "MC-96025",
     "customer": {
       "name": "Sheikh Srabon",
