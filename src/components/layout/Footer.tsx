@@ -165,6 +165,11 @@ export const Footer: React.FC = () => {
                   <ChevronRight className="w-3 h-3 text-slate-500" /> About My Computer
                 </button>
               </li>
+              <li>
+                <button onClick={() => setCurrentView('admin')} className="hover:text-blue-600 flex items-center gap-1.5 transition-colors text-indigo-600 font-bold">
+                  <ChevronRight className="w-3 h-3 text-indigo-500" /> Admin Portal (অ্যাডমিন প্যানেল)
+                </button>
+              </li>
             </ul>
           </div>
 

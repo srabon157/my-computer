@@ -49,6 +49,23 @@ export const OrderTracking: React.FC = () => {
         </form>
       </div>
 
+      {/* Empty State when no order matches */}
+      {!matchedOrder && (
+        <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-lg text-center space-y-3">
+          <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
+            <Truck className="w-7 h-7" />
+          </div>
+          <h3 className="font-extrabold text-base text-slate-800">
+            {language === 'EN' ? 'No Order Tracked Yet' : 'এখনো কোনো অর্ডার ট্র্যাক করা হয়নি'}
+          </h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto">
+            {language === 'EN'
+              ? 'Enter your Order ID (e.g. MC-10001) above to track its live status, or place an order to see real-time updates.'
+              : 'লাইভ স্ট্যাটাস জানতে উপরে আপনার অর্ডার আইডি (যেমন: MC-10001) দিন, অথবা অর্ডার সম্পন্ন করার পর ট্র্যাক করুন।'}
+          </p>
+        </div>
+      )}
+
       {/* Order Status Timeline Card */}
       {matchedOrder && (
         <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/80 shadow-lg space-y-6">

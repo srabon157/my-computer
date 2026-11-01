@@ -224,7 +224,10 @@ export interface Order {
   discount: number;
   shippingCost: number;
   total: number;
-  paymentMethod: 'bKash' | 'Nagad' | 'SSLCommerz' | 'Cash on Delivery';
+  paymentMethod: 'bKash' | 'Nagad' | 'Rocket' | 'Upay' | 'Cash on Delivery';
+  paymentNumber?: string;
+  senderNumber?: string;
+  trxId?: string;
   paymentStatus: 'Paid' | 'Pending';
   orderStatus: 'Pending' | 'Confirmed' | 'Placed' | 'Processing' | 'Shipped' | 'Out for Delivery' | 'Delivered' | 'Cancelled';
   area?: string;

@@ -33,7 +33,7 @@ export function verifyAdminToken(req: AuthenticatedRequest, res: Response, next:
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as AdminAuthPayload;
-    if (decoded.role !== 'admin') {
+    if (decoded.role !== 'admin' && decoded.role !== 'super_admin') {
       res.status(403).json({
         success: false,
         error: 'Forbidden. Admin privileges required.',
@@ -42,7 +42,7 @@ export function verifyAdminToken(req: AuthenticatedRequest, res: Response, next:
     }
     req.admin = decoded;
     next();
-  } catch (err: any) {
+  } catch (_err: any) {
     res.status(401).json({
       success: false,
       error: 'Invalid or expired token. Please log in again.',

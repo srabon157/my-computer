@@ -17,7 +17,7 @@ export interface ITrackingStep {
 }
 
 export type OrderStatus = 'Pending' | 'Confirmed' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
-export type PaymentMethod = 'Cash on Delivery' | 'bKash' | 'Nagad' | 'SSLCommerz';
+export type PaymentMethod = 'Cash on Delivery' | 'bKash' | 'Nagad' | 'Rocket' | 'Upay';
 export type PaymentStatus = 'Pending' | 'Paid';
 
 export interface IOrder extends Document {
@@ -39,6 +39,9 @@ export interface IOrder extends Document {
   discount: number;
   grandTotal: number;
   paymentMethod: PaymentMethod;
+  paymentNumber?: string;
+  senderNumber?: string;
+  trxId?: string;
   paymentStatus: PaymentStatus;
   orderStatus: OrderStatus;
   trackingSteps: ITrackingStep[];
@@ -96,9 +99,12 @@ const orderSchema = new Schema<IOrder>(
     grandTotal: { type: Number, required: true, min: 0 },
     paymentMethod: {
       type: String,
-      enum: ['Cash on Delivery', 'bKash', 'Nagad', 'SSLCommerz'],
+      enum: ['Cash on Delivery', 'bKash', 'Nagad', 'Rocket', 'Upay'],
       default: 'Cash on Delivery',
     },
+    paymentNumber: { type: String, default: '01873434639' },
+    senderNumber: { type: String, default: '' },
+    trxId: { type: String, default: '' },
     paymentStatus: {
       type: String,
       enum: ['Pending', 'Paid'],
