@@ -155,7 +155,7 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
     if (isEnvMatch) {
       const token = generateToken({
         userId: 'admin_env',
-        email: envAdminEmail,
+        email: envAdminEmail || "admin@mycomputer.com",
         role: 'super_admin',
       });
       return res.json({
@@ -166,7 +166,7 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
           id: 'admin_env',
           username: envAdminUser,
           name: envAdminName,
-          email: envAdminEmail,
+          email: envAdminEmail || "admin@mycomputer.com",
           role: 'super_admin',
         },
       });
