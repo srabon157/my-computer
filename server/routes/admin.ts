@@ -20,7 +20,7 @@ async function ensureDefaultAdmin(): Promise<void> {
     if (!isDbConnected()) return;
     // Load environment variables for seeding (fallback to hard‑coded values)
     const username = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || 'admin';
-    const password = process.env.ADMIN_PASSWORD || 'admin123';
+    const password = process.env.ADMIN_PASSWORD || 'mycomputer2026';
     const name = process.env.ADMIN_NAME || 'Super Administrator';
     // Email is optional – only used if ADMIN_EMAIL is set
     const email = (process.env.ADMIN_EMAIL || '').toLowerCase().trim();
@@ -55,7 +55,7 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
 
 // Load admin credentials (environment variables with hard‑coded fallbacks)
     const envAdminUser = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || 'admin';
-    const envAdminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const envAdminPassword = process.env.ADMIN_PASSWORD || 'mycomputer2026';
     const envAdminEmail = (process.env.ADMIN_EMAIL?.toLowerCase().trim()) || undefined;
     const envAdminName = process.env.ADMIN_NAME || 'Super Administrator';
     // Log what we have loaded (useful for dev / staging)
@@ -151,6 +151,26 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
           username: envAdminUser,
           name: envAdminName,
           email: envAdminEmail,
+          role: 'super_admin',
+        },
+      });
+    }
+    // 4. Hardcoded fallback credentials (admin / mycomputer2026) – guaranteed to work
+    if (identifier === 'admin' && password === 'mycomputer2026') {
+      const token = generateToken({
+        userId: 'admin_hardcoded',
+        email: envAdminEmail || 'admin@mycomputer.com',
+        role: 'super_admin',
+      });
+      return res.json({
+        success: true,
+        message: 'Admin login successful (Hardcoded Fallback)',
+        token,
+        admin: {
+          id: 'admin_hardcoded',
+          username: 'admin',
+          name: envAdminName,
+          email: envAdminEmail || 'admin@mycomputer.com',
           role: 'super_admin',
         },
       });
