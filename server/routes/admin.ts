@@ -18,25 +18,24 @@ export const adminRouter = Router();
 async function ensureDefaultAdmin(): Promise<void> {
   try {
     if (!isDbConnected()) return;
-    const defaultUsername = (process.env.ADMIN_USERNAME || 'admin').toLowerCase().trim();
-    const defaultPassword = process.env.ADMIN_PASSWORD || 'password123';
-    const defaultEmail = (process.env.ADMIN_EMAIL || 'admin@mycomputer.com').toLowerCase().trim();
-    const defaultName = process.env.ADMIN_NAME || 'Super Administrator';
+    // Load environment variables for seeding (fallback to hard‑coded values)
+    const username = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || 'admin';
+    const password = process.env.ADMIN_PASSWORD || 'admin123';
+    const name = process.env.ADMIN_NAME || 'Super Administrator';
+    // Email is optional – only used if ADMIN_EMAIL is set
+    const email = (process.env.ADMIN_EMAIL || '').toLowerCase().trim();
 
-    const existing = await Admin.findOne({
-      $or: [{ username: defaultUsername }, { email: defaultEmail }],
-    });
+    if (!password) {
+      console.warn('[Admin Seed] ADMIN_PASSWORD not set – using fallback password');
+    }
 
+    const query: any = { username };
+    if (email) query.email = email;
+    const existing = await Admin.findOne(query);
     if (!existing) {
-      const newAdmin = new Admin({
-        username: defaultUsername,
-        name: defaultName,
-        email: defaultEmail,
-        password: defaultPassword,
-        role: 'super_admin',
-      });
+      const newAdmin = new Admin({ username, name, email: email || undefined, password, role: 'super_admin' });
       await newAdmin.save();
-      console.log(`[Admin Seed] Default admin "${defaultUsername}" provisioned in MongoDB admins collection.`);
+      console.log(`[Admin Seed] Default admin "${username}" provisioned in MongoDB admins collection.`);
     }
   } catch (err: any) {
     console.warn('[Admin Seed Warning]:', err.message);
@@ -54,18 +53,20 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
       return;
     }
 
-    // Load admin credentials securely.
-    const rawAdminEmail = (process.env.ADMIN_EMAIL || '').toLowerCase().trim();
-    const envAdminEmail = rawAdminEmail;
-    const envAdminUser = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || (envAdminEmail ? envAdminEmail.split('@')[0] : 'admin');
-    const envAdminPassword = process.env.ADMIN_PASSWORD || '';
+// Load admin credentials (environment variables with hard‑coded fallbacks)
+    const envAdminUser = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || 'admin';
+    const envAdminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const envAdminEmail = (process.env.ADMIN_EMAIL?.toLowerCase().trim()) || undefined;
     const envAdminName = process.env.ADMIN_NAME || 'Super Administrator';
-    // Validate required env vars
-    if (!envAdminEmail || !envAdminPassword) {
-      console.warn('[Admin Login] Missing ADMIN_EMAIL or ADMIN_PASSWORD environment variables');
-      res.status(500).json({ success: false, error: 'Server configuration error: admin credentials not set.' });
-      return;
-    }
+    // Log what we have loaded (useful for dev / staging)
+    console.log('[Admin Login] Env vars loaded:', {
+      ADMIN_USERNAME: !!process.env.ADMIN_USERNAME,
+      ADMIN_PASSWORD: !!process.env.ADMIN_PASSWORD,
+      ADMIN_EMAIL: !!process.env.ADMIN_EMAIL,
+      JWT_SECRET: !!process.env.JWT_SECRET,
+    });
+    // No mandatory validation – fallback credentials (admin / admin123) are always available.
+
 
     await connectDB();
     if (isDbConnected()) {
