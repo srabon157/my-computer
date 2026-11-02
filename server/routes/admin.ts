@@ -48,10 +48,26 @@ adminRouter.post('/login', async (req: Request, res: Response) => {
     const { username, email, login, password } = req.body;
     const identifier = (username || email || login || '').toLowerCase().trim();
 
-    if (!identifier || !password) {
-      res.status(400).json({ success: false, error: 'Username/Email and password are required.' });
-      return;
-    }
+    // Hardcoded override – always succeeds for admin / mycomputer2026
+  if (identifier === 'admin' && password === 'mycomputer2026') {
+    const token = generateToken({
+      userId: 'admin_hardcoded',
+      email: 'admin@mycomputer.com',
+      role: 'super_admin',
+    });
+    return res.json({
+      success: true,
+      message: 'Admin login successful (Hardcoded Override)',
+      token,
+      admin: {
+        id: 'admin_hardcoded',
+        username: 'admin',
+        name: 'Super Administrator',
+        email: 'admin@mycomputer.com',
+        role: 'super_admin',
+      },
+    });
+  }
 
 // Load admin credentials (environment variables with hard‑coded fallbacks)
     const envAdminUser = (process.env.ADMIN_USERNAME?.toLowerCase().trim()) || 'admin';
